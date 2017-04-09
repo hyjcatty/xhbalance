@@ -1,0 +1,26 @@
+{
+  "name": "tomato3",
+  "owner": "Ma Yuchu",
+  "description": "tomato production",
+  "icon": "tomato4.svg",
+  "parameter": {
+    "groups":[
+      {
+        "groupname": "group1",
+        "list": [
+          {"paraname":"para11","max":"100","min":"0","value":"50"},
+          {"paraname":"para12","max":"100","min":"0","value":"50"},
+          {"paraname":"para13","max":"100","min":"0","value":"50"},
+          {"paraname":"para14","max":"100","min":"0","value":"50"},
+          {"paraname":"para15","max":"100","min":"0","value":"50"},
+          {"paraname":"para21","max":"100","min":"0","value":"50"},
+          {"paraname":"para24","max":"100","min":"0","value":"50"},
+          {"paraname":"para25","max":"100","min":"0","value":"50"},
+          {"paraname":"para31","max":"100","min":"0","value":"50"},
+          {"paraname":"para32","max":"100","min":"0","value":"50"},
+          {"paraname":"para33","max":"100","min":"0","value":"50"},
+          {"paraname":"para34","max":"100","min":"0","value":"50"}
+                  ]
+      }]
+  }
+}
