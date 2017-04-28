@@ -31,11 +31,12 @@ export default class configurationview extends Component {
             head:"none"
         }
         this._iconcallback = this.handle_icon_selection.bind(this);
+        //this.keyboard_initialize();
 
     }
     update_size(width,height){
         this.setState({height:height,width:width});
-        console.log("configurationview width:"+width+",height:"+height);
+        //console.log("configurationview width:"+width+",height:"+height);
 
 
     }
@@ -52,7 +53,7 @@ export default class configurationview extends Component {
         this.setState({hide:"none"});
     }
     show(){
-        console.log(this.state.configuration);
+        //console.log(this.state.configuration);
         this.setState({hide:"block"});
     }
     module_show(){
@@ -76,12 +77,196 @@ export default class configurationview extends Component {
         let tempconfigure = this.state.configuration;
         tempconfigure.icon=icon;
 
-        console.log("choice icon:"+icon);
+        //console.log("choice icon:"+icon);
         this.setState({defaulticon:icon,configuration:tempconfigure});
         this.module_hide();
     }
     save_configuration(){
         return this.state.configuration;
+    }
+    keyboard_initialize(){
+
+        $.extend( $.keyboard.altKeys, {
+            1   : '\u2460 \u2474 \u2488 \u2776 \u278a \u2780',
+            '!' : '\u00a1 \u2762 \u2763', // adding two more exclamation points!
+            2   : '\u2461 \u2475 \u2489 \u2777 \u278b \u2781',
+            3   : '\u2462 \u2476 \u248a \u2778 \u278c \u2782',
+            4   : '\u2463 \u2477 \u248b \u2779 \u278d \u2783',
+            5   : '\u2464 \u2478 \u248c \u277a \u278e \u2784',
+            6   : '\u2465 \u2479 \u248d \u277b \u278f \u2785',
+            7   : '\u2466 \u247a \u248e \u277c \u2790 \u2786',
+            8   : '\u2467 \u247b \u248f \u277d \u2791 \u2787',
+            9   : '\u2468 \u247c \u2490 \u277e \u2792 \u2788',
+            0   : '\u2469 \u247d \u2491 \u277f \u2793 \u2789',
+            '[' : '\u25c0 \u25c1 \u25c2 \u25c3 \u25c4 \u25c5 \u261a \u261c', // left arrows
+            ']' : '\u25b6 \u25b7 \u25b8 \u25b9 \u25ba \u25bb \u261b \u261e', // right arrows
+            // action keys the "!!" makes the button get the "ui-state-active" (set by the css.buttonActive option)
+            'enter' : '{!!clear} {!!a} {!!c}',
+            // smileys, card suits, & other symbols
+            '\u263a' : '\u2639 \u263b \u2660 \u2661 \u2662 \u2663 \u2664 \u2665 \u2666 \u2667 \u2766 \u2767 \u263c \u263d \u263e \u2605 \u2606',
+            // symbols with 4+ arms
+            '\u2719' : '\u271a \u271b \u271c \u271d \u271e \u271f \u2720 \u2721 \u2722 \u2723 \u2724 \u2725 \u2726 \u2727 \u2729 \u272a \u272b \u272c \u272d \u272e \u272f \u2730 \u2731 \u2732 \u2733 \u2734 \u2735 \u2736 \u2737 \u2738 \u2739 \u273a \u273b \u273c \u273d \u273e \u273f \u2740 \u2741 \u2742 \u2743 \u2744 \u2745 \u2746 \u2747 \u2748 \u2749 \u274a \u274b \u2756'
+        });
+        $(function(){
+
+            $('#ConfigureName_Input').keyboard({
+                display: {
+                    'bksp'   :  "\u2190",
+                    'accept' : 'accept',
+                    'normal' : 'ABC',
+                    'meta1'  : '.?123',
+                    'meta2'  : '#+='
+                },
+                layout: 'custom',
+                usePreview: false,
+                css: {
+                    // keyboard container
+                    container: 'center-block well', // jumbotron
+                    // default state
+                    buttonDefault: 'btn btn-default',
+                    // hovered button
+                    buttonHover: 'btn-primary',
+                    // Action keys (e.g. Accept, Cancel, Tab, etc);
+                    // this replaces "actionClass" option
+                    buttonAction: 'active',
+                    // used when disabling the decimal button {dec}
+                    // when a decimal exists in the input area
+                    buttonDisabled: 'disabled'
+                },
+                customLayout: {
+                    'normal': [
+                        '1 2 3 4 5 6 7 8 9 0 {bksp}',
+                        'q w e r t y u i o p ',
+                        'a s d f g h j k l {enter}',
+                        '{s} z x c v b n m , . {s}',
+                        ' {space} {accept}'
+                    ],
+                    'shift': [
+                        '1 2 3 4 5 6 7 8 9 0 {bksp}',
+                        'Q W E R T Y U I O P ',
+                        'A S D F G H J K L {enter}',
+                        '{s} Z X C V B N M _ - {s}',
+                        ' {space}  {accept}'
+                    ]
+                }
+            });
+            $.extend( $.keyboard.altKeys, {
+                1   : '\u2460 \u2474 \u2488 \u2776 \u278a \u2780',
+                '!' : '\u00a1 \u2762 \u2763', // adding two more exclamation points!
+                2   : '\u2461 \u2475 \u2489 \u2777 \u278b \u2781',
+                3   : '\u2462 \u2476 \u248a \u2778 \u278c \u2782',
+                4   : '\u2463 \u2477 \u248b \u2779 \u278d \u2783',
+                5   : '\u2464 \u2478 \u248c \u277a \u278e \u2784',
+                6   : '\u2465 \u2479 \u248d \u277b \u278f \u2785',
+                7   : '\u2466 \u247a \u248e \u277c \u2790 \u2786',
+                8   : '\u2467 \u247b \u248f \u277d \u2791 \u2787',
+                9   : '\u2468 \u247c \u2490 \u277e \u2792 \u2788',
+                0   : '\u2469 \u247d \u2491 \u277f \u2793 \u2789',
+                '[' : '\u25c0 \u25c1 \u25c2 \u25c3 \u25c4 \u25c5 \u261a \u261c', // left arrows
+                ']' : '\u25b6 \u25b7 \u25b8 \u25b9 \u25ba \u25bb \u261b \u261e', // right arrows
+                // action keys the "!!" makes the button get the "ui-state-active" (set by the css.buttonActive option)
+                'enter' : '{!!clear} {!!a} {!!c}',
+                // smileys, card suits, & other symbols
+                '\u263a' : '\u2639 \u263b \u2660 \u2661 \u2662 \u2663 \u2664 \u2665 \u2666 \u2667 \u2766 \u2767 \u263c \u263d \u263e \u2605 \u2606',
+                // symbols with 4+ arms
+                '\u2719' : '\u271a \u271b \u271c \u271d \u271e \u271f \u2720 \u2721 \u2722 \u2723 \u2724 \u2725 \u2726 \u2727 \u2729 \u272a \u272b \u272c \u272d \u272e \u272f \u2730 \u2731 \u2732 \u2733 \u2734 \u2735 \u2736 \u2737 \u2738 \u2739 \u273a \u273b \u273c \u273d \u273e \u273f \u2740 \u2741 \u2742 \u2743 \u2744 \u2745 \u2746 \u2747 \u2748 \u2749 \u274a \u274b \u2756'
+            }
+            );
+            $('.configure_input').each(function(){
+                $(this).keyboard({
+                    display: {
+                        'bksp': "\u2190",
+                        'accept': 'accept',
+                        'normal': 'ABC',
+                        'meta1': '.?123',
+                        'meta2': '#+='
+                    },
+                    layout: 'custom',
+                    usePreview: false,
+                    css: {
+                        // keyboard container
+                        container: 'center-block well', // jumbotron
+                        // default state
+                        buttonDefault: 'btn btn-default',
+                        // hovered button
+                        buttonHover: 'btn-primary',
+                        // Action keys (e.g. Accept, Cancel, Tab, etc);
+                        // this replaces "actionClass" option
+                        buttonAction: 'active',
+                        // used when disabling the decimal button {dec}
+                        // when a decimal exists in the input area
+                        buttonDisabled: 'disabled'
+                    },
+                    customLayout: {
+                        'normal': [
+                            '1 2 3 {b}',
+                            '4 5 6 -',
+                            '7 8 9 .',
+                            '0 {a} {c}'
+                        ]
+                    },
+                    visible: function(e, keyboard, el) {
+                        keyboard.$preview[0].select();
+                    },
+                    validate: function(e, key, el) {
+                        //console.log(key);
+                        let max = e.$el.attr("data-max");
+                        let min = e.$el.attr("data-min");
+                        if(parseFloat(key)>parseFloat(max)){
+                            e.$el.val('100');
+                        }else if(parseFloat(key)<parseFloat(min)){
+                            e.$el.val('0');
+                        }else{
+                            e.$el.val(parseFloat(key));
+                        }
+                        return true;
+
+                    }
+                });
+            });
+
+        });
+
+    }
+    componentDidMount(){
+        //this.keyboard_initialize();
+    }
+    componentDidUpdate(){
+        this.keyboard_initialize();
+    }
+    getUpdatedValue(){
+        let output = this.state.configuration;
+        let name = $("#ConfigureName_Input").val();
+        if(name === "" && output.name ===""){
+            $("#ConfigureName_Input").focus();
+            return "";
+        }else if(name !== ""){
+
+            output.name=name;
+        }
+
+        $('.configure_input').each(function(){
+            let group_sequence = $(this).attr("data-group");
+            let para_sequence = $(this).attr("data-parameter");
+            //console.log("group_sequence:"+group_sequence+"para_sequence:"+para_sequence);
+            let value=$(this).val();
+            //console.log(output);
+            output.parameter.groups[parseInt(group_sequence)].list[parseInt(para_sequence)].value = value;
+        });
+        return output;
+    }
+    handleChange(){
+        let max = parseFloat($(this).attr("data-max"));
+        let min = parseFloat($(this).attr("data-min"));
+        let value = parseFloat($(this).val());
+        if(value<min){
+            $(this).val(min);
+        }
+         else if(value>max){
+            $(this).val(max);
+        }else  {
+            $(this).val(value);
+        }
     }
     render() {
         if(this.state.configuration === null){
@@ -105,9 +290,13 @@ export default class configurationview extends Component {
         for(let i=0;i<this.state.configuration.parameter.groups.length;i++){
             let content=[];
             for(let j=0;j<this.state.configuration.parameter.groups[i].list.length;j++){
-                let contentline = "Max:["+this.state.configuration.parameter.groups[i].list[j].max+"]Min:["+this.state.configuration.parameter.groups[i].list[j].min+"]Value:["+this.state.configuration.parameter.groups[i].list[j].value+"]";
-                content.push(<p className="lead" key={this.state.key2+i+"p"+j+"1"}>{this.state.configuration.parameter.groups[i].list[j].paraname}</p>);
-                content.push(<p key={this.state.key2+i+"p"+j+"2"}>{contentline}</p>);
+                let contentline = "Max:["+this.state.configuration.parameter.groups[i].list[j].max+"]Min:["+this.state.configuration.parameter.groups[i].list[j].min+"]";
+                content.push(<div className="count" style={{fontSize:20,marginTop:15,verticalAlign:'bottom'}} key={this.state.key2+i+"p"+j+"1"}>{this.state.configuration.parameter.groups[i].list[j].paraname}</div>);
+                content.push(<h3 style={{fontSize:10,marginRight:5}}  key={this.state.key2+i+"p"+j+"2"}>{contentline}</h3>);
+
+                //content.push(<p className="lead" key={this.state.key2+i+"p"+j+"1"}>{this.state.configuration.parameter.groups[i].list[j].paraname}</p>);
+                content.push(<input type="text" className="form-control configure_input" placeholder="CONFIG Value" aria-describedby="basic-addon1" key={this.state.key2+"G"+i+"P"+j+"input"} id={"Para_G"+i+"P"+j+"_input"} data-group={i} data-parameter={j} value={this.state.configuration.parameter.groups[i].list[j].value} onChange={this.handleChange} data-min={this.state.configuration.parameter.groups[i].list[j].min} data-max={this.state.configuration.parameter.groups[i].list[j].max}/>);
+                //content.push(<p key={this.state.key2+i+"p"+j+"2"}>{contentline}</p>);
             }
             let temp;
             if(i==0){
@@ -133,14 +322,14 @@ export default class configurationview extends Component {
                         <div className="col-xs-9 col-md-9 col-sm-9 col-lg-9" style={{display:this.state.head}}>
                             <div className="input-group">
                                 <span className="input-group-addon" id="Username" style={{minWidth: "150px"}}>CONFIG NAME</span>
-                                <input type="text" className="form-control" placeholder="CONFIG NAME" aria-describedby="basic-addon1" id="Username_Input"/>
+                                <input type="text" className="form-control" placeholder="CONFIG NAME" aria-describedby="basic-addon1" id="ConfigureName_Input" value="" />
                             </div>
                         </div>
                         <div className="col-xs-9 col-md-9 col-sm-9 col-lg-9" style={{display:this.state.head,margonTop:50}}>
                             <h4>Icon:</h4>
                             <div  style={{marginTop:this.state.bricksize/5,marginLeft:this.state.bricksize/5,marginRight:this.state.bricksize/5,marginBottom:this.state.bricksize/5,width:this.state.bricksize,height:this.state.bricksize,float: "left",position:"relative"}}>
                                 <button type="button" className="btn" style={{height:this.state.bricksize,width:this.state.bricksize,verticalAlign:"middle"}} onClick={this.module_show.bind(this)}><i>
-                                    <img src={"./svg/"+this.state.configuration.icon}  style={{height:this.state.bricksize*0.5,width:this.state.bricksize*0.5,marginTop:0}}></img><br/>
+                                    <img src={"./svg/"+this.state.configuration.icon}  style={{height:this.state.bricksize*0.5,width:this.state.bricksize*0.5,marginTop:0}} ></img><br/>
                                 </i></button>
                             </div>
                         </div>

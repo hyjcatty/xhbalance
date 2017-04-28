@@ -22,6 +22,16 @@ function _urlencode($elem)
   }
   return urlencode($elem);
 }
+function filenew($name,$content){
+    $newfile=fopen("./json/".$name.".json","w");
+    fwrite($newfile,$content);
+    fclose($newfile);
+}
+function filemod($name,$content){
+    $modfile=fopen("./json/".$name.".json","w+") ;
+    fwrite($modfile,$content);
+    fclose($modfile);
+}
 function getfiles($path,$type){
     $ret = array();
     if(!file_exists($path)) return $ret;
@@ -396,6 +406,46 @@ switch ($key){
                 $sta='true';
                 $retval=array(
                     'ret'=>$ret,
+                    'status'=>$sta,
+                    'auth'=>'true',
+                    'msg'=>'12345'
+                );
+
+                $jsonencode = _encode($retval);
+                echo $jsonencode; break;
+    case "XH_Balance_save_new_conf": //Use Wechat to login the Server, response is the userID in system.
+        /*
+         var map={
+            action:"XH_Balance_save_new_conf",
+            type:"query",
+            body: conf,
+            user:"null"
+         };
+        * */
+            $body=$payload["body"];
+            $sta='true';
+            filenew($body["name"],_encode($body));
+            $retval=array(
+                'status'=>$sta,
+                'auth'=>'true',
+                'msg'=>'12345'
+            );
+
+            $jsonencode = _encode($retval);
+            echo $jsonencode; break;
+        case "XH_Balance_save_mod_conf": //Use Wechat to login the Server, response is the userID in system.
+            /*
+             var map={
+                action:"XH_Balance_save_mod_conf",
+                type:"query",
+                body: conf,
+                user:"null"
+             };
+            * */
+            $body=$payload["body"];
+            $sta='true';
+            filemod($body["name"],_encode($body));
+                $retval=array(
                     'status'=>$sta,
                     'auth'=>'true',
                     'msg'=>'12345'

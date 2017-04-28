@@ -86,7 +86,9 @@ export default class workview extends Component {
     newview(configuration){
         this.props.workcontrolfoot(false,true,false);
         this.setState({configuration:configuration,status:"new"});
-        this.refs.Configurationview.new_view(configuration);
+        let configuration_local = configuration;
+        configuration_local.name="";
+        this.refs.Configurationview.new_view(configuration_local);
         this.refs.Billboardview.hide();
         this.refs.Buttonbar.new_configure();
         this.show();
@@ -113,9 +115,9 @@ export default class workview extends Component {
         }else if(this.state.status == "running"){
             this.props.workstopcase(this.state.configuration);
         }else if(this.state.status == "new"){
-            alert("want to save new file!");
+            this.props.worksavenewcase(this.refs.Configurationview.getUpdatedValue());
         }else{
-            alert("want to save modified file!");
+            this.props.worksavemodcase(this.refs.Configurationview.getUpdatedValue());
         }
     }
     button2click(){

@@ -32,14 +32,14 @@ export default class buttonbar extends Component {
     }
     update_size(width,height){
         this.setState({height:height,width:width},this.calculatesize);
-        console.log("button bar width:"+width+",height:"+height);
+        //console.log("button bar width:"+width+",height:"+height);
     }
     calculatesize(){
         let size = (this.state.width);
         let marginsize = size*0.1;
         let bricksize = size-marginsize*2;
         let margintop = (this.state.height-bricksize*2)/3
-        console.log("bricksize:"+bricksize+",marginsize:"+marginsize);
+        //console.log("bricksize:"+bricksize+",marginsize:"+marginsize);
         this.setState({bricksize:bricksize,marginsize:marginsize,margintop:margintop});
     }
     run_configure(){

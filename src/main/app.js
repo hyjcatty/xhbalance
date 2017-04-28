@@ -38,12 +38,16 @@ class App extends Component{
             iconlist:[],
             runcallback:null,
             stopcallback:null,
+            savenewback:null,
+            savemodback:null
         };
         this._footcallbackreturn=this.loginview.bind(this);
         this._footcallbackconfigure=this.configureview.bind(this);
         this._workstartcase=this.startcase.bind(this);
         this._workstopcase=this.stopcase.bind(this);
         this._workcontrolfoot=this.footButtonShow.bind(this);
+        this._worksavenewcase=this.savenewcase.bind(this);
+        this._worksavemodcase=this.savemodcase.bind(this);
     }
     initializeSize(width,height){
         let winlength= (width>height)?width:height;
@@ -75,6 +79,9 @@ class App extends Component{
     initializerunstop(runcallback,stopcallback){
         this.setState({runcallback:runcallback,stopcallback:stopcallback});
     }
+    initializerunsave(newsave,modsave){
+        this.setState({savenewback:newsave,savemodback:modsave});
+    }
     footButtonShow(breturn,bback,bconfigure){
         this.refs.foot.show_return_button(breturn);
         this.refs.foot.show_back_button(bback);
@@ -89,13 +96,14 @@ class App extends Component{
         this.refs.Loginview.show();
         this.refs.foot.hide_all();
         this.refs.Brickview.hide();
-
+        this.tipsinfo("Please login.");
     }
     brickview(){
         this.refs.Workview.hide();
         this.refs.Loginview.hide();
         this.refs.Brickview.show();
         this.footButtonShow(true,false,true);
+
     }
     workview_run(configure){
         //this.refs.Workview.billboardview();
@@ -104,6 +112,7 @@ class App extends Component{
         this.refs.Brickview.hide();
         this.footButtonShow(false,true,false);
         this.refs.Workview.runview(configure);
+        this.tipsinfo(configure.name);
     }
     workview_running(configure){
         //this.refs.Workview.billboardview();
@@ -112,6 +121,7 @@ class App extends Component{
         this.refs.Brickview.hide();
         this.footButtonShow(false,false,false);
         this.refs.Workview.runningview(configure);
+        this.tipsinfo(configure.name);
     }
     workview_mod(configure){
         //this.refs.Workview.billboardview();
@@ -120,6 +130,7 @@ class App extends Component{
         this.refs.Brickview.hide();
         this.footButtonShow(false,true,false);
         this.refs.Workview.modview(configure);
+        this.tipsinfo(configure.name);
     }
     workview_new(configure){
         //this.refs.Workview.billboardview();
@@ -128,6 +139,7 @@ class App extends Component{
         this.refs.Brickview.hide();
         this.footButtonShow(false,true,false);
         this.refs.Workview.newview(configure);
+        this.tipsinfo("new Configuration");
     }
     update_status(status){
         this.refs.Workview.update_billboard_status(status);
@@ -166,6 +178,15 @@ class App extends Component{
     stopcase(configure){
         this.state.runcallback(false,configure);
     }
+    savenewcase(configure){
+        this.state.savenewback(configure);
+    }
+    savemodcase(configure){
+        this.state.savemodback(configure);
+    }
+    tipsinfo(tips){
+        this.refs.foot.write_log(tips);
+    }
     render() {
         return(
         <div>
@@ -175,7 +196,7 @@ class App extends Component{
             <div>
                 <Loginview ref="Loginview"/>
                 <Brickview ref="Brickview"/>
-                <Workview ref="Workview" workstartcase={this._workstartcase} workstopcase={this._workstopcase} workcontrolfoot={this._workcontrolfoot}/>
+                <Workview ref="Workview" workstartcase={this._workstartcase} workstopcase={this._workstopcase} workcontrolfoot={this._workcontrolfoot} worksavenewcase={this._worksavenewcase} worksavemodcase={this._worksavemodcase}/>
             </div>
             <div>
                 <Foot ref="foot" footcallbackreturn={this._footcallbackreturn} footcallbackconfigure={this._footcallbackconfigure}/>
@@ -186,7 +207,8 @@ class App extends Component{
 
 
 }
-
+var bricklist=[];
+var baselist=[];
 var IconList=[];
 var Running=false;
 var runcycle=setInterval(xhbalancegetstatus,250);
@@ -200,6 +222,7 @@ var app_handle = ReactDOM.render(react_element,document.getElementById('app'));
 //}
 var footcallback_back= function(){
     xhbalanceconfiglist();
+    tips("");
 }
 //var footcallback_configure= function(){
 //    alert("Not support yet!");
@@ -215,8 +238,9 @@ app_handle.initializeSize(winWidth,winHeight);
 app_handle.initializefoot(footcallback_back);
 app_handle.initializehead();
 app_handle.initializeLogin(xhbalancelogin);
-app_handle.initializeWork(xhbalanceconfiglist);
+app_handle.initializeWork(newviewabort);
 app_handle.initializerunstop(xhbalancestartcase,xhbalancestartcase);
+app_handle.initializerunsave(xhbalancesavenewconf,xhbalancesavemodconf);
 app_handle.loginview();
 //fetchtest();
 function get_size(){
@@ -238,6 +262,9 @@ function get_size(){
 }
 window.onresize= function(){
     location.reload(true);
+}
+function tips(tip){
+    app_handle.tipsinfo(tip);
 }
 function GetRandomNum(Min,Max)
 {
@@ -287,6 +314,10 @@ function fetchtest(){
 }
 function xhbalancetestcallback(){
 
+}
+function newviewabort(){
+    xhbalanceconfiglist();
+    tips("");
 }
 function xhbalanceconfiglist(){
 
@@ -400,8 +431,8 @@ function xhbalanceconfiglistcallback(res){
     if(res.jsonResult.auth == "false"){
         return;
     }
-    let bricklist = res.jsonResult.ret.configure;
-    let baselist = res.jsonResult.ret.base;
+    bricklist = res.jsonResult.ret.configure;
+    baselist = res.jsonResult.ret.base;
     app_handle.initializeBrick(bricklist,baselist,brickclickfetch,bricknewclickfetch);
     app_handle.brickview();
 }
@@ -448,6 +479,7 @@ function xhbalancelogincallback(res){
     let userinfo = res.jsonResult.ret;
     app_handle.setuser(userinfo.username,userinfo.userid);
     xhbalanceconfiglist();
+    tips("");
 }
 function xhbalanceiconlist(){
     var map={
@@ -489,14 +521,14 @@ function xhbalancestartcase(boolinput,configure){
     let body;
     let actioncallback;
     if(boolinput){
-        console.log("start a case");
+        //console.log("start a case");
         body={
             action:"start",
             configure:configure
         }
         actioncallback=xhbalancestartcasecallback;
     }else{
-        console.log("stop a case");
+        //console.log("stop a case");
         body={
             action:"stop"
         }
@@ -622,8 +654,89 @@ function xhbalancelightcallback(res){
     let detailstatus = res.jsonResult.ret;
     app_handle.update_light(detailstatus);
 }
+function checkrename(name){
+    for(let i=0;i<bricklist.length;i++){
+        if(name === bricklist[i].name) return true;
+    }
+    return false;
+}
+function xhbalancesavenewconf(configure){
+    if(configure =="") return;
+    if(checkrename(configure.name)) {
+        alert("Rename alert, please check");
+        return;
+    }
+    var map={
+        action:"XH_Balance_save_new_conf",
+        type:"mod",
+        body:configure,
+        user:app_handle.getuser()
+    };
+    fetch(request_head,
+        {
+            method:'POST',
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify(map)
+        }).then(jsonParse)
+        .then(xhbalancesavenewconfcallback)
+        //.then(fetchlist)
+        .catch( (error) => {
+            console.log('request error', error);
+            return { error };
+        });
+}
 
+function xhbalancesavenewconfcallback(res){
+    if(res.jsonResult.status == "false"){
+        alert("保存新配置出错！");
+        return;
+    }
+    if(res.jsonResult.auth == "false"){
+        return;
+    }
+    xhbalanceconfiglist();
+    tips("Save successfully!");
+}
 
+function xhbalancesavemodconf(configure){
+
+    var map={
+        action:"XH_Balance_save_mod_conf",
+        type:"mod",
+        body:configure,
+        user:app_handle.getuser()
+    };
+    fetch(request_head,
+        {
+            method:'POST',
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify(map)
+        }).then(jsonParse)
+        .then(xhbalancesavemodconfcallback)
+        //.then(fetchlist)
+        .catch( (error) => {
+            console.log('request error', error);
+            return { error };
+        });
+}
+
+function xhbalancesavemodconfcallback(res){
+    if(res.jsonResult.status == "false"){
+        alert("修改配置保存出错！");
+        return;
+    }
+    if(res.jsonResult.auth == "false"){
+        return;
+    }
+    xhbalanceconfiglist();
+    tips("Save successfully!");
+}
 var hexcase = 0; /* hex output format. 0 - lowercase; 1 - uppercase     */
 var b64pad = ""; /* base-64 pad character. "=" for strict RFC compliance  */
 var chrsz = 8; /* bits per input character. 8 - ASCII; 16 - Unicode    */

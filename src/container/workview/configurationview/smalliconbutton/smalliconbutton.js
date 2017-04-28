@@ -21,7 +21,7 @@ export default class Smalliconbutton extends Component {
         };
     }
     updateprop(icon,bricksize){
-        console.log("SetIcon:"+icon);
+        //console.log("SetIcon:"+icon);
         this.setState({icon:icon,bricksize:bricksize});
     }
     handle_click(){

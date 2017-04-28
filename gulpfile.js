@@ -76,6 +76,8 @@ gulp.task("resourcecopy",function(){
         .pipe(gulp.dest(option.buildPath+"/resource/image/"));
     gulp.src("./resource/fonts/g*")
         .pipe(gulp.dest(option.buildPath+"/resource/fonts/"));
+    gulp.src("./resource/keyboardmaster/**/*")
+        .pipe(gulp.dest(option.buildPath+"/resource/keyboardmaster/"));
     mkdirp.sync(option.buildPath+"/upload/");
     gulp.src("./svg/*")
         .pipe(gulp.dest(option.buildPath+"/svg/"));

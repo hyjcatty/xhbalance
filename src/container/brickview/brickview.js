@@ -42,7 +42,7 @@ export default class brickview extends Component {
     }
     update_size(width,height){
         this.setState({height:height,width:width});
-        console.log("convas width:"+width+",convas height:"+height);
+        //console.log("convas width:"+width+",convas height:"+height);
         this.calculatesize(width);
 
     }
@@ -50,7 +50,7 @@ export default class brickview extends Component {
         let size = (width-30)/4;
         let marginsize = size*0.05;
         let bricksize = size-marginsize*2;
-        console.log("bricksize:"+bricksize+",marginsize:"+marginsize);
+        //console.log("bricksize:"+bricksize+",marginsize:"+marginsize);
         this.setState({bricksize:bricksize,marginsize:marginsize});
     }
     update_buttonlist(buttonlist,baselist,callback,newchoicecallback){

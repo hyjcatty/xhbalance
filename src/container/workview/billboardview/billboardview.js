@@ -88,7 +88,7 @@ export default class billboardview extends Component {
     }
     update_size(width,height){
         this.setState({height:height,width:width});
-        console.log("billboardview width:"+width+",height:"+height);
+        //console.log("billboardview width:"+width+",height:"+height);
         for(let i=1;i<7;i++){
             this.refs['Label1x'+i].initialize("New Sign ups","Note");
         }
@@ -113,7 +113,7 @@ export default class billboardview extends Component {
         this.setState({showlist:status},this.flash_status);
     }
     flash_light(){
-        console.log("flashlight");
+        //console.log("flashlight");
         for(let i=1;i<17;i++){
             this.refs['Light'+i].updateprop(this.state.lightlist.lightboard[i-1].note,this.colorlist[this.state.lightlist.lightboard[i-1].colorbrick],this.colorlist[this.state.lightlist.lightboard[i-1].colornote],this.colorlist[this.state.lightlist.lightboard[i-1].colorcircle],this.state.lightlist.lightboard[i-1].blingbrick,this.state.lightlist.lightboard[i-1].blingnote,this.state.lightlist.lightboard[i-1].blingcircle,this.state.lightlist.lightboard[i-1].colorbrick,this.state.lightlist.lightboard[i-1].colornote,this.state.lightlist.lightboard[i-1].colorcircle);
         }
