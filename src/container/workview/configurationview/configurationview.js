@@ -209,17 +209,19 @@ export default class configurationview extends Component {
                         keyboard.$preview[0].select();
                     },
                     validate: function(e, key, el) {
-                        //console.log(key);
+
                         let max = e.$el.attr("data-max");
                         let min = e.$el.attr("data-min");
                         if(parseFloat(key)>parseFloat(max)){
-                            e.$el.val('100');
+                            e.$el.val(parseFloat(max));
+                            return false;
                         }else if(parseFloat(key)<parseFloat(min)){
-                            e.$el.val('0');
+                            e.$el.val(parseFloat(min));
+                            return false;
                         }else{
                             e.$el.val(parseFloat(key));
+                            return true;
                         }
-                        return true;
 
                     }
                 });
@@ -255,18 +257,25 @@ export default class configurationview extends Component {
         });
         return output;
     }
-    handleChange(){
-        let max = parseFloat($(this).attr("data-max"));
-        let min = parseFloat($(this).attr("data-min"));
-        let value = parseFloat($(this).val());
+    handleChange(e){
+    }
+    handleBlur(e){/*
+        let handleid = e.currentTarget.getAttribute("id");
+        console.log(handleid);
+        let handle = $("#"+handleid);
+        console.log("key="+handle.val()+";min="+handle.attr("data-min")+";max="+handle.attr("data-max"));
+        let max = parseFloat(handle.attr("data-max"));
+        let min = parseFloat(handle.attr("data-min"));
+        let value = parseFloat(handle.val());
+        console.log("key="+value+";min="+min+";max="+max);
         if(value<min){
-            $(this).val(min);
+            handle.val(min);
         }
-         else if(value>max){
-            $(this).val(max);
+        else if(value>max){
+            handle.val(max);
         }else  {
-            $(this).val(value);
-        }
+            handle.val(value);
+        }*/
     }
     render() {
         if(this.state.configuration === null){
@@ -295,7 +304,7 @@ export default class configurationview extends Component {
                 content.push(<h3 style={{fontSize:10,marginRight:5}}  key={this.state.key2+i+"p"+j+"2"}>{contentline}</h3>);
 
                 //content.push(<p className="lead" key={this.state.key2+i+"p"+j+"1"}>{this.state.configuration.parameter.groups[i].list[j].paraname}</p>);
-                content.push(<input type="text" className="form-control configure_input" placeholder="CONFIG Value" aria-describedby="basic-addon1" key={this.state.key2+"G"+i+"P"+j+"input"} id={"Para_G"+i+"P"+j+"_input"} data-group={i} data-parameter={j} value={this.state.configuration.parameter.groups[i].list[j].value} onChange={this.handleChange} data-min={this.state.configuration.parameter.groups[i].list[j].min} data-max={this.state.configuration.parameter.groups[i].list[j].max}/>);
+                content.push(<input type="text" className="form-control configure_input" placeholder="CONFIG Value" aria-describedby="basic-addon1" key={this.state.key2+"G"+i+"P"+j+"input"} id={"Para_G"+i+"P"+j+"_input"} data-group={i} data-parameter={j} value={this.state.configuration.parameter.groups[i].list[j].value} onChange={this.handleChange} onBlur={this.handleBlur} data-min={this.state.configuration.parameter.groups[i].list[j].min} data-max={this.state.configuration.parameter.groups[i].list[j].max}/>);
                 //content.push(<p key={this.state.key2+i+"p"+j+"2"}>{contentline}</p>);
             }
             let temp;
