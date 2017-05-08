@@ -78,6 +78,8 @@ gulp.task("resourcecopy",function(){
         .pipe(gulp.dest(option.buildPath+"/resource/fonts/"));
     gulp.src("./resource/keyboardmaster/**/*")
         .pipe(gulp.dest(option.buildPath+"/resource/keyboardmaster/"));
+    gulp.src("./resource/switchery/*")
+        .pipe(gulp.dest(option.buildPath+"/resource/switchery/"));
     mkdirp.sync(option.buildPath+"/upload/");
     gulp.src("./svg/*")
         .pipe(gulp.dest(option.buildPath+"/svg/"));

@@ -230,11 +230,17 @@ export default class configurationview extends Component {
         });
 
     }
+    switchery_initialize(){
+        for(let i=0;i<16;i++){
+            let myswitch = new Switchery($("#balance_"+i),{size:"small",color:'0d74e9'})
+        }
+    }
     componentDidMount(){
         //this.keyboard_initialize();
     }
     componentDidUpdate(){
         this.keyboard_initialize();
+        this.switchery_initialize();
     }
     getUpdatedValue(){
         let output = this.state.configuration;
@@ -255,9 +261,28 @@ export default class configurationview extends Component {
             //console.log(output);
             output.parameter.groups[parseInt(group_sequence)].list[parseInt(para_sequence)].value = value;
         });
+        $('.configure_choice').each(function(){
+            let group_sequence = $(this).attr("data-group");
+            let para_sequence = $(this).attr("data-parameter");
+            //console.log("group_sequence:"+group_sequence+"para_sequence:"+para_sequence);
+            let value=$(this).val();
+            //console.log(output);
+            output.parameter.groups[parseInt(group_sequence)].list[parseInt(para_sequence)].value = value;
+        });
+        for(let i=0;i<16;i++){
+            //console.log($("#Configure_Balance_"+i));
+            //console.log($("#Configure_Balance_"+i).is(":checked"));
+            this.state.configuration.parameter.preemption[i]=$("#Configure_Balance_"+i).is(":checked");
+        }
         return output;
     }
     handleChange(e){
+    }
+    handleChangecheck(e){
+        /*
+        let handleid = e.currentTarget.getAttribute("id");
+        console.log(handleid);
+        $("#"+handleid).checked=!($("#"+handleid).checked);*/
     }
     handleBlur(e){/*
         let handleid = e.currentTarget.getAttribute("id");
@@ -299,13 +324,31 @@ export default class configurationview extends Component {
         for(let i=0;i<this.state.configuration.parameter.groups.length;i++){
             let content=[];
             for(let j=0;j<this.state.configuration.parameter.groups[i].list.length;j++){
-                let contentline = "Max:["+this.state.configuration.parameter.groups[i].list[j].max+"]Min:["+this.state.configuration.parameter.groups[i].list[j].min+"]";
-                content.push(<div className="count" style={{fontSize:20,marginTop:15,verticalAlign:'bottom'}} key={this.state.key2+i+"p"+j+"1"}>{this.state.configuration.parameter.groups[i].list[j].paraname}</div>);
-                content.push(<h3 style={{fontSize:10,marginRight:5}}  key={this.state.key2+i+"p"+j+"2"}>{contentline}</h3>);
+                if(this.state.configuration.parameter.groups[i].list[j].max!==""){
+                    let contentline = "Max:["+this.state.configuration.parameter.groups[i].list[j].max+"];Min:["+this.state.configuration.parameter.groups[i].list[j].min+"];Note:"+this.state.configuration.parameter.groups[i].list[j].note;
+                    content.push(<div className="count" style={{fontSize:20,marginTop:15,verticalAlign:'bottom'}} key={this.state.key2+i+"p"+j+"1"}>{this.state.configuration.parameter.groups[i].list[j].paraname}</div>);
+                    content.push(<h3 style={{fontSize:10,marginRight:5}}  key={this.state.key2+i+"p"+j+"2"}>{contentline}</h3>);
+                    content.push(<input type="text" className="form-control configure_input" placeholder="CONFIG Value" aria-describedby="basic-addon1" key={this.state.key2+"G"+i+"P"+j+"input"} id={"Para_G"+i+"P"+j+"_input"} data-group={i} data-parameter={j} value={this.state.configuration.parameter.groups[i].list[j].value} onChange={this.handleChange} onBlur={this.handleBlur} data-min={this.state.configuration.parameter.groups[i].list[j].min} data-max={this.state.configuration.parameter.groups[i].list[j].max}/>);
+                }else{
+                    let contentline = "Note:"+this.state.configuration.parameter.groups[i].list[j].note;
+                    content.push(<div className="count" style={{fontSize:20,marginTop:15,verticalAlign:'bottom'}} key={this.state.key2+i+"p"+j+"1"}>{this.state.configuration.parameter.groups[i].list[j].paraname}</div>);
+                    content.push(<h3 style={{fontSize:10,marginRight:5}}  key={this.state.key2+i+"p"+j+"2"}>{contentline}</h3>);
+                    let choice_items = [];
+                    for(let k=0;k<this.state.configuration.parameter.groups[i].list[j].items.length;k++){
+                        /*
+                        if(this.state.configuration.parameter.groups[i].list[j].value === this.state.configuration.parameter.groups[i].list[j].items[k]){
+                            choice_items.push(<option value={this.state.configuration.parameter.groups[i].list[j].items[k]} selected="selected" key={"choice_item_"+i+"_"+j+"_"+k}>{this.state.configuration.parameter.groups[i].list[j].items[k]}</option>);
 
-                //content.push(<p className="lead" key={this.state.key2+i+"p"+j+"1"}>{this.state.configuration.parameter.groups[i].list[j].paraname}</p>);
-                content.push(<input type="text" className="form-control configure_input" placeholder="CONFIG Value" aria-describedby="basic-addon1" key={this.state.key2+"G"+i+"P"+j+"input"} id={"Para_G"+i+"P"+j+"_input"} data-group={i} data-parameter={j} value={this.state.configuration.parameter.groups[i].list[j].value} onChange={this.handleChange} onBlur={this.handleBlur} data-min={this.state.configuration.parameter.groups[i].list[j].min} data-max={this.state.configuration.parameter.groups[i].list[j].max}/>);
-                //content.push(<p key={this.state.key2+i+"p"+j+"2"}>{contentline}</p>);
+                        }else{
+                            choice_items.push(<option value={this.state.configuration.parameter.groups[i].list[j].items[k]} key={"choice_item_"+i+"_"+j+"_"+k}>{this.state.configuration.parameter.groups[i].list[j].items[k]}</option>);
+                        }*/
+                        choice_items.push(<option value={this.state.configuration.parameter.groups[i].list[j].items[k]} key={"choice_item_"+i+"_"+j+"_"+k}>{this.state.configuration.parameter.groups[i].list[j].items[k]}</option>);
+
+                    }
+                    content.push(<select className="form-control configure_choice" placeholder="CONFIG Value" aria-describedby="basic-addon1" key={this.state.key2+"G"+i+"P"+j+"Choice"} id={"Para_G"+i+"P"+j+"_Choice"} data-group={i} data-parameter={j} onChange={this.handleChange} defaultValue={this.state.configuration.parameter.groups[i].list[j].value} >{choice_items}</select>);
+
+                }
+
             }
             let temp;
             if(i==0){
@@ -322,6 +365,25 @@ export default class configurationview extends Component {
                 <div key={this.state.key+"basebutton"+i} style={{marginTop:this.state.bricksize/5,marginLeft:this.state.bricksize/5,marginRight:this.state.bricksize/5,marginBottom:this.state.bricksize/5,width:this.state.bricksize,height:this.state.bricksize,float: "left",position:"relative"}}>
                     <Smalliconbutton ref={this.state.key3+i} iconcallback={this._iconcallback}/>
                 </div>);
+        }
+        let preemption =[];
+        for(let i=0;i<this.state.configuration.parameter.preemption.length;i++){
+            if(this.state.configuration.parameter.preemption[i]){
+                let temp = <div className = "col-xs-3 col-md-3 col-sm-3 col-lg-3" key={"preemption_"+i} >
+                    <label>
+                        <input type="checkbox"  id={"Configure_Balance_"+i} defaultChecked="checked" onChange={this.handleChangecheck} /> {"balance_"+i}
+                    </label>
+                </div>;
+                preemption.push(temp);
+            }else{
+                let temp = <div className = "col-xs-3 col-md-3 col-sm-3 col-lg-3" key={"preemption_"+i}>
+                    <label>
+                        <input type="checkbox" id={"Configure_Balance_"+i} onChange={this.handleChangecheck}/> {"balance_"+i}
+                    </label>
+                </div>;
+                preemption.push(temp);
+            }
+
         }
         return (
             <div style={{position:"relative",background:"#FFFFFF",height:this.state.height,maxHeight:this.state.height,width:'100%',display:this.state.hide,overflow:'scroll',overflowX:'hidden'}}>
@@ -344,8 +406,15 @@ export default class configurationview extends Component {
                         </div>
                     </div>
                     <div className="clearfix"></div>
-
-
+                    <div className="col-xs-12 col-md-12 col-sm-12 col-lg-12 " style={{display:"block"}}>
+                        <div className="col-xs-12 col-md-12 col-sm-12 col-lg-12 " style={{display:"block"}}>
+                            <h4>Preemption:</h4>
+                        </div>
+                        <div className="col-xs-12 col-md-12 col-sm-12 col-lg-12 " style={{display:"block"}}>
+                            {preemption}
+                        </div>
+                    </div>
+                    <div className="clearfix"></div>
                     <div className="col-xs-12 col-md-12 col-sm-12 col-lg-12 " style={{display:"block"}}>
                         <div className="col-xs-12 col-md-12 col-sm-12 col-lg-12 " style={{display:"block"}}>
                             <h4>Detail Parameter:</h4>
