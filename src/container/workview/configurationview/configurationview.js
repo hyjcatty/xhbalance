@@ -28,7 +28,8 @@ export default class configurationview extends Component {
             bricksize:75,
             iconlist:[],
             defaulticon:"sugar1.svg",
-            head:"none"
+            head:"none",
+            switchlist:[]
         }
         this._iconcallback = this.handle_icon_selection.bind(this);
         //this.keyboard_initialize();
@@ -51,9 +52,12 @@ export default class configurationview extends Component {
     }
     hide(){
         this.setState({hide:"none"});
+        //this.switchery_distory();
     }
     show(){
         //console.log(this.state.configuration);
+
+        //
         this.setState({hide:"block"});
     }
     module_show(){
@@ -231,16 +235,53 @@ export default class configurationview extends Component {
 
     }
     switchery_initialize(){
-        for(let i=0;i<16;i++){
-            let myswitch = new Switchery($("#balance_"+i),{size:"small",color:'0d74e9'})
+        /*
+         for(let i=0;i<16;i++){
+         var switchery = new Switchery($("#Configure_Balance_"+i), {
+         color: '#26B99A'
+         });
+         this.state.switchlist.push(switchery);
+         }
+         console.log("switchery list lenght:"+this.state.switchlist.length);*/
+        if ($(".switchery-default")[0]) {
+            var elems = Array.prototype.slice.call(document.querySelectorAll('.switchery-default'));
+            //console.log("switchery list lenght:"+elems.length);
+            elems.forEach(function (html) {
+                html.remove();
+            });
         }
+        if(this.state.configuration!==null){
+
+            for(let i=0;i<16;i++){
+                $("#Configure_Balance_"+i).prop("checked",this.state.configuration.parameter.preemption[i]);
+            }
+        }
+
+        if ($(".js-switch")[0]) {
+            var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+            console.log("switchery list lenght:"+elems.length);
+            elems.forEach(function (html) {
+                var switchery = new Switchery(html, {
+                    color: '#26B99A'
+                });
+            });
+        }
+    }
+    switchery_destory(){
+        console.log("switchery list lenght:"+this.state.switchlist.length);
+        for(let i=0;i<this.state.switchlist.length;i++){
+            console.log("destory switch");
+            this.state.switchlist[i].destory();
+        }
+        this.setState({switchlist:[]});
     }
     componentDidMount(){
         //this.keyboard_initialize();
+
     }
     componentDidUpdate(){
-        this.keyboard_initialize();
         this.switchery_initialize();
+        this.keyboard_initialize();
     }
     getUpdatedValue(){
         let output = this.state.configuration;
@@ -279,6 +320,19 @@ export default class configurationview extends Component {
     handleChange(e){
     }
     handleChangecheck(e){
+        /*
+        for(let i=0;i<16;i++){
+            //console.log($("#Configure_Balance_"+i));
+            console.log("Configure_Balance_"+i+":"+$("#Configure_Balance_"+i).is(":checked"));
+            //this.state.configuration.parameter.preemption[i]=$("#Configure_Balance_"+i).is(":checked");
+        }
+        $("#Configure_Balance_1").prop("checked",true);
+
+        for(let i=0;i<16;i++){
+            //console.log($("#Configure_Balance_"+i));
+            console.log("Configure_Balance_"+i+":"+$("#Configure_Balance_"+i).is(":checked"));
+            //this.state.configuration.parameter.preemption[i]=$("#Configure_Balance_"+i).is(":checked");
+        }*/
         /*
         let handleid = e.currentTarget.getAttribute("id");
         console.log(handleid);
@@ -369,22 +423,62 @@ export default class configurationview extends Component {
         let preemption =[];
         for(let i=0;i<this.state.configuration.parameter.preemption.length;i++){
             if(this.state.configuration.parameter.preemption[i]){
-                let temp = <div className = "col-xs-3 col-md-3 col-sm-3 col-lg-3" key={"preemption_"+i} >
+                let temp =<div className = "col-xs-3 col-md-3 col-sm-3 col-lg-3" key={"preemption_"+i} >
                     <label>
-                        <input type="checkbox"  id={"Configure_Balance_"+i} defaultChecked="checked" onChange={this.handleChangecheck} /> {"balance_"+i}
+                        <input type="checkbox" id={"Configure_Balance_"+i} className="js-switch" defaultChecked="checked" onChange={this.handleChangecheck} data-switchery="true" value="on"/> {"balance_"+i}
                     </label>
                 </div>;
                 preemption.push(temp);
             }else{
-                let temp = <div className = "col-xs-3 col-md-3 col-sm-3 col-lg-3" key={"preemption_"+i}>
+                let temp = <div className = "col-xs-3 col-md-3 col-sm-3 col-lg-3" key={"preemption_"+i} >
                     <label>
-                        <input type="checkbox" id={"Configure_Balance_"+i} onChange={this.handleChangecheck}/> {"balance_"+i}
+                        <input type="checkbox" id={"Configure_Balance_"+i} className="js-switch"  data-switchery="false" value="off" onChange={this.handleChangecheck}/> {"balance_"+i}
                     </label>
                 </div>;
                 preemption.push(temp);
             }
 
         }
+/*
+        for(let i=0;i<this.state.configuration.parameter.preemption.length;i++){
+            if(this.state.configuration.parameter.preemption[i]){
+                let temp =<div className = "col-xs-3 col-md-3 col-sm-3 col-lg-3" key={"preemption_"+i} ><label>
+                        <input type="checkbox" className="js-switch" id={"Configure_Balance_"+i}  defaultChecked="checked" onChange={this.handleChangecheck} data-switchery="true" style={{display: "none"}}/>
+                        <span className="switchery switchery-default" style={{borderColor: "#26b99a", boxshadow: "#26b99a 0px 0px 0px 11px inset", transition: "border 0.4s, box-shadow 0.4s, background-color 1.2s", backgroundColor: "#26b99a"}}>
+                        <small style={{left: "12px", transition: "background-color 0.4s, left 0.2s", backgroundColor: "#ffffff"}}></small>
+                        </span> {"balance_"+i}
+                        </label></div>;
+                preemption.push(temp);
+            }else{
+                let temp = <div className = "col-xs-3 col-md-3 col-sm-3 col-lg-3" key={"preemption_"+i} ><label>
+                    <input type="checkbox" className="js-switch" id={"Configure_Balance_"+i}   onChange={this.handleChangecheck} data-switchery="true" style={{display: "none"}}/>
+                        <span className="switchery switchery-default" style={{borderColor: "#dfdfdf", boxshadow: "#dfdfdf 0px 0px 0px 11px inset", transition: "border 0.4s, box-shadow 0.4s", backgroundColor: "#FFFFFF"}}>
+                        <small style={{left: "0px", transition: "background-color 0.4s, left 0.2s"}}></small>
+                        </span> {"balance_"+i}
+                </label></div>;
+                preemption.push(temp);
+            }
+
+        }*/
+        /*
+        for(let i=0;i<this.state.configuration.parameter.preemption.length;i++){
+            if(this.state.configuration.parameter.preemption[i]){
+                let temp = <div className = "col-xs-3 col-md-3 col-sm-3 col-lg-3" key={"preemption_"+i} >
+                    <label>
+                        <input type="checkbox"  id={"Configure_Balance_"+i} className="flat" defaultChecked="checked" onChange={this.handleChangecheck} /> {"balance_"+i}
+                    </label>
+                </div>;
+                preemption.push(temp);
+            }else{
+                let temp = <div className = "col-xs-3 col-md-3 col-sm-3 col-lg-3" key={"preemption_"+i}>
+                    <label>
+                        <input type="checkbox" id={"Configure_Balance_"+i} className="flat" onChange={this.handleChangecheck}/> {"balance_"+i}
+                    </label>
+                </div>;
+                preemption.push(temp);
+            }
+
+        }*/
         return (
             <div style={{position:"relative",background:"#FFFFFF",height:this.state.height,maxHeight:this.state.height,width:'100%',display:this.state.hide,overflow:'scroll',overflowX:'hidden'}}>
                 <div className="x_content" >
@@ -410,7 +504,7 @@ export default class configurationview extends Component {
                         <div className="col-xs-12 col-md-12 col-sm-12 col-lg-12 " style={{display:"block"}}>
                             <h4>Preemption:</h4>
                         </div>
-                        <div className="col-xs-12 col-md-12 col-sm-12 col-lg-12 " style={{display:"block"}}>
+                        <div className="col-xs-12 col-md-12 col-sm-12 col-lg-12 " style={{display:"block"}} id="preemption_tab">
                             {preemption}
                         </div>
                     </div>
