@@ -11,6 +11,7 @@ import classNames from 'classnames';
 import Foot from "../foot/foot"
 import Head from "../head/head"
 import Loginview from "../container/loginview/loginview"
+import Sysconfview from "../container/sysconfview/sysconfview"
 import Brickview from "../container/brickview/brickview"
 import Workview from "../container/workview/workview"
 import './App.css';
@@ -42,7 +43,7 @@ class App extends Component{
             savemodback:null
         };
         this._footcallbackreturn=this.loginview.bind(this);
-        this._footcallbackconfigure=this.configureview.bind(this);
+        this._footcallbackconfigure=this.sysconfview.bind(this);
         this._workstartcase=this.startcase.bind(this);
         this._workstopcase=this.stopcase.bind(this);
         this._workcontrolfoot=this.footButtonShow.bind(this);
@@ -60,6 +61,11 @@ class App extends Component{
         this.refs.Loginview.update_size(width,canvasheight);
         this.refs.Brickview.update_size(width,canvasheight);
         this.refs.Workview.update_size(width,canvasheight);
+        this.refs.Sysconfview.update_size(width,canvasheight,headfootheight);
+    }
+    initializesysconf(callback,configure){
+        this.refs.Sysconfview.update_callback(callback);
+        this.refs.Sysconfview.update_config(configure);
     }
     initializeLogin(callback){
         this.refs.Loginview.update_callback(callback);
@@ -70,10 +76,11 @@ class App extends Component{
     initializehead(){
         this.refs.head.update_username(this.state.username);
     }
-    initializefoot(callback_back){
+    initializefoot(callback_back,callback_save){
         this.refs.foot.hide_all();
         //this.refs.foot.update_callback_return(callback_return);
         this.refs.foot.update_callback_back(callback_back);
+        this.refs.foot.update_callback_save(callback_save);
         //this.refs.foot.update_callback_configure(callback_configure);
     }
     initializerunstop(runcallback,stopcallback){
@@ -82,10 +89,11 @@ class App extends Component{
     initializerunsave(newsave,modsave){
         this.setState({savenewback:newsave,savemodback:modsave});
     }
-    footButtonShow(breturn,bback,bconfigure){
+    footButtonShow(breturn,bback,bconfigure,bsave){
         this.refs.foot.show_return_button(breturn);
         this.refs.foot.show_back_button(bback);
         this.refs.foot.show_configure_button(bconfigure);
+        this.refs.foot.show_save_button(bsave);
     }
     initializeWork(work2brickcallback){
         this.refs.Workview.update_callback(work2brickcallback);
@@ -96,13 +104,15 @@ class App extends Component{
         this.refs.Loginview.show();
         this.refs.foot.hide_all();
         this.refs.Brickview.hide();
+        this.refs.Sysconfview.hide();
         this.tipsinfo("Please login.");
     }
     brickview(){
         this.refs.Workview.hide();
         this.refs.Loginview.hide();
         this.refs.Brickview.show();
-        this.footButtonShow(true,false,true);
+        this.refs.Sysconfview.hide();
+        this.footButtonShow(true,false,true,false);
 
     }
     workview_run(configure){
@@ -110,7 +120,8 @@ class App extends Component{
 
         this.refs.Loginview.hide();
         this.refs.Brickview.hide();
-        this.footButtonShow(false,true,false);
+        this.refs.Sysconfview.hide();
+        this.footButtonShow(false,true,false,false);
         this.refs.Workview.runview(configure);
         this.tipsinfo(configure.name);
     }
@@ -119,7 +130,8 @@ class App extends Component{
 
         this.refs.Loginview.hide();
         this.refs.Brickview.hide();
-        this.footButtonShow(false,false,false);
+        this.refs.Sysconfview.hide();
+        this.footButtonShow(false,false,false,false);
         this.refs.Workview.runningview(configure);
         this.tipsinfo(configure.name);
     }
@@ -128,16 +140,27 @@ class App extends Component{
 
         this.refs.Loginview.hide();
         this.refs.Brickview.hide();
-        this.footButtonShow(false,true,false);
+        this.refs.Sysconfview.hide();
+        this.footButtonShow(false,true,false,false);
         this.refs.Workview.modview(configure);
         this.tipsinfo(configure.name);
+    }
+    sysconfview(){
+        this.refs.Workview.hide();
+        this.refs.Loginview.hide();
+        //this.refs.foot.hide_all();
+        this.refs.Brickview.hide();
+        this.refs.Sysconfview.show();
+        this.footButtonShow(false,true,false,true);
+        this.tipsinfo("System Configuration");
     }
     workview_new(configure){
         //this.refs.Workview.billboardview();
 
         this.refs.Loginview.hide();
         this.refs.Brickview.hide();
-        this.footButtonShow(false,true,false);
+        this.refs.Sysconfview.hide();
+        this.footButtonShow(false,true,false,false);
         this.refs.Workview.newview(configure);
         this.tipsinfo("new Configuration");
     }
@@ -184,6 +207,9 @@ class App extends Component{
     savemodcase(configure){
         this.state.savemodback(configure);
     }
+    getsysconfset(){
+        return this.refs.Sysconfview.getUpdatedValue();
+    }
     tipsinfo(tips){
         this.refs.foot.write_log(tips);
     }
@@ -194,6 +220,7 @@ class App extends Component{
                 <Head ref="head"/>
             </div>
             <div>
+                <Sysconfview ref="Sysconfview"/>
                 <Loginview ref="Loginview"/>
                 <Brickview ref="Brickview"/>
                 <Workview ref="Workview" workstartcase={this._workstartcase} workstopcase={this._workstopcase} workcontrolfoot={this._workcontrolfoot} worksavenewcase={this._worksavenewcase} worksavemodcase={this._worksavemodcase}/>
@@ -217,6 +244,7 @@ get_size();
 xhbalanceiconlist();
 var react_element = <App/>;
 var app_handle = ReactDOM.render(react_element,document.getElementById('app'));
+sysconffetch();
 //var footcallback_return= function(){
 //    app_handle.loginview();
 //}
@@ -235,7 +263,7 @@ app_handle.initializeSize(winWidth,winHeight);
 
 
 //app_handle.initializefoot(footcallback_return,footcallback_back,footcallback_configure);
-app_handle.initializefoot(footcallback_back);
+app_handle.initializefoot(footcallback_back,footcallback_save);
 app_handle.initializehead();
 app_handle.initializeLogin(xhbalancelogin);
 app_handle.initializeWork(newviewabort);
@@ -737,6 +765,85 @@ function xhbalancesavemodconfcallback(res){
     xhbalanceconfiglist();
     tips("Save successfully!");
 }
+
+function xhbalancesavesysconf(configure){
+
+    var map={
+        action:"XH_Balance_sys_config_save",
+        type:"mod",
+        body:configure,
+        user:app_handle.getuser()
+    };
+    fetch(request_head,
+        {
+            method:'POST',
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify(map)
+        }).then(jsonParse)
+        .then(xhbalancesavesysconfcallback)
+        //.then(fetchlist)
+        .catch( (error) => {
+            console.log('request error', error);
+            return { error };
+        });
+}
+
+function xhbalancesavesysconfcallback(res){
+    if(res.jsonResult.status == "false"){
+        alert("修改系统配置保存出错！");
+        return;
+    }
+    if(res.jsonResult.auth == "false"){
+        return;
+    }
+    xhbalanceconfiglist();
+    sysconffetch();
+    tips("Save successfully!");
+}
+function sysconffetch(){
+    var map={
+        action:"XH_Balance_sys_config",
+        type:"query",
+        user:null
+    };
+    fetch(request_head,
+        {
+            method:'POST',
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify(map)
+        }).then(jsonParse)
+        .then(sysconffetchcallback)
+        .catch( (error) => {
+            console.log('request error', error);
+            return { error };
+        });
+}
+function sysconffetchcallback(res){
+    if(res.jsonResult.status == "false"){
+        alert("系统错误，请联系管理员！");
+        return;
+    }
+    if(res.jsonResult.auth == "false"){
+        return;
+    }
+    let configuration = res.jsonResult.ret;
+
+    app_handle.initializesysconf(xhbalancesavesysconf,configuration);
+    //app_handle.workview();
+}
+
+function footcallback_save(){
+    xhbalancesavesysconf(app_handle.getsysconfset());
+
+}
+
+
 var hexcase = 0; /* hex output format. 0 - lowercase; 1 - uppercase     */
 var b64pad = ""; /* base-64 pad character. "=" for strict RFC compliance  */
 var chrsz = 8; /* bits per input character. 8 - ASCII; 16 - Unicode    */

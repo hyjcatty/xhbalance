@@ -1,0 +1,44 @@
+{
+  "name": "configure",
+  "owner": "system",
+  "parameter": {
+    "groups":[
+      {
+        "groupname": "group1",
+        "list": [
+          {"paraname":"choice11","type":"choice","max":"","min":"","value":"0","items":["123","456","789","0"],"note":"choice info"},
+          {"paraname":"para11","type":"float","max":"100","min":"0","value":"50","note":"Note info"},
+          {"paraname":"para12","type":"int","max":"100","min":"0","value":"50","note":"Note info"},
+          {"paraname":"para13","type":"string","max":"5","min":"","value":"ssd","note":"Note info"},
+          {"paraname":"checkbox14","type":"checkbox","max":"","min":"","value":true,"note":"Note info"}
+                  ]
+      },{
+        "groupname": "group2",
+        "list": [
+          {"paraname":"choice21","type":"choice","max":"","min":"","value":"123","items":["123","456","789","0"],"note":"choice info"},
+          {"paraname":"para21","type":"float","max":"100","min":"0","value":"50","note":"Note info"},
+          {"paraname":"para24","type":"int","max":"100","min":"0","value":"50","note":"Note info"},
+          {"paraname":"para25","type":"int","max":"100","min":"0","value":"50","note":"Note info"}
+        ]
+      },{
+        "groupname": "group3",
+        "list": [
+          {"paraname":"para31","type":"int","max":"100","min":"0","value":"50","note":"Note info"},
+          {"paraname":"para32","type":"int","max":"100","min":"0","value":"50","note":"Note info"},
+          {"paraname":"para33","type":"int","max":"100","min":"0","value":"50","note":"Note info"},
+          {"paraname":"para34","type":"int","max":"100","min":"0","value":"50","note":"Note info"},
+          {"paraname":"para35","type":"int","max":"100","min":"0","value":"50","note":"Note info"},
+          {"paraname":"para36","type":"int","max":"100","min":"0","value":"50","note":"Note info"},
+          {"paraname":"checkbox37","type":"checkbox","max":"","min":"","value":false,"note":"Note info"}
+        ]
+      },{
+        "groupname": "group4",
+        "list": [
+          {"paraname":"choice41","type":"choice","max":"","min":"","value":"123","items":["123","456","789","0"],"note":"choice info"},
+          {"paraname":"para41","type":"float","max":"100","min":"0","value":"50","note":"Note info"},
+          {"paraname":"para44","type":"int","max":"100","min":"0","value":"50","note":"Note info"},
+          {"paraname":"para45","type":"int","max":"100","min":"0","value":"50","note":"Note info"}
+        ]
+      }]
+  }
+}

@@ -243,13 +243,18 @@ export default class configurationview extends Component {
          this.state.switchlist.push(switchery);
          }
          console.log("switchery list lenght:"+this.state.switchlist.length);*/
+        let switchery_list = $("#preemption_tab").find("span").each(function(html){
+            $(this).remove();
+        });
+
+        /*
         if ($(".switchery-default")[0]) {
             var elems = Array.prototype.slice.call(document.querySelectorAll('.switchery-default'));
             //console.log("switchery list lenght:"+elems.length);
             elems.forEach(function (html) {
                 html.remove();
             });
-        }
+        }*/
         if(this.state.configuration!==null){
 
             for(let i=0;i<16;i++){
@@ -257,8 +262,8 @@ export default class configurationview extends Component {
             }
         }
 
-        if ($(".js-switch")[0]) {
-            var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+        if ($(".configure-js-switch")[0]) {
+            var elems = Array.prototype.slice.call(document.querySelectorAll('.configure-js-switch'));
             console.log("switchery list lenght:"+elems.length);
             elems.forEach(function (html) {
                 var switchery = new Switchery(html, {
@@ -266,14 +271,6 @@ export default class configurationview extends Component {
                 });
             });
         }
-    }
-    switchery_destory(){
-        console.log("switchery list lenght:"+this.state.switchlist.length);
-        for(let i=0;i<this.state.switchlist.length;i++){
-            console.log("destory switch");
-            this.state.switchlist[i].destory();
-        }
-        this.setState({switchlist:[]});
     }
     componentDidMount(){
         //this.keyboard_initialize();
@@ -425,14 +422,14 @@ export default class configurationview extends Component {
             if(this.state.configuration.parameter.preemption[i]){
                 let temp =<div className = "col-xs-3 col-md-3 col-sm-3 col-lg-3" key={"preemption_"+i} >
                     <label>
-                        <input type="checkbox" id={"Configure_Balance_"+i} className="js-switch" defaultChecked="checked" onChange={this.handleChangecheck} data-switchery="true" value="on"/> {"balance_"+i}
+                        <input type="checkbox" id={"Configure_Balance_"+i} className="js-switch configure-js-switch" defaultChecked="checked" onChange={this.handleChangecheck} data-switchery="true" value="on"/> {"balance_"+i}
                     </label>
                 </div>;
                 preemption.push(temp);
             }else{
                 let temp = <div className = "col-xs-3 col-md-3 col-sm-3 col-lg-3" key={"preemption_"+i} >
                     <label>
-                        <input type="checkbox" id={"Configure_Balance_"+i} className="js-switch"  data-switchery="false" value="off" onChange={this.handleChangecheck}/> {"balance_"+i}
+                        <input type="checkbox" id={"Configure_Balance_"+i} className="js-switch configure-js-switch"  data-switchery="false" value="off" onChange={this.handleChangecheck}/> {"balance_"+i}
                     </label>
                 </div>;
                 preemption.push(temp);

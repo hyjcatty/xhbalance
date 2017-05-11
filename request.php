@@ -32,6 +32,11 @@ function filemod($name,$content){
     fwrite($modfile,$content);
     fclose($modfile);
 }
+function confmod($content){
+    $modfile=fopen("./sysconf/configure.json","w+") ;
+    fwrite($modfile,$content);
+    fclose($modfile);
+}
 function getfiles($path,$type){
     $ret = array();
     if(!file_exists($path)) return $ret;
@@ -80,7 +85,10 @@ function geticonlist(){
 }
 function getfiledetail($path){
     $ret = "";
-    if(!file_exists($path)) return "";
+    if(!file_exists($path)) {
+        //echo $path." is not exist!";
+        return "";
+    }
     $afile=$path;
     $json_string = file_get_contents($afile);
     return $json_string;
@@ -445,6 +453,32 @@ switch ($key){
             $body=$payload["body"];
             $sta='true';
             filemod($body["name"],_encode($body));
+                $retval=array(
+                    'status'=>$sta,
+                    'auth'=>'true',
+                    'msg'=>'12345'
+                );
+
+                $jsonencode = _encode($retval);
+                echo $jsonencode; break;
+        case "XH_Balance_sys_config":
+            $retarray;
+            $retarray = getfiledetail("./sysconf/configure.json");
+            //echo "file content".$retarray;
+            $obj=json_decode($retarray,true);
+            $retval=array(
+                'status'=>'true',
+                'auth'=>'true',
+                'ret'=>$obj,
+                'msg'=>''
+            );
+
+            $jsonencode = _encode($retval);
+            echo $jsonencode; break;
+        case "XH_Balance_sys_config_save":
+            $body=$payload["body"];
+            $sta='true';
+            confmod(_encode($body));
                 $retval=array(
                     'status'=>$sta,
                     'auth'=>'true',

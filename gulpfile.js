@@ -89,6 +89,8 @@ gulp.task("resourcecopy",function(){
         .pipe(gulp.dest(option.buildPath+"/svg/"));
     gulp.src("./json/**/*")
         .pipe(gulp.dest(option.buildPath+"/json/"));
+    gulp.src("./sysconf/*")
+        .pipe(gulp.dest(option.buildPath+"/sysconf/"));
     /*
      gulp.src("./*.html")
      .pipe(gulp.dest(option.buildPath+"/"));*/
