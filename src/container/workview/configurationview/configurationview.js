@@ -477,7 +477,7 @@ export default class configurationview extends Component {
 
         }*/
         return (
-            <div style={{position:"relative",background:"#FFFFFF",height:this.state.height,maxHeight:this.state.height,width:'100%',display:this.state.hide,overflow:'scroll',overflowX:'hidden'}}>
+            <div style={{position:"relative",background:"#FFFFFF",height:this.state.height,maxHeight:this.state.height,width:'100%',display:this.state.hide,overflowY:'scroll',overflowX:'hidden'}}>
                 <div className="x_content" >
                     <div className="col-xs-12 col-md-12 col-sm-12 col-lg-12" style={{display:this.state.head}}>
                         <h4>&nbsp;</h4>
@@ -489,7 +489,8 @@ export default class configurationview extends Component {
                         </div>
                         <div className="col-xs-9 col-md-9 col-sm-9 col-lg-9" style={{display:this.state.head,margonTop:50}}>
                             <h4>Icon:</h4>
-                            <div  style={{marginTop:this.state.bricksize/5,marginLeft:this.state.bricksize/5,marginRight:this.state.bricksize/5,marginBottom:this.state.bricksize/5,width:this.state.bricksize,height:this.state.bricksize,float: "left",position:"relative"}}>
+                            <div  style={{marginTop:this.state.bricksize/5,marginLeft:this.state.bricksize/5,marginRight:this.state.bricksize/5,marginBottom:this.state.bricksize/5,
+                            width:this.state.bricksize,height:this.state.bricksize,float: "left",position:"relative"}}>
                                 <button type="button" className="btn" style={{height:this.state.bricksize,width:this.state.bricksize,verticalAlign:"middle"}} onClick={this.module_show.bind(this)}><i>
                                     <img src={"./svg/"+this.state.configuration.icon}  style={{height:this.state.bricksize*0.5,width:this.state.bricksize*0.5,marginTop:0}} ></img><br/>
                                 </i></button>
@@ -497,17 +498,17 @@ export default class configurationview extends Component {
                         </div>
                     </div>
                     <div className="clearfix"></div>
-                    <div className="col-xs-12 col-md-12 col-sm-12 col-lg-12 " style={{display:"block"}}>
-                        <div className="col-xs-12 col-md-12 col-sm-12 col-lg-12 " style={{display:"block"}}>
+                    <div className="col-xs-12 col-md-12 col-sm-12 col-lg-12 " >
+                        <div className="col-xs-12 col-md-12 col-sm-12 col-lg-12 " >
                             <h4>Preemption:</h4>
                         </div>
-                        <div className="col-xs-12 col-md-12 col-sm-12 col-lg-12 " style={{display:"block"}} id="preemption_tab">
+                        <div className="col-xs-12 col-md-12 col-sm-12 col-lg-12 "  id="preemption_tab">
                             {preemption}
                         </div>
                     </div>
                     <div className="clearfix"></div>
-                    <div className="col-xs-12 col-md-12 col-sm-12 col-lg-12 " style={{display:"block"}}>
-                        <div className="col-xs-12 col-md-12 col-sm-12 col-lg-12 " style={{display:"block"}}>
+                    <div className="col-xs-12 col-md-12 col-sm-12 col-lg-12 " >
+                        <div className="col-xs-12 col-md-12 col-sm-12 col-lg-12 " >
                             <h4>Detail Parameter:</h4>
                         </div>
                         <div className="col-xs-3 col-md-3 col-sm-3 col-lg-3">
