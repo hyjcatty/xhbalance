@@ -46,6 +46,10 @@ export default class buttonbar extends Component {
         this.showbutton2();
         this.setState({button1:"START",button2:"MODIFY",status:0});
     }
+    calibration_configure(){
+        this.showbutton2();
+        this.setState({button1:"TO_ZERO",button2:"CALIBRATION",status:0});
+    }
     modify_configure(){
         this.showbutton2();
         this.setState({button1:"SAVE",button2:"ABORT",status:1});

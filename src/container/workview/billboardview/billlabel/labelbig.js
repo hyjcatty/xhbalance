@@ -16,12 +16,10 @@ export default class Labelbig extends Component {
             title:"New Sign ups",
             note:"Status Report",
             status:"- - - -",
-            warning:"- - - -",
-            error:"- - - -"
         };
     }
-    updateprop(status,warning,error){
-        this.setState({status:status,warning:warning,error:error});
+    updateprop(status){
+        this.setState({status:status});
     }
     initialize(title,note){
         this.setState({title:title,note:note});
@@ -29,11 +27,9 @@ export default class Labelbig extends Component {
     render() {
         return (
             <div className="tile-stats">
-                <div key="statuspanel" className="count" style={{fontSize:24}}>{"状态："+this.state.status}</div>
-                <div key="warningpanel" className="count" style={{fontSize:24}}>{"告警："+this.state.warning}</div>
-                <div key="errorpanel" className="count" style={{fontSize:24}}>{"错误："+this.state.error}</div>
-                <h3>{this.state.title}</h3>
-                <p>{this.state.note}</p>
+                <h3 style={{paddingTop:10}}>{this.state.title}</h3>
+                <div key="statuspanel" className="count" style={{fontSize:48,paddingTop:20,paddingBottom:20,textAlign:"center"}}>{this.state.status}</div>
+                <p className="pull-right" style={{paddingRight:10}}>{this.state.note}</p>
             </div>
         );
     }

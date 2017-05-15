@@ -12,6 +12,7 @@ import '../../../../resource/css/font-awesome.min.css';
 import './billboardview.css';
 import Label1 from "./billlabel/label1.js"
 import Label2 from "./billlabel/label2.js"
+import Label3 from "./billlabel/label3.js"
 import Labelbig from "./billlabel/labelbig.js"
 import Light from "./billlabel/light.js"
 
@@ -39,6 +40,10 @@ export default class billboardview extends Component {
                 warning: "123",
                 error: "123"
             },
+            currentweight:{
+                value:0
+            },
+
             mainvalue: [{value: 179, color: "RED"}, {value: 179, color: "RED"}, {value: 179, color: "RED"}, {
                 value: 179,
                 color: "RED"
@@ -89,14 +94,21 @@ export default class billboardview extends Component {
     update_size(width,height){
         this.setState({height:height,width:width});
         //console.log("billboardview width:"+width+",height:"+height);
-        for(let i=1;i<7;i++){
-            this.refs['Label1x'+i].initialize("New Sign ups","Note");
-        }
-        for(let i=1;i<5;i++){
+        this.refs['Label1x1'].initialize("Target Weight","kg");
+        this.refs['Label1x2'].initialize("Upper Weight","kg");
+        this.refs['Label1x3'].initialize("Total Comb","pcs");
+        this.refs['Label1x4'].initialize("Total Weight","kg");
+        this.refs['Label1x5'].initialize("Speed Pcs","pcs/min");
+        this.refs['Label1x6'].initialize("Speed Kg","kg/min");
+        for(let i=1;i<4;i++){
             this.refs['Label2x'+(2*i-1)].initialize("Average Time","From last Count","left",width);
             this.refs['Label2x'+(2*i)].initialize("Average Time","From last Count","right",width);
         }
-        this.refs.Labelbigboard.initialize("New Sign ups","Status Report");
+        //this.refs['Label3x1'].initialize("Status info","fa fa-bullhorn",width);
+        this.refs['Label3x2'].initialize("Warning info","fa fa-warning",width);
+        this.refs['Label3x3'].initialize("Error info","fa fa-times",width);
+
+        this.refs.Labelbigboard.initialize("Current Weight","kg");
         for(let i=1;i<9;i++){
             this.refs['Light'+(2*i-1)].initialize("left",width);
             this.refs['Light'+(2*i)].initialize("right",width);
@@ -122,10 +134,14 @@ export default class billboardview extends Component {
         for(let i=1;i<7;i++){
             this.refs['Label1x'+i].updateprop(this.colorlist[this.state.showlist.mainvalue[i-1].color],this.state.showlist.mainvalue[0].value);
         }
-        for(let i=1;i<9;i++){
+        for(let i=1;i<7;i++){
             this.refs['Label2x'+i].updateprop(this.colorlist[this.state.showlist.detailvalue[i-1].color],this.colorlist[this.state.showlist.detailvalue[i-1].subcolor],this.state.showlist.detailvalue[i-1].value,this.state.showlist.detailvalue[i-1].subvalue);
         }
-        this.refs.Labelbigboard.updateprop(this.state.showlist.statusdetail.status,this.state.showlist.statusdetail.warning,this.state.showlist.statusdetail.error);
+        //this.refs['Label3x1'].updateprop("#73879c",this.state.showlist.statusdetail.status);
+        this.refs['Label3x2'].updateprop("#f0ad4e",this.state.showlist.statusdetail.warning);
+        this.refs['Label3x3'].updateprop("#d95349",this.state.showlist.statusdetail.error);
+        //this.refs.Labelbigboard.updateprop(this.state.showlist.statusdetail.status,this.state.showlist.statusdetail.warning,this.state.showlist.statusdetail.error);
+        this.refs.Labelbigboard.updateprop(this.state.showlist.currentweight.value);
     }
     clearbillboard(){
         //this.setState({showlist:this.state.defaultshow});
@@ -172,9 +188,9 @@ export default class billboardview extends Component {
                         <Label2 key="Label2x5" ref="Label2x5"/>
                         <Label2 key="Label2x6" ref="Label2x6"/>
                     </div>
-                    <div key = "Label2g4" style={{width:this.state.width*0.45,float: "left",position:"relative",marginTop:this.state.width*0.02}}>
-                        <Label2 key="Label2x7" ref="Label2x7"/>
-                        <Label2 key="Label2x8" ref="Label2x8"/>
+                    <div key = "Label3g1" style={{width:this.state.width*0.45,float: "left",position:"relative",marginTop:this.state.width*0.02}}>
+                        <Label3 key="Label3x2" ref="Label3x2"/>
+                        <Label3 key="Label3x3" ref="Label3x3"/>
                     </div>
                 </div>
                 <div key="rightpanel" style={{width:this.state.width*0.45,height:this.state.height,float: "left",position:"relative",marginLeft:this.state.width*0.03,marginTop:this.state.width*0.03}}>

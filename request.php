@@ -313,10 +313,14 @@ switch ($key){
                 );
                 array_push($detailvalue,$temp);
             }
+            $currentweight=array(
+            'value'=>(string)rand(0,250)
+            );
             $ret=array(
                 'statusdetail'=>$statusdetail,
                 'mainvalue'=>$mainvalue,
-                'detailvalue'=>$detailvalue
+                'detailvalue'=>$detailvalue,
+                'currentweight'=>$currentweight
             );
             $sta='true';
             $retval=array(
