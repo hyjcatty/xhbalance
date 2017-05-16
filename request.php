@@ -491,6 +491,37 @@ switch ($key){
 
                 $jsonencode = _encode($retval);
                 echo $jsonencode; break;
+        case "XH_Balance_cali_to_zero":
+            $body=$payload["body"];
+            $balance = $body["balance"];
+            $sta='true';
+            $ret=array(
+                'balance'=>$balance
+            );
+            $retval=array(
+                'status'=>$sta,
+                'ret'=>$ret,
+                'auth'=>'true',
+                'msg'=>'12345'
+            );
+            $jsonencode = _encode($retval);
+            echo $jsonencode; break;
+        case "XH_Balance_cali_to_countweight":
+            $body=$payload["body"];
+            $balance = $body["balance"];
+            $sta='true';
+            $ret=array(
+                'balance'=>$balance
+            );
+            $retval=array(
+                'status'=>$sta,
+                'ret'=>$ret,
+                'auth'=>'true',
+                'msg'=>'12345'
+            );
+            $jsonencode = _encode($retval);
+            echo $jsonencode; break;
+
 	default:
 
 	break;

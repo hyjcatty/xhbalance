@@ -27,6 +27,7 @@ export default class foot extends Component {
             hideBack:"none",
             hideConfigure:"none",
             hideSave:"none",
+            hideCalibration:"none",
             callbackBack:null,
             callbackSave:null,
             disabled:"",
@@ -76,6 +77,13 @@ export default class foot extends Component {
             this.setState({hideConfigure:"none"});
         }
     }
+    show_calibration_button(input){
+        if(input===true){
+            this.setState({hideCalibration:"block"});}
+        else{
+            this.setState({hideCalibration:"none"});
+        }
+    }
     show_save_button(input){
         if(input===true){
             this.setState({hideSave:"block"});}
@@ -84,7 +92,7 @@ export default class foot extends Component {
         }
     }
     hide_all(){
-        this.setState({hideReturn:"none",hideConfigure:"none",hideReturn:"none",hideSave:"none"});
+        this.setState({hideReturn:"none",hideConfigure:"none",hideReturn:"none",hideSave:"none",hideCalibration:"none"});
     }
     handle_click_return(){
         //console.log("click");
@@ -100,6 +108,12 @@ export default class foot extends Component {
         //console.log("click");
         if(this.props.footcallbackconfigure){
             this.props.footcallbackconfigure();
+        }
+    }
+    handle_click_calibration(){
+        //console.log("click");
+        if(this.props.footcallbackcalibration){
+            this.props.footcallbackcalibration();
         }
     }
     handle_click_save(){
@@ -144,6 +158,9 @@ export default class foot extends Component {
                     </button>
                     <button  type="button" className="btn btn-warning btn-sm pull-left" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:(this.state.height-10)*1.5,display:this.state.hideSave}} disabled={this.state.disabled} onClick={this.handle_click_save.bind(this)}>
                         <i className="fa fa-save"> </i>
+                    </button>
+                    <button  type="button" className="btn btn-warning btn-sm pull-left" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:(this.state.height-10)*1.5,display:this.state.hideCalibration}} disabled={this.state.disabled} onClick={this.handle_click_calibration.bind(this)}>
+                        <i className="fa fa-wrench"> </i>
                     </button>
                     <a style={{position:"relative",height:this.state.height,display:'table-cell',verticalAlign:'middle'}}>
                         < span className="headlabel" style={{fontSize:this.state.height*0.3,marginRight:this.state.height*0.3}}>&nbsp;</span>
