@@ -65,10 +65,10 @@ export default class calibrationview extends Component {
                 style={{position:"relative",background:"#FFFFFF",height:this.state.height,maxHeight:this.state.height,width:'100%',display:this.state.hide,overflowY:'hidden',overflowX:'hidden'}}>
 
                 <div key="rightpanel"
-                     style={{width:this.state.width,height:this.state.height,float: "left",position:"relative",marginLeft:this.state.width*0.05,marginTop:this.state.width*0.03}}>
+                     style={{width:this.state.width,height:this.state.height,float: "left",position:"relative",marginLeft:this.state.width*0.05}}>
 
                     <div key="Lightboard"
-                         style={{width:this.state.width*0.9,float: "left",position:"relative",marginTop:15}}>
+                         style={{width:this.state.width*0.9,float: "left",position:"relative"}}>
                         {unitlist}
                     </div>
                 </div>
