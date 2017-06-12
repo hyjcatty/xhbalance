@@ -132,7 +132,7 @@ export default class billboardview extends Component {
     }
     flash_status(){
         for(let i=1;i<7;i++){
-            this.refs['Label1x'+i].updateprop(this.colorlist[this.state.showlist.mainvalue[i-1].color],this.state.showlist.mainvalue[0].value);
+            this.refs['Label1x'+i].updateprop(this.colorlist[this.state.showlist.mainvalue[i-1].color],this.state.showlist.mainvalue[i-1].value);
         }
         for(let i=1;i<7;i++){
             this.refs['Label2x'+i].updateprop(this.colorlist[this.state.showlist.detailvalue[i-1].color],this.colorlist[this.state.showlist.detailvalue[i-1].subcolor],this.state.showlist.detailvalue[i-1].value,this.state.showlist.detailvalue[i-1].subvalue);
