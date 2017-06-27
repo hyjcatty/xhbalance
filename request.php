@@ -230,6 +230,27 @@ switch ($key){
 
             $jsonencode = _encode($retval);
             echo $jsonencode; break;
+    case "XH_Balance_to_zero_shortcut": //Use Wechat to login the Server, response is the userID in system.
+        /*
+        body={
+                configure:configure
+            };
+         var map={
+            action:"XH_Balance_to_zero_shortcut",
+            type:"query",
+            user:"null"
+         };
+        * */
+            //$body=$payload["body"];
+            $sta='true';
+            $retval=array(
+                'status'=>$sta,
+                'auth'=>'true',
+                'msg'=>'12345'
+            );
+
+            $jsonencode = _encode($retval);
+            echo $jsonencode; break;
     case "XH_Balance_status": //Use Wechat to login the Server, response is the userID in system.
             /*
              var map={

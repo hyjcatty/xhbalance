@@ -28,8 +28,10 @@ export default class foot extends Component {
             hideConfigure:"none",
             hideSave:"none",
             hideCalibration:"none",
+            hideTozero:"none",
             callbackBack:null,
             callbackSave:null,
+            callbackTozero:null,
             disabled:"",
             loginfo:"xxxxxxxxx"
         }
@@ -55,6 +57,9 @@ export default class foot extends Component {
     }
     update_callback_save(callback){
         this.setState({callbackSave:callback})
+    }
+    update_callback_tozero(callback){
+        this.setState({callbackTozero:callback})
     }
     show_return_button(input){
         if(input===true){
@@ -91,8 +96,15 @@ export default class foot extends Component {
             this.setState({hideSave:"none"});
         }
     }
+    show_to_zero_button(input){
+        if(input===true){
+            this.setState({hideTozero:"block"});}
+        else{
+            this.setState({hideTozero:"none"});
+        }
+    }
     hide_all(){
-        this.setState({hideReturn:"none",hideConfigure:"none",hideReturn:"none",hideSave:"none",hideCalibration:"none"});
+        this.setState({hideReturn:"none",hideConfigure:"none",hideReturn:"none",hideSave:"none",hideCalibration:"none",hideTozero:"none"});
     }
     handle_click_return(){
         //console.log("click");
@@ -115,6 +127,10 @@ export default class foot extends Component {
         if(this.props.footcallbackcalibration){
             this.props.footcallbackcalibration();
         }
+    }
+    handle_click_to_zero(){
+        //console.log("click");
+        this.state.callbackTozero();
     }
     handle_click_save(){
         this.state.callbackSave();
@@ -161,6 +177,9 @@ export default class foot extends Component {
                     </button>
                     <button  type="button" className="btn btn-warning btn-sm pull-left" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:(this.state.height-10)*1.5,display:this.state.hideCalibration}} disabled={this.state.disabled} onClick={this.handle_click_calibration.bind(this)}>
                         <i className="fa fa-wrench"> </i>
+                    </button>
+                    <button  type="button" className="btn btn-warning btn-sm pull-left" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:(this.state.height-10)*1.5,display:this.state.hideTozero}} disabled={this.state.disabled} onClick={this.handle_click_to_zero.bind(this)}>
+                        <i className="fa fa-recycle"> </i>
                     </button>
                     <a style={{position:"relative",height:this.state.height,display:'table-cell',verticalAlign:'middle'}}>
                         < span className="headlabel" style={{fontSize:this.state.height*0.3,marginRight:this.state.height*0.3}}>&nbsp;</span>

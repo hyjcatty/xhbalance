@@ -125,6 +125,9 @@ gulp.task('scripts', function() {
     gulp.src('./index.html')
         .pipe(htmlmin(option_html))
         .pipe(gulp.dest(option.buildPath+'/'));
+    gulp.src('./Loading.html')
+        .pipe(htmlmin(option_html))
+        .pipe(gulp.dest(option.buildPath+'/'));
 });
 
 gulp.task('default',['clean'], function(){

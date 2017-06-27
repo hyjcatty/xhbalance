@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Loading.... </title>
+
+    <!-- Bootstrap -->
+    <link href="./resource/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="./resource/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="./resource/css/nprogress.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="./resource/css/custom.min.css" rel="stylesheet">
+
+    <script src="./resource/keyboardmaster/docs/js/jquery-latest.min.js"></script>
+  </head>
+
+  <body class="login">
+    <div>
+
+      <div class="login_wrapper">
+        <div class="animate form login_form">
+          <section class="login_content">
+            <form>
+              <h1>System is Booting</h1>
+              <div>
+                <h1 id="contentline">Please wait a moment....</h1>
+              </div>
+
+              <div class="clearfix"></div>
+
+              <div class="separator">
+
+                <div class="clearfix"></div>
+                <br />
+
+                <div>
+                  <h1><i class="fa fa-paw"></i> Xiao Hui tech</h1>
+                  <p>©2017 All Rights Reserved.</p>
+                </div>
+              </div>
+            </form>
+          </section>
+        </div>
+
+
+      </div>
+    </div>
+    <script>
+      var basic_address = getRelativeURL()+"/";
+      var request_head= basic_address+"loading.php";
+      var indexurl = basic_address+"index.html";
+      $(document).ready(function() {
+
+        var runcycle=setInterval(check_if_ready,2500);
+      });
+      function check_if_ready(){
+        var map={
+          action:"XH_Balance_if_ready"
+        };
+        var callback=function(result){
+          if(result.status=="true"){
+            jump_to_index();
+          }else{
+            var content = $("#contentline").text();
+            content = content + "."
+            if(content.length>25) content = "Please wait a moment";
+            $("#contentline").text(content);
+          }
+        };
+        JQ_get(request_head,map,callback);
+      }
+      function JQ_get(url,request,callback){
+        jQuery.get(url, request, function (data) {
+          var result=JSON.parse(data);
+          callback(result);
+        });
+      }
+      function jump_to_index(){
+        window.location="http://"+window.location.host+indexurl;
+      }
+      function getRelativeURL(){
+        var url = document.location.toString();
+        var arrUrl= url.split("//");
+        var start = arrUrl[1].indexOf("/");
+        var reUrl=arrUrl[1].substring(start);
+        if(reUrl.indexOf("?")!=-1) {
+          reUrl = reUrl.split("?")[0];
+        }
+        var end = reUrl.lastIndexOf("/");
+        reUrl=reUrl.substring(0,end);
+        return reUrl;
+
+      }
+    </script>
+  </body>
+</html>

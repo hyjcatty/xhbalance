@@ -41,7 +41,8 @@ class App extends Component{
             runcallback:null,
             stopcallback:null,
             savenewback:null,
-            savemodback:null
+            savemodback:null,
+            forceflashback:null
         };
         this._footcallbackreturn=this.loginview.bind(this);
         this._footcallbackconfigure=this.sysconfview.bind(this);
@@ -82,11 +83,12 @@ class App extends Component{
     initializehead(){
         this.refs.head.update_username(this.state.username);
     }
-    initializefoot(callback_back,callback_save){
+    initializefoot(callback_back,callback_save,callback_tozero){
         this.refs.foot.hide_all();
         //this.refs.foot.update_callback_return(callback_return);
         this.refs.foot.update_callback_back(callback_back);
         this.refs.foot.update_callback_save(callback_save);
+        this.refs.foot.update_callback_tozero(callback_tozero);
         //this.refs.foot.update_callback_configure(callback_configure);
     }
     initializerunstop(runcallback,stopcallback){
@@ -95,12 +97,16 @@ class App extends Component{
     initializerunsave(newsave,modsave){
         this.setState({savenewback:newsave,savemodback:modsave});
     }
-    footButtonShow(breturn,bback,bconfigure,bsave,bcalibration){
+    initializeforceflash(forceflash){
+        this.setState({forceflashback:forceflash});
+    }
+    footButtonShow(breturn,bback,bconfigure,bsave,bcalibration,btozero){
         this.refs.foot.show_return_button(breturn);
         this.refs.foot.show_back_button(bback);
         this.refs.foot.show_configure_button(bconfigure);
         this.refs.foot.show_save_button(bsave);
         this.refs.foot.show_calibration_button(bcalibration);
+        this.refs.foot.show_to_zero_button(btozero);
     }
     initializeWork(work2brickcallback){
         this.refs.Workview.update_callback(work2brickcallback);
@@ -121,7 +127,7 @@ class App extends Component{
         this.refs.Loginview.hide();
         this.refs.Brickview.show();
         this.refs.Sysconfview.hide();
-        this.footButtonShow(true,false,true,false,true);
+        this.footButtonShow(true,false,true,false,true,false);
 
     }
     workview_run(configure){
@@ -130,9 +136,10 @@ class App extends Component{
         this.refs.Loginview.hide();
         this.refs.Brickview.hide();
         this.refs.Sysconfview.hide();
-        this.footButtonShow(false,true,false,false,false);
+        this.footButtonShow(false,true,false,false,false,true);
         this.refs.Workview.runview(configure);
         this.tipsinfo(configure.name);
+        this.state.forceflashback();
     }
     workview_running(configure){
         //this.refs.Workview.billboardview();
@@ -140,7 +147,7 @@ class App extends Component{
         this.refs.Loginview.hide();
         this.refs.Brickview.hide();
         this.refs.Sysconfview.hide();
-        this.footButtonShow(false,false,false,false,false);
+        this.footButtonShow(false,false,false,false,false,false);
         this.refs.Workview.runningview(configure);
         this.tipsinfo(configure.name);
     }
@@ -150,7 +157,7 @@ class App extends Component{
         this.refs.Loginview.hide();
         this.refs.Brickview.hide();
         this.refs.Sysconfview.hide();
-        this.footButtonShow(false,true,false,false,false);
+        this.footButtonShow(false,true,false,false,false,false);
         this.refs.Workview.modview(configure);
         this.tipsinfo(configure.name);
     }
@@ -161,7 +168,7 @@ class App extends Component{
         //this.refs.foot.hide_all();
         this.refs.Brickview.hide();
         this.refs.Sysconfview.show();
-        this.footButtonShow(false,true,false,true,false);
+        this.footButtonShow(false,true,false,true,false,false);
         this.tipsinfo("System Configuration");
     }
     workview_new(configure){
@@ -170,7 +177,7 @@ class App extends Component{
         this.refs.Loginview.hide();
         this.refs.Brickview.hide();
         this.refs.Sysconfview.hide();
-        this.footButtonShow(false,true,false,false,false);
+        this.footButtonShow(false,true,false,false,false,false);
         this.refs.Workview.newview(configure);
         this.tipsinfo("new Configuration");
     }
@@ -181,7 +188,7 @@ class App extends Component{
         this.refs.Brickview.hide();
         this.refs.Sysconfview.hide();
         this.refs.Calibrationview.show();
-        this.footButtonShow(false,true,false,false,false);
+        this.footButtonShow(false,true,false,false,false,false);
         this.tipsinfo("Balance Calibration");
     }
     update_status(status){
@@ -250,7 +257,7 @@ class App extends Component{
                 <Workview ref="Workview" workstartcase={this._workstartcase} workstopcase={this._workstopcase} workcontrolfoot={this._workcontrolfoot} worksavenewcase={this._worksavenewcase} worksavemodcase={this._worksavemodcase}/>
             </div>
             <div>
-                <Foot ref="foot" footcallbackreturn={this._footcallbackreturn} footcallbackconfigure={this._footcallbackconfigure} footcallbackcalibration={this._footcallbackcalibration}/>
+                <Foot ref="foot" footcallbackreturn={this._footcallbackreturn} footcallbackconfigure={this._footcallbackconfigure} footcallbackcalibration={this._footcallbackcalibration} />
             </div>
         </div>
         );
@@ -287,12 +294,13 @@ app_handle.initializeSize(winWidth,winHeight);
 
 
 //app_handle.initializefoot(footcallback_return,footcallback_back,footcallback_configure);
-app_handle.initializefoot(footcallback_back,footcallback_save);
+app_handle.initializefoot(footcallback_back,footcallback_save,xhbalancetozeroshortcut);
 app_handle.initializehead();
 app_handle.initializeLogin(xhbalancelogin);
 app_handle.initializeWork(newviewabort);
 app_handle.initializerunstop(xhbalancestartcase,xhbalancestartcase);
 app_handle.initializerunsave(xhbalancesavenewconf,xhbalancesavemodconf);
+app_handle.initializeforceflash(xhbalanceforceflashstatus);
 app_handle.initializeCalibration(balance_to_zero,balance_to_countweight);
 app_handle.loginview();
 //fetchtest();
@@ -610,6 +618,53 @@ function xhbalancestartcase(boolinput,configure){
         });
 }
 
+function xhbalancetozeroshortcut(){
+    //let body;
+    let actioncallback;
+    /*
+    body={
+        configure:configure
+    };*/
+    actioncallback=xhbalancetozeroshortcutcallback;
+    var map={
+        action:"XH_Balance_to_zero_shortcut",
+        //body:body,
+        type:"query",
+        user:"null"
+    };
+    fetch(request_head,
+        {
+            method:'POST',
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify(map)
+        }).then(jsonParse)
+        .then(actioncallback)
+        //.then(fetchlist)
+        .catch( (error) => {
+            console.log('request error', error);
+            return { error };
+        });
+}
+function xhbalancetozeroshortcutcallback(res){
+    if(res.jsonResult.status == "false"){
+        alert("启动用例失败！请和管理员联系");
+        app_handle.initializeLogin(xhbalancelogin);
+        app_handle.loginview();
+        return;
+    }
+    if(res.jsonResult.auth == "false"){
+        return;
+    }
+    xhbalanceforceflashstatus();
+}
+function xhbalanceforceflashstatus(){
+    xhbalancegetstatus_force();
+    xhbalancegetlight_force();
+
+}
 function xhbalancestartcasecallback(res){
     if(res.jsonResult.status == "false"){
         alert("启动用例失败！请和管理员联系");
@@ -661,6 +716,29 @@ function xhbalancegetstatus(){
             return { error };
         });
 }
+function xhbalancegetstatus_force(){
+    //if(Running===false)return;
+    var map={
+        action:"XH_Balance_status",
+        type:"query",
+        user:"null"
+    };
+    fetch(request_head,
+        {
+            method:'POST',
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify(map)
+        }).then(jsonParse)
+        .then(xhbalancestatuscallback)
+        //.then(fetchlist)
+        .catch( (error) => {
+            console.log('request error', error);
+            return { error };
+        });
+}
 function xhbalancestatuscallback(res){
     if(res.jsonResult.status == "false"){
         alert("运行错误，设备已停止运行"+res.jsonResult.msg);
@@ -675,6 +753,28 @@ function xhbalancestatuscallback(res){
 
 function xhbalancegetlight(){
     if(Running===false)return;
+    var map={
+        action:"XH_Balance_light",
+        type:"query",
+        user:"null"
+    };
+    fetch(request_head,
+        {
+            method:'POST',
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify(map)
+        }).then(jsonParse)
+        .then(xhbalancelightcallback)
+        //.then(fetchlist)
+        .catch( (error) => {
+            console.log('request error', error);
+            return { error };
+        });
+}
+function xhbalancegetlight_force(){
     var map={
         action:"XH_Balance_light",
         type:"query",
