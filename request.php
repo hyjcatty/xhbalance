@@ -542,7 +542,42 @@ switch ($key){
             );
             $jsonencode = _encode($retval);
             echo $jsonencode; break;
+    case "XH_Balance_get_alarm": //Use Wechat to login the Server, response is the userID in system.
+        /*
+         var map={
+            action:"XH_Balance_get_alarm",
+            type:"query",
+            user:"null"
+         };
+        */
+            $number = rand(1,5);
+            $sta='true';
+            if($number == 2) $sta='false';
+            $retval=array(
+                'status'=>$sta,
+                'auth'=>'true',
+                'msg'=>'error msg:1234567890;1234567890;1234567890'
+            );
 
+            $jsonencode = _encode($retval);
+            echo $jsonencode; break;
+        case "XH_Balance_clear_alarm": //Use Wechat to login the Server, response is the userID in system.
+            /*
+             var map={
+                action:"XH_Balance_clear_alarm",
+                type:"query",
+                user:"null"
+             };
+            */
+                $sta='true';
+                $retval=array(
+                    'status'=>$sta,
+                    'auth'=>'true',
+                    'msg'=>'msg0'
+                );
+
+                $jsonencode = _encode($retval);
+                echo $jsonencode; break;
 	default:
 
 	break;

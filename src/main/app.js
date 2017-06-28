@@ -100,6 +100,12 @@ class App extends Component{
     initializeforceflash(forceflash){
         this.setState({forceflashback:forceflash});
     }
+    showalarm(alarmcontent){
+        this.refs.Workview.showalarm(alarmcontent);
+    }
+    hidealarm(){
+        this.refs.Workview.hidealarm();
+    }
     footButtonShow(breturn,bback,bconfigure,bsave,bcalibration,btozero){
         this.refs.foot.show_return_button(breturn);
         this.refs.foot.show_back_button(bback);
@@ -108,8 +114,8 @@ class App extends Component{
         this.refs.foot.show_calibration_button(bcalibration);
         this.refs.foot.show_to_zero_button(btozero);
     }
-    initializeWork(work2brickcallback){
-        this.refs.Workview.update_callback(work2brickcallback);
+    initializeWork(work2brickcallback,work2alarmremovecallback){
+        this.refs.Workview.update_callback(work2brickcallback,work2alarmremovecallback);
     }
     loginview(){
         this.removeuser();
@@ -138,7 +144,7 @@ class App extends Component{
         this.refs.Sysconfview.hide();
         this.footButtonShow(false,true,false,false,false,true);
         this.refs.Workview.runview(configure);
-        this.tipsinfo(configure.name);
+        if(configure!=null) this.tipsinfo(configure.name);
         this.state.forceflashback();
     }
     workview_running(configure){
@@ -149,7 +155,7 @@ class App extends Component{
         this.refs.Sysconfview.hide();
         this.footButtonShow(false,false,false,false,false,false);
         this.refs.Workview.runningview(configure);
-        this.tipsinfo(configure.name);
+        if(configure!=null) this.tipsinfo(configure.name);
     }
     workview_mod(configure){
         //this.refs.Workview.billboardview();
@@ -159,7 +165,7 @@ class App extends Component{
         this.refs.Sysconfview.hide();
         this.footButtonShow(false,true,false,false,false,false);
         this.refs.Workview.modview(configure);
-        this.tipsinfo(configure.name);
+        if(configure!=null) this.tipsinfo(configure.name);
     }
     sysconfview(){
         this.refs.Calibrationview.hide();
@@ -269,7 +275,9 @@ var bricklist=[];
 var baselist=[];
 var IconList=[];
 var Running=false;
+var Alarming=false;
 var runcycle=setInterval(xhbalancegetstatus,250);
+var alarmcycle=setInterval(balance_get_alarm,3000);
 var lightcycle=setInterval(xhbalancegetlight,3000);
 get_size();
 xhbalanceiconlist();
@@ -297,7 +305,7 @@ app_handle.initializeSize(winWidth,winHeight);
 app_handle.initializefoot(footcallback_back,footcallback_save,xhbalancetozeroshortcut);
 app_handle.initializehead();
 app_handle.initializeLogin(xhbalancelogin);
-app_handle.initializeWork(newviewabort);
+app_handle.initializeWork(newviewabort,balance_clear_alarm);
 app_handle.initializerunstop(xhbalancestartcase,xhbalancestartcase);
 app_handle.initializerunsave(xhbalancesavenewconf,xhbalancesavemodconf);
 app_handle.initializeforceflash(xhbalanceforceflashstatus);
@@ -1040,6 +1048,77 @@ function balance_to_countweight_callback(res){
         return;
     }
     app_handle.update_cali_status(balanceNo,2);
+}
+
+function balance_get_alarm(){
+    if(Running===false)return;
+    if(Alarming===true) return;
+    var map={
+        action:"XH_Balance_get_alarm",
+        type:"query",
+        user:app_handle.getuser()
+    };
+    fetch(request_head,
+        {
+            method:'POST',
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify(map)
+        }).then(jsonParse)
+        .then(balance_get_alarm_callback)
+        .catch( (error) => {
+            console.log('request error', error);
+            return { error };
+        });
+}
+function balance_get_alarm_callback(res){
+    if(res.jsonResult.status == "true"){
+
+        //console.log("No alarm!");
+        return;
+    }else{
+
+        //console.log("Find alarm!");
+        Alarming=true;
+        app_handle.showalarm(res.jsonResult.msg);
+    }
+    if(res.jsonResult.auth == "false"){
+        return;
+    }
+}
+function balance_clear_alarm(){
+    var map={
+        action:"XH_Balance_clear_alarm",
+        type:"query",
+        user:app_handle.getuser()
+    };
+    fetch(request_head,
+        {
+            method:'POST',
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify(map)
+        }).then(jsonParse)
+        .then(balance_clear_alarm_callback)
+        .catch( (error) => {
+            console.log('request error', error);
+            return { error };
+        });
+}
+function balance_clear_alarm_callback(res){
+    if(res.jsonResult.status == "true"){
+
+        app_handle.hidealarm();
+        Alarming=false;
+        return;
+    }
+    if(res.jsonResult.auth == "false"){
+        return;
+    }
 }
 var hexcase = 0; /* hex output format. 0 - lowercase; 1 - uppercase     */
 var b64pad = ""; /* base-64 pad character. "=" for strict RFC compliance  */
