@@ -30,7 +30,7 @@ export default class Label1 extends Component {
             <div className="animated flipInY">
                 <div className="tile-stats">
                     <div className="count" style={{fontSize:32,color:this.state.color}}>{this.state.value}</div>
-                    <h3 style={{fontSize:10,marginRight:5}} className="pull-right">{this.state.title}</h3>
+                    <h3 style={{fontSize:10,marginRight:5,color:"#3498db"}} className="pull-right">{this.state.title}</h3>
                     <p>{this.state.note}</p>
                 </div>
             </div>

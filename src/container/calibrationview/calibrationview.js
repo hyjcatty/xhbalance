@@ -39,7 +39,7 @@ export default class calibrationview extends Component {
         }
     }
     update_balance_status(balanceNo,status){
-        this.refs['Light'+(parseInt(balanceNo)+1)].setstatus(status);
+        this.refs['Light'+(parseInt(balanceNo))].setstatus(status);
     }
     hide(){
         this.setState({hide:"none"});
@@ -47,7 +47,7 @@ export default class calibrationview extends Component {
     show(){
         this.setState({hide:"block"});
         for(let i=0;i<16;i++){
-            this.refs['Light'+(i+1)].updatebalance(i);
+            this.refs['Light'+(i+1)].updatebalance(i+1);
         }
     }
     render() {

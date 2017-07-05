@@ -50,7 +50,7 @@ export default class Calibrationunit extends Component {
         this.setState({note:note,colorbrick:colorbrick,colornote:colornote,colorcircle:colorcircle,blingbrick:blingbrick,blingnote:blingnote,blingcircle:blingcircle,colorbrickname:colorbrickname,colornotename:colornotename,colorcirclename:colorcirclename});
     }
     updatebalance(balanceNo){
-        this.setState({balanceNo:balanceNo,title:("#Balance:_"+(balanceNo+1)+"_")});
+        this.setState({balanceNo:balanceNo,title:("#Balance:_"+(balanceNo)+"_")});
         this.setstatus(0);
     }
     updatecallback(callbackzero,callbackcountweight){
@@ -88,20 +88,21 @@ export default class Calibrationunit extends Component {
         if(this.state.blingcircle)  lightcircle1 = "btn btn-primary btn-sm  blingbling-"+this.state.colorcirclename;
         if(this.state.location =="left"){
             light.push(
-                <div key="light" style={{width:this.state.width*0.42,float: "left",position:"relative",marginTop:this.state.width*0.02,borderBottom: "2px solid #ADB2B5"}}>
-                    <h3 style={{width:this.state.width*0.42,fontSize:10,marginLeft:5}} className="pull-left">{this.state.title}</h3>
+                <div key="light" style={{width:this.state.width*0.42,float: "left",position:"relative",marginTop:this.state.width*0.00,borderBottom: "2px solid #ADB2B5"}}>
+                    <h3 style={{width:this.state.width*0.42,fontSize:5,marginLeft:5,marginBottom:"3px"}} className="pull-left">{this.state.title}</h3>
                     <div key="light" style={{width:this.state.width*0.42,height:this.state.height,float: "left",position:"relative"}}>
-                        <div style={{float: "left",position:"relative",marginRight:"5px",marginTop:"5px",height:(this.state.height-10),width:this.state.width*0.1,display:this.state.hideBack}}>
+                        <div style={{float: "left",position:"relative",marginRight:"5px",marginTop:"2px",height:(this.state.height-10),width:this.state.width*0.1,display:this.state.hideBack}}>
                             <button  type="button" className={lightcircle1} style={{height:(this.state.height-10),width:(this.state.height-10)*1.5,display:this.state.hideBack}} onClick={this.handle_click_back1.bind(this)}>
                                 <i className="fa fa-upload"> </i>
                             </button>
                         </div>
-                        <div style={{float: "left",position:"relative",marginRight:"5px",marginTop:"5px",height:(this.state.height-10),width:this.state.width*0.1,display:this.state.hideBack}}>
+                        <div style={{float: "left",position:"relative",marginRight:"5px",marginTop:"2px",height:(this.state.height-10),width:this.state.width*0.1,display:this.state.hideBack}}>
                             <button  type="button" className={lightbrick1} style={{height:(this.state.height-10),width:(this.state.height-10)*1.5,display:this.state.hideBack}} disabled={this.state.disabled} onClick={this.handle_click_back2.bind(this)}>
                                 <i className="fa fa-download"> </i>
                             </button>
                         </div>
-                        <div className={lightnote1} role="alert" style={{textAlign:"center",float: "right",position:"relative",backgroundColor:this.state.colornote,borderColor:this.state.colornote,padding:10,marginBottom:0,top: "50%",transform: "translateY(-50%)",width:this.state.width*0.20,height:(this.state.height-10)}}>
+                        <div className={lightnote1} role="alert" style={{textAlign:"center",float: "right",position:"relative",backgroundColor:this.state.colornote,borderColor:this.state.colornote,padding:10,marginBottom:0,top: "50%",
+                        transform: "translateY(-52%)",width:this.state.width*0.20,height:(this.state.height-10)}}>
                             <strong>{this.state.note}</strong>
                         </div>
                     </div>
@@ -110,20 +111,21 @@ export default class Calibrationunit extends Component {
              //lightbrick1=lightbrick1 + "pull-right";
              //lightcircle1=lightcircle1 + "pull-right";
             light.push(
-                <div key="light" style={{width:this.state.width*0.42,float: "right",position:"relative",marginTop:this.state.width*0.02,borderBottom: "2px solid #ADB2B5"}}>
-                    <h3 style={{width:this.state.width*0.42,fontSize:10,marginRight:5,textAlign:"right"}}>{this.state.title}</h3>
+                <div key="light" style={{width:this.state.width*0.42,float: "right",position:"relative",marginTop:this.state.width*0.00,borderBottom: "2px solid #ADB2B5"}}>
+                    <h3 style={{width:this.state.width*0.42,fontSize:5,marginRight:5,textAlign:"right",marginBottom:"3px"}}>{this.state.title}</h3>
                     <div key="light" style={{width:this.state.width*0.42,height:this.state.height,float: "left",position:"relative"}}>
-                        <div style={{float: "right",position:"relative",marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:this.state.width*0.1,display:this.state.hideBack}}>
+                        <div style={{float: "right",position:"relative",marginLeft:"5px",marginTop:"2px",height:(this.state.height-10),width:this.state.width*0.1,display:this.state.hideBack}}>
                             <button  type="button" className={lightcircle1} style={{float: "right",position:"relative",height:(this.state.height-10),width:(this.state.height-10)*1.5,display:this.state.hideBack}} onClick={this.handle_click_back1.bind(this)}>
                                 <i className="fa fa-upload"> </i>
                             </button>
                         </div>
-                        <div style={{float: "right",position:"relative",marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:this.state.width*0.1,display:this.state.hideBack}}>
+                        <div style={{float: "right",position:"relative",marginLeft:"5px",marginTop:"2px",height:(this.state.height-10),width:this.state.width*0.1,display:this.state.hideBack}}>
                             <button  type="button" className={lightbrick1} style={{float: "right",position:"relative",height:(this.state.height-10),width:(this.state.height-10)*1.5,display:this.state.hideBack}} disabled={this.state.disabled} onClick={this.handle_click_back2.bind(this)}>
                                 <i className="fa fa-download"> </i>
                             </button>
                         </div>
-                        <div className={lightnote1} role="alert" style={{textAlign:"center",float: "left",position:"relative",backgroundColor:this.state.colornote,borderColor:this.state.colornote,padding:10,marginBottom:0,top: "50%",transform: "translateY(-50%)",width:this.state.width*0.20,height:(this.state.height-10)}}>
+                        <div className={lightnote1} role="alert" style={{textAlign:"center",float: "left",position:"relative",backgroundColor:this.state.colornote,borderColor:this.state.colornote,padding:10,marginBottom:0,top: "50%",
+                        transform: "translateY(-52%)",width:this.state.width*0.20,height:(this.state.height-10)}}>
                             <strong>{this.state.note}</strong>
                         </div>
                     </div>
