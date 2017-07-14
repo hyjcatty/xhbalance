@@ -59,7 +59,7 @@ export default class brickview extends Component {
     updateprop(){
         for(let i=0;i<this.state.buttonlist.length;i++) {
             this.refs[this.state.key + i].updateprop(this.state.buttonlist[i],this.state.bricksize,this.state.callback);
-            this.refs[this.state.key +"confbutton"+ i].updateprop(this.state.buttonlist[i],"conf",this.state.bricksize);
+            this.refs[this.state.key +"confbutton"+ i].updateprop(this.state.buttonlist[i],"configure",this.state.bricksize);
             //console.log(this.state.Framelist[i]);
         }
         for(let i=0;i<this.state.baselist.length;i++) {

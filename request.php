@@ -58,6 +58,7 @@ function getfiles($path,$type){
             //echo '<br>'.$obj['description'];
 
             $map= array(
+                'index'=>'123',
                 'name'=>$obj['name'],
                 'icon'=>$obj['icon'],
                 'owner'=>$obj['owner'],

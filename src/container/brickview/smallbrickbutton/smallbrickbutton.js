@@ -23,7 +23,7 @@ export default class Smallbrickbutton extends Component {
         this.state = {
             bricksize:800,
             configuration:default_conf,
-            type:"conf"
+            type:"configure"
         };
     }
     updateprop(configuration,type,bricksize){
