@@ -303,7 +303,7 @@ export default class configurationview extends Component {
             let group_sequence = $(this).attr("data-group");
             let para_sequence = $(this).attr("data-parameter");
             //console.log("group_sequence:"+group_sequence+"para_sequence:"+para_sequence);
-            let value=$(this).val();
+            let value=$(this).get(0).selectedIndex+"";//val();.val();
             //console.log(output);
             output.parameter.groups[parseInt(group_sequence)].list[parseInt(para_sequence)].value = value;
         });
@@ -381,6 +381,8 @@ export default class configurationview extends Component {
                     content.push(<h3 style={{fontSize:10,marginRight:5}}  key={this.state.key2+i+"p"+j+"2"}>{contentline}</h3>);
                     content.push(<input type="text" className="form-control configure_input" placeholder="CONFIG Value" aria-describedby="basic-addon1" key={this.state.key2+"G"+i+"P"+j+"input"} id={"Para_G"+i+"P"+j+"_input"} data-group={i} data-parameter={j} value={this.state.configuration.parameter.groups[i].list[j].value} onChange={this.handleChange} onBlur={this.handleBlur} data-min={this.state.configuration.parameter.groups[i].list[j].min} data-max={this.state.configuration.parameter.groups[i].list[j].max}/>);
                 }else{
+                    this.state.configuration.parameter.groups[i].list[j].defaultvalue = this.state.configuration.parameter.groups[i].list[j].items[parseInt(this.state.configuration.parameter.groups[i].list[j].value)];
+
                     let contentline = "Note:"+this.state.configuration.parameter.groups[i].list[j].note;
                     content.push(<div className="count" style={{fontSize:20,marginTop:15,verticalAlign:'bottom'}} key={this.state.key2+i+"p"+j+"1"}>{this.state.configuration.parameter.groups[i].list[j].paraname}</div>);
                     content.push(<h3 style={{fontSize:10,marginRight:5}}  key={this.state.key2+i+"p"+j+"2"}>{contentline}</h3>);
@@ -396,7 +398,8 @@ export default class configurationview extends Component {
                         choice_items.push(<option value={this.state.configuration.parameter.groups[i].list[j].items[k]} key={"choice_item_"+i+"_"+j+"_"+k}>{this.state.configuration.parameter.groups[i].list[j].items[k]}</option>);
 
                     }
-                    content.push(<select className="form-control configure_choice" placeholder="CONFIG Value" aria-describedby="basic-addon1" key={this.state.key2+"G"+i+"P"+j+"Choice"} id={"Para_G"+i+"P"+j+"_Choice"} data-group={i} data-parameter={j} onChange={this.handleChange} defaultValue={this.state.configuration.parameter.groups[i].list[j].value} >{choice_items}</select>);
+                    content.push(<select className="form-control configure_choice" placeholder="CONFIG Value" aria-describedby="basic-addon1" key={this.state.key2+"G"+i+"P"+j+"Choice"} id={"Para_G"+i+"P"+j+"_Choice"} data-group={i} data-parameter={j} onChange={this.handleChange}
+                                         defaultValue={this.state.configuration.parameter.groups[i].list[j].defaultvalue} >{choice_items}</select>);
 
                 }
 

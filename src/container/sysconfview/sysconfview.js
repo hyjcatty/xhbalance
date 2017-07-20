@@ -322,7 +322,7 @@ export default class sysconfview extends Component {
                     this.state.configure.parameter.groups[i].list[j].value=$("#"+this.state.key2+"G"+i+"P"+j+this.state.configure.parameter.groups[i].list[j].type).val();
                 }
                 if(this.state.configure.parameter.groups[i].list[j].type === "choice"){
-                    this.state.configure.parameter.groups[i].list[j].value=$("#"+this.state.key2+"G"+i+"P"+j+this.state.configure.parameter.groups[i].list[j].type).val();
+                    this.state.configure.parameter.groups[i].list[j].value=$("#"+this.state.key2+"G"+i+"P"+j+this.state.configure.parameter.groups[i].list[j].type).get(0).selectedIndex+"";//val();
                 }
                 if(this.state.configure.parameter.groups[i].list[j].type === "checkbox"){
                     this.state.configure.parameter.groups[i].list[j].value=$("#"+this.state.key2+"G"+i+"P"+j+this.state.configure.parameter.groups[i].list[j].type).is(":checked");
@@ -390,6 +390,7 @@ export default class sysconfview extends Component {
                         let contentline = "Note:"+this.state.configure.parameter.groups[i].list[j].note;
                         let className="form-control "+"sys_conf_choice";
                         let choice_items = [];
+                        this.state.configure.parameter.groups[i].list[j].defaultvalue = this.state.configure.parameter.groups[i].list[j].items[parseInt(this.state.configure.parameter.groups[i].list[j].value)];
                         for(let k=0;k<this.state.configure.parameter.groups[i].list[j].items.length;k++){
                             choice_items.push(<option value={this.state.configure.parameter.groups[i].list[j].items[k]} key={"choice_item_"+i+"_"+j+"_"+k}>{this.state.configure.parameter.groups[i].list[j].items[k]}</option>);
 
@@ -401,7 +402,7 @@ export default class sysconfview extends Component {
                                     <select className={className} placeholder="CONFIG Value" aria-describedby="basic-addon1"
                                             key={this.state.key2+"G"+i+"P"+j+this.state.configure.parameter.groups[i].list[j].type} id={this.state.key2+"G"+i+"P"+j+this.state.configure.parameter.groups[i].list[j].type} data-group={i} data-parameter={j}
                                             onChange={this.handleChange} onBlur={this.handleBlur}
-                                            defaultValue={this.state.configure.parameter.groups[i].list[j].value} >{choice_items}</select>
+                                            defaultValue={this.state.configure.parameter.groups[i].list[j].defaultvalue} >{choice_items}</select>
                                 </div>
                                 <h3 style={{fontSize:10,marginRight:5}}  key={this.state.key2+i+"p"+j+"2"}>{contentline}</h3>
                             </div>);
