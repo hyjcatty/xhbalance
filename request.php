@@ -47,7 +47,7 @@ function getfiles($path,$type){
         } else {
             //echo $afile.'<br />';
             $json_string = file_get_contents($afile);
-            //echo print_r($json_string,true);            //´òÓ¡ÎÄ¼þµÄÄÚÈÝ
+            //echo print_r($json_string,true);            //ï¿½ï¿½Ó¡ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             //echo "<br>";
 
             $obj=json_decode($json_string,true);
@@ -500,6 +500,22 @@ switch ($key){
             );
 
             $jsonencode = _encode($retval);
+
+            echo $jsonencode; break;
+        case "XH_Balance_sys_debug":
+            $retarray;
+            $retarray = getfiledetail("./sysconf/debug.json");
+            //echo "file content".$retarray;
+            $obj=json_decode($retarray,true);
+            $retval=array(
+                'status'=>'true',
+                'auth'=>'true',
+                'ret'=>$obj,
+                'msg'=>''
+            );
+
+            $jsonencode = _encode($retval);
+
             echo $jsonencode; break;
         case "XH_Balance_sys_config_save":
             $body=$payload["body"];
@@ -513,6 +529,20 @@ switch ($key){
 
                 $jsonencode = _encode($retval);
                 echo $jsonencode; break;
+        case "XH_Balance_sys_debug_run":
+            $body=$payload["body"];
+            $sta='true';
+            $retlen = rand(20,100);
+            $msg="return msg:";
+            for($i=0;$i<$retlen;$i++)$msg=$msg."x";
+            $retval=array(
+                'status'=>$sta,
+                'auth'=>'true',
+                'msg'=>$msg
+            );
+
+            $jsonencode = _encode($retval);
+            echo $jsonencode; break;
         case "XH_Balance_cali_to_zero":
             $body=$payload["body"];
             $balance = $body["balance"];
@@ -532,6 +562,8 @@ switch ($key){
             $body=$payload["body"];
             $balance = $body["balance"];
             $sta='true';
+            $returnweight = rand(10,100);
+
             $ret=array(
                 'balance'=>$balance
             );
@@ -539,7 +571,7 @@ switch ($key){
                 'status'=>$sta,
                 'ret'=>$ret,
                 'auth'=>'true',
-                'msg'=>'12345'
+                'msg'=>(string)$returnweight
             );
             $jsonencode = _encode($retval);
             echo $jsonencode; break;

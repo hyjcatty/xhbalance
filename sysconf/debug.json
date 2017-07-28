@@ -1,0 +1,18 @@
+{
+  "name": "debug",
+  "owner": "system",
+  "parameter": {
+    "groups":[
+      {
+        "groupname": "group1",
+        "list": [
+          {"paraname":"choice11","type":"choice","max":"","min":"","value":"0","items":["123","456","789","0"],"note":"choice info"},
+          {"paraname":"choice12","type":"choice","max":"","min":"","value":"0","items":["123","456","789","0"],"note":"choice info"},
+          {"paraname":"para13","type":"int","max":"100","min":"0","value":"50","note":"Note info"},
+          {"paraname":"para14","type":"int","max":"100","min":"0","value":"50","note":"Note info"},
+          {"paraname":"para15","type":"int","max":"100","min":"0","value":"50","note":"Note info"},
+          {"paraname":"para16","type":"int","max":"100","min":"0","value":"50","note":"Note info"}
+                  ]
+      }]
+  }
+}

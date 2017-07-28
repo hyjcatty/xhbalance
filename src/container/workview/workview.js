@@ -66,7 +66,7 @@ export default class workview extends Component {
         this.setState({hide:"block"});
     }
     modview(configuration){
-        this.props.workcontrolfoot(false,true,false,false,false,false);
+        this.props.workcontrolfoot(false,true,false,false,false,false,false);
         this.setState({configuration:configuration,status:"mod"});
         this.refs.Configurationview.modify_view(configuration);
         this.refs.Billboardview.hide();
@@ -76,7 +76,7 @@ export default class workview extends Component {
         this.show();
     }
     runview(configuration){
-        this.props.workcontrolfoot(false,true,true,false,false,true);
+        this.props.workcontrolfoot(false,true,true,false,false,true,false);
         if(configuration!==null){
             this.setState({configuration:configuration,status:"run"});
             this.refs.Billboardview.update_configuration(configuration);
@@ -92,7 +92,7 @@ export default class workview extends Component {
         this.show();
     }
     newview(configuration){
-        this.props.workcontrolfoot(false,true,false,false,false,false);
+        this.props.workcontrolfoot(false,true,false,false,false,false,false);
         this.setState({configuration:configuration,status:"new"});
         let configuration_local = configuration;
         configuration_local.name="";
@@ -104,7 +104,7 @@ export default class workview extends Component {
         this.show();
     }
     runningview(configuration){
-        this.props.workcontrolfoot(false,false,false,false,false,false);
+        this.props.workcontrolfoot(false,false,false,false,false,false,false);
         if(configuration!==null){
             this.setState({configuration:configuration,status:"running"});
             this.refs.Billboardview.update_configuration(configuration);

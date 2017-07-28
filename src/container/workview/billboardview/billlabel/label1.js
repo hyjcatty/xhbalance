@@ -27,11 +27,11 @@ export default class Label1 extends Component {
     }
     render() {
         return (
-            <div className="animated flipInY">
+            <div className="animated flipInY" style={{paddingTop:15}}>
                 <div className="tile-stats">
                     <div className="count" style={{fontSize:32,color:this.state.color}}>{this.state.value}</div>
-                    <h3 style={{fontSize:10,marginRight:5,color:"#3498db"}} className="pull-right">{this.state.title}</h3>
-                    <p>{this.state.note}</p>
+                    <h3 style={{fontSize:14,paddingTop:10,marginRight:5,color:"#3498db"}} className="pull-right">{this.state.title}</h3>
+                    <p style={{fontSize:14,paddingTop:25}}>{this.state.note}</p>
                 </div>
             </div>
         );

@@ -22,13 +22,14 @@ export default class foot extends Component {
         super(props);
         this.state={
             height:50,
-            content:"©小慧科技",
+            content:"©波峰智能",
             hideReturn:"none",
             hideBack:"none",
             hideConfigure:"none",
             hideSave:"none",
             hideCalibration:"none",
             hideTozero:"none",
+            hideDebug:"none",
             callbackBack:null,
             callbackSave:null,
             callbackTozero:null,
@@ -82,6 +83,13 @@ export default class foot extends Component {
             this.setState({hideConfigure:"none"});
         }
     }
+    show_debug_button(input){
+        if(input===true){
+            this.setState({hideDebug:"block"});}
+        else{
+            this.setState({hideDebug:"none"});
+        }
+    }
     show_calibration_button(input){
         if(input===true){
             this.setState({hideCalibration:"block"});}
@@ -104,7 +112,7 @@ export default class foot extends Component {
         }
     }
     hide_all(){
-        this.setState({hideReturn:"none",hideConfigure:"none",hideReturn:"none",hideSave:"none",hideCalibration:"none",hideTozero:"none"});
+        this.setState({hideReturn:"none",hideConfigure:"none",hideBack:"none",hideSave:"none",hideCalibration:"none",hideTozero:"none",hideDebug:"none"});
     }
     handle_click_return(){
         //console.log("click");
@@ -120,6 +128,12 @@ export default class foot extends Component {
         //console.log("click");
         if(this.props.footcallbackconfigure){
             this.props.footcallbackconfigure();
+        }
+    }
+    handle_click_debug(){
+        //console.log("click");
+        if(this.props.footcallbackdebug){
+            this.props.footcallbackdebug();
         }
     }
     handle_click_calibration(){
@@ -163,23 +177,26 @@ export default class foot extends Component {
 
             <div style={{position:"relative",background:"#eeeeee",height:this.state.height,width:'100%',display:'table'}}>
                 <div style={{position:"relative",background:"#eeeeee",height:this.state.height,width:'33%',display:'table',float:"left"}}>
-                    <button  type="button" className="btn btn-warning btn-sm pull-left" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:(this.state.height-10)*1.5,display:this.state.hideBack}} disabled={this.state.disabled} onClick={this.handle_click_back.bind(this)}>
-                        <i className="fa fa-arrow-left"></i>
+                    <button  type="button" className="btn btn-warning btn-sm pull-left" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:(this.state.height-10)*1.6,display:this.state.hideBack}} disabled={this.state.disabled} onClick={this.handle_click_back.bind(this)}>
+                        <i className="fa fa-arrow-left" style={{fontSize:25}}></i>
                     </button>
-                    <button  type="button" className="btn btn-warning btn-sm pull-left" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:(this.state.height-10)*1.5,display:this.state.hideReturn}} disabled={this.state.disabled} onClick={this.handle_click_return.bind(this)}>
-                        <i className="fa fa-sign-out"> </i>
+                    <button  type="button" className="btn btn-warning btn-sm pull-left" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:(this.state.height-10)*1.6,display:this.state.hideReturn}} disabled={this.state.disabled} onClick={this.handle_click_return.bind(this)}>
+                        <i className="fa fa-sign-out" style={{fontSize:25}}> </i>
                     </button>
-                    <button  type="button" className="btn btn-warning btn-sm pull-left" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:(this.state.height-10)*1.5,display:this.state.hideConfigure}} disabled={this.state.disabled} onClick={this.handle_click_configure.bind(this)}>
-                        <i className="fa fa-gear"> </i>
+                    <button  type="button" className="btn btn-warning btn-sm pull-left" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:(this.state.height-10)*1.6,display:this.state.hideConfigure}} disabled={this.state.disabled} onClick={this.handle_click_configure.bind(this)}>
+                        <i className="fa fa-gear" style={{fontSize:25}}> </i>
                     </button>
-                    <button  type="button" className="btn btn-warning btn-sm pull-left" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:(this.state.height-10)*1.5,display:this.state.hideSave}} disabled={this.state.disabled} onClick={this.handle_click_save.bind(this)}>
-                        <i className="fa fa-save"> </i>
+                    <button  type="button" className="btn btn-warning btn-sm pull-left" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:(this.state.height-10)*1.6,display:this.state.hideSave}} disabled={this.state.disabled} onClick={this.handle_click_save.bind(this)}>
+                        <i className="fa fa-save" style={{fontSize:25}}> </i>
                     </button>
-                    <button  type="button" className="btn btn-warning btn-sm pull-left" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:(this.state.height-10)*1.5,display:this.state.hideCalibration}} disabled={this.state.disabled} onClick={this.handle_click_calibration.bind(this)}>
-                        <i className="fa fa-wrench"> </i>
+                    <button  type="button" className="btn btn-warning btn-sm pull-left" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:(this.state.height-10)*1.6,display:this.state.hideCalibration}} disabled={this.state.disabled} onClick={this.handle_click_calibration.bind(this)}>
+                        <i className="fa fa-wrench" style={{fontSize:25}}> </i>
                     </button>
-                    <button  type="button" className="btn btn-warning btn-sm pull-left" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:(this.state.height-10)*1.5,display:this.state.hideTozero}} disabled={this.state.disabled} onClick={this.handle_click_to_zero.bind(this)}>
-                        <i className="fa fa-recycle"> </i>
+                    <button  type="button" className="btn btn-warning btn-sm pull-left" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:(this.state.height-10)*1.6,display:this.state.hideTozero}} disabled={this.state.disabled} onClick={this.handle_click_to_zero.bind(this)}>
+                        <i className="fa fa-recycle" style={{fontSize:25}}> </i>
+                    </button>
+                    <button  type="button" className="btn btn-warning btn-sm pull-left" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:(this.state.height-10)*1.6,display:this.state.hideDebug}} disabled={this.state.disabled} onClick={this.handle_click_debug.bind(this)}>
+                        <i className="fa fa-bug" style={{fontSize:25}}> </i>
                     </button>
                     <a style={{position:"relative",height:this.state.height,display:'table-cell',verticalAlign:'middle'}}>
                         < span className="headlabel" style={{fontSize:this.state.height*0.3,marginRight:this.state.height*0.3}}>&nbsp;</span>

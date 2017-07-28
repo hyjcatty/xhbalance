@@ -38,8 +38,8 @@ export default class calibrationview extends Component {
             this.refs['Light'+(i+1)].updatecallback(callbackzero,callbackcountweight);
         }
     }
-    update_balance_status(balanceNo,status){
-        this.refs['Light'+(parseInt(balanceNo))].setstatus(status);
+    update_balance_status(balanceNo,status,weight){
+        this.refs['Light'+(parseInt(balanceNo))].setstatus(status,weight);
     }
     hide(){
         this.setState({hide:"none"});

@@ -100,18 +100,19 @@ export default class billboardview extends Component {
         this.refs['Label1x4'].initialize("Total Weight","kg");
         this.refs['Label1x5'].initialize("Speed Pcs","pcs/min");
         this.refs['Label1x6'].initialize("Speed Kg","kg/min");
+        /*
         for(let i=1;i<4;i++){
             this.refs['Label2x'+(2*i-1)].initialize("Average Time","From last Count","left",width);
             this.refs['Label2x'+(2*i)].initialize("Average Time","From last Count","right",width);
         }
         //this.refs['Label3x1'].initialize("Status info","fa fa-bullhorn",width);
         this.refs['Label3x2'].initialize("Warning info","fa fa-warning",width);
-        this.refs['Label3x3'].initialize("Error info","fa fa-times",width);
+        this.refs['Label3x3'].initialize("Error info","fa fa-times",width);*/
 
         this.refs.Labelbigboard.initialize("Current Weight","kg");
         for(let i=1;i<9;i++){
-            this.refs['Light'+(2*i-1)].initialize("left",width);
-            this.refs['Light'+(2*i)].initialize("right",width);
+            this.refs['Light'+(2*i-1)].initialize("left",width,""+(2*i-1));
+            this.refs['Light'+(2*i)].initialize("right",width,""+(2*i));
         }
 
     }
@@ -133,13 +134,13 @@ export default class billboardview extends Component {
     flash_status(){
         for(let i=1;i<7;i++){
             this.refs['Label1x'+i].updateprop(this.colorlist[this.state.showlist.mainvalue[i-1].color],this.state.showlist.mainvalue[i-1].value);
-        }
+        }/*
         for(let i=1;i<7;i++){
             this.refs['Label2x'+i].updateprop(this.colorlist[this.state.showlist.detailvalue[i-1].color],this.colorlist[this.state.showlist.detailvalue[i-1].subcolor],this.state.showlist.detailvalue[i-1].value,this.state.showlist.detailvalue[i-1].subvalue);
         }
         //this.refs['Label3x1'].updateprop("#73879c",this.state.showlist.statusdetail.status);
         this.refs['Label3x2'].updateprop("#f0ad4e",this.state.showlist.statusdetail.warning);
-        this.refs['Label3x3'].updateprop("#d95349",this.state.showlist.statusdetail.error);
+        this.refs['Label3x3'].updateprop("#d95349",this.state.showlist.statusdetail.error);*/
         //this.refs.Labelbigboard.updateprop(this.state.showlist.statusdetail.status,this.state.showlist.statusdetail.warning,this.state.showlist.statusdetail.error);
         this.refs.Labelbigboard.updateprop(this.state.showlist.currentweight.value);
     }
@@ -155,6 +156,89 @@ export default class billboardview extends Component {
         this.setState({hide:"block"});
     }
     render() {
+        return (
+            <div style={{position:"relative",background:"#FFFFFF",height:this.state.height,maxHeight:this.state.height,width:'100%',display:this.state.hide,overflowY:'hidden',overflowX:'hidden'}}>
+                <div key = "leftpanel" style={{width:this.state.width*0.42,height:this.state.height,float: "left",position:"relative",marginLeft:this.state.width*0.03,marginTop:this.state.width*0.03}}>
+                    <div key = "Labelbigboard" style={{width:this.state.width*0.42,float: "left",position:"relative"}}>
+                        <div className="animated flipInY">
+                            <Labelbig ref="Labelbigboard"/>
+                        </div>
+                    </div>
+                    <div key = "Label1x1" style={{width:this.state.width*0.20,float: "left",position:"relative"}}>
+                        <Label1 ref="Label1x1"/>
+                    </div>
+                    <div key = "Label1x2" style={{width:this.state.width*0.20,float: "left",position:"relative",marginLeft:this.state.width*0.02}}>
+                        <Label1 ref="Label1x2"/>
+                    </div>
+                    <div key = "Label1x3" style={{width:this.state.width*0.20,float: "left",position:"relative"}}>
+                        <Label1 ref="Label1x3"/>
+                    </div>
+                    <div key = "Label1x4"  style={{width:this.state.width*0.20,float: "left",position:"relative",marginLeft:this.state.width*0.02}}>
+                        <Label1 ref="Label1x4"/>
+                    </div>
+                    <div key = "Label1x5"  style={{width:this.state.width*0.20,float: "left",position:"relative"}}>
+                        <Label1 ref="Label1x5"/>
+                    </div>
+                    <div key = "Label1x6" style={{width:this.state.width*0.20,float: "left",position:"relative",marginLeft:this.state.width*0.02}}>
+                        <Label1 ref="Label1x6"/>
+                    </div>
+                </div>
+                <div key="rightpanel" style={{width:this.state.width*0.45,height:this.state.height,float: "left",position:"relative",marginLeft:this.state.width*0.03,marginTop:this.state.width*0.03}}>
+
+                    <div key = "Lightboard" style={{width:this.state.width*0.45,float: "left",position:"relative"}}>
+                        <div key ="Light1">
+                        <Light  ref="Light1"/>
+                        </div>
+                        <div key ="Light2">
+                        <Light ref="Light2"/>
+                        </div>
+                        <div key ="Light3">
+                        <Light ref="Light3"/>
+                        </div>
+                        <div key ="Light4">
+                        <Light ref="Light4"/>
+                        </div>
+                        <div key ="Light5">
+                        <Light  ref="Light5"/>
+                        </div>
+                        <div key ="Light6">
+                        <Light  ref="Light6"/>
+                        </div>
+                        <div key ="Light7">
+                        <Light ref="Light7"/>
+                        </div>
+                        <div key ="Light8">
+                        <Light ref="Light8"/>
+                        </div>
+                        <div key ="Light9">
+                        <Light ref="Light9"/>
+                        </div>
+                        <div key ="Light10">
+                        <Light ref="Light10"/>
+                        </div>
+                        <div key ="Light11">
+                        <Light ref="Light11"/>
+                        </div>
+                        <div key ="Light12">
+                        <Light ref="Light12"/>
+                        </div>
+                        <div key ="Light13">
+                        <Light ref="Light13"/>
+                        </div>
+                        <div key ="Light14">
+                        <Light  ref="Light14"/>
+                        </div>
+                        <div key ="Light15">
+                        <Light  ref="Light15"/>
+                        </div>
+                        <div key ="Light16">
+                        <Light ref="Light16"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+        /*
         return (
             <div style={{position:"relative",background:"#FFFFFF",height:this.state.height,maxHeight:this.state.height,width:'100%',display:this.state.hide,overflowY:'hidden',overflowX:'hidden'}}>
                 <div key = "leftpanel" style={{width:this.state.width*0.45,height:this.state.height,float: "left",position:"relative",marginLeft:this.state.width*0.03,marginTop:this.state.width*0.03}}>
@@ -251,7 +335,7 @@ export default class billboardview extends Component {
                     </div>
                 </div>
             </div>
-        );
+        );*/
     /*
 
 

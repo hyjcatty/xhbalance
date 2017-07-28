@@ -59,12 +59,12 @@ export default class Calibrationunit extends Component {
     initialize(location,width,height){
         this.setState({location:location,width:width,height:height});
     }
-    setstatus(status){
+    setstatus(status,weight){
         this.setState({status:status});
         if(status == 1){
             this.setState({note:"Countweight ON.",disabled:"",colornote: "#f0ad4e",colornotename:"ORANGE",blingnote:true});
         }else if(status == 2){
-            this.setState({note:"OK",disabled:"disabled",colornote: "#26b99a",colornotename:"GREEN",blingnote:false});
+            this.setState({note:"weight:"+weight,disabled:"disabled",colornote: "#26b99a",colornotename:"GREEN",blingnote:false});
         }else if(status == 3){
             this.setState({note:"Error",disabled:"disabled",colornote: "#d95349",colornotename:"RED",blingnote:true});
         }else{

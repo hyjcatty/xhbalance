@@ -12,6 +12,7 @@ import Foot from "../foot/foot"
 import Head from "../head/head"
 import Loginview from "../container/loginview/loginview"
 import Sysconfview from "../container/sysconfview/sysconfview"
+import Sysdebug from "../container/debugview/sysdebug"
 import Calibrationview from "../container/calibrationview/calibrationview"
 import Brickview from "../container/brickview/brickview"
 import Workview from "../container/workview/workview"
@@ -46,6 +47,7 @@ class App extends Component{
         };
         this._footcallbackreturn=this.loginview.bind(this);
         this._footcallbackconfigure=this.sysconfview.bind(this);
+        this._footcallbackdebug=this.sysdebugview.bind(this);
         this._footcallbackcalibration=this.calibrationview.bind(this);
         this._workstartcase=this.startcase.bind(this);
         this._workstopcase=this.stopcase.bind(this);
@@ -65,11 +67,16 @@ class App extends Component{
         this.refs.Brickview.update_size(width,canvasheight);
         this.refs.Workview.update_size(width,canvasheight);
         this.refs.Sysconfview.update_size(width,canvasheight,headfootheight);
+        this.refs.Sysdebugview.update_size(width,canvasheight,headfootheight);
         this.refs.Calibrationview.update_size(width,canvasheight,headfootheight);
     }
     initializesysconf(callback,configure){
         this.refs.Sysconfview.update_callback(callback);
         this.refs.Sysconfview.update_config(configure);
+    }
+    initializesysdebug(callback,configure){
+        this.refs.Sysdebugview.update_callback(callback);
+        this.refs.Sysdebugview.update_config(configure);
     }
     initializeLogin(callback){
         this.refs.Loginview.update_callback(callback);
@@ -106,13 +113,14 @@ class App extends Component{
     hidealarm(){
         this.refs.Workview.hidealarm();
     }
-    footButtonShow(breturn,bback,bconfigure,bsave,bcalibration,btozero){
+    footButtonShow(breturn,bback,bconfigure,bsave,bcalibration,btozero,bdebug){
         this.refs.foot.show_return_button(breturn);
         this.refs.foot.show_back_button(bback);
         this.refs.foot.show_configure_button(bconfigure);
         this.refs.foot.show_save_button(bsave);
         this.refs.foot.show_calibration_button(bcalibration);
         this.refs.foot.show_to_zero_button(btozero);
+        this.refs.foot.show_debug_button(bdebug);
     }
     initializeWork(work2brickcallback,work2alarmremovecallback){
         this.refs.Workview.update_callback(work2brickcallback,work2alarmremovecallback);
@@ -125,6 +133,7 @@ class App extends Component{
         this.refs.foot.hide_all();
         this.refs.Brickview.hide();
         this.refs.Sysconfview.hide();
+        this.refs.Sysdebugview.hide();
         this.tipsinfo("Please login.");
     }
     brickview(){
@@ -133,7 +142,12 @@ class App extends Component{
         this.refs.Loginview.hide();
         this.refs.Brickview.show();
         this.refs.Sysconfview.hide();
-        this.footButtonShow(true,false,true,false,true,false);
+        this.refs.Sysdebugview.hide();
+        if(this.state.username === "admin")
+            this.footButtonShow(true,false,true,false,true,false,true);
+
+        else
+        this.footButtonShow(true,false,true,false,true,false,false);
 
     }
     workview_run(configure){
@@ -142,7 +156,8 @@ class App extends Component{
         this.refs.Loginview.hide();
         this.refs.Brickview.hide();
         this.refs.Sysconfview.hide();
-        this.footButtonShow(false,true,false,false,false,true);
+        this.refs.Sysdebugview.hide();
+        this.footButtonShow(false,true,false,false,false,true,false);
         this.refs.Workview.runview(configure);
         if(configure!=null) this.tipsinfo(configure.name);
         this.state.forceflashback();
@@ -153,7 +168,8 @@ class App extends Component{
         this.refs.Loginview.hide();
         this.refs.Brickview.hide();
         this.refs.Sysconfview.hide();
-        this.footButtonShow(false,false,false,false,false,false);
+        this.refs.Sysdebugview.hide();
+        this.footButtonShow(false,false,false,false,false,false,false);
         this.refs.Workview.runningview(configure);
         if(configure!=null) this.tipsinfo(configure.name);
     }
@@ -163,7 +179,8 @@ class App extends Component{
         this.refs.Loginview.hide();
         this.refs.Brickview.hide();
         this.refs.Sysconfview.hide();
-        this.footButtonShow(false,true,false,false,false,false);
+        this.refs.Sysdebugview.hide();
+        this.footButtonShow(false,true,false,false,false,false,false);
         this.refs.Workview.modview(configure);
         if(configure!=null) this.tipsinfo(configure.name);
     }
@@ -174,8 +191,20 @@ class App extends Component{
         //this.refs.foot.hide_all();
         this.refs.Brickview.hide();
         this.refs.Sysconfview.show();
-        this.footButtonShow(false,true,false,true,false,false);
+        this.refs.Sysdebugview.hide();
+        this.footButtonShow(false,true,false,true,false,false,false);
         this.tipsinfo("System Configuration");
+    }
+    sysdebugview(){
+        this.refs.Calibrationview.hide();
+        this.refs.Workview.hide();
+        this.refs.Loginview.hide();
+        //this.refs.foot.hide_all();
+        this.refs.Brickview.hide();
+        this.refs.Sysconfview.hide();
+        this.refs.Sysdebugview.show();
+        this.footButtonShow(false,true,false,false,false,false,false);
+        this.tipsinfo("System debug");
     }
     workview_new(configure){
         //this.refs.Workview.billboardview();
@@ -183,7 +212,8 @@ class App extends Component{
         this.refs.Loginview.hide();
         this.refs.Brickview.hide();
         this.refs.Sysconfview.hide();
-        this.footButtonShow(false,true,false,false,false,false);
+        this.refs.Sysdebugview.hide();
+        this.footButtonShow(false,true,false,false,false,false,false);
         this.refs.Workview.newview(configure);
         this.tipsinfo("new Configuration");
     }
@@ -193,8 +223,9 @@ class App extends Component{
         //this.refs.foot.hide_all();
         this.refs.Brickview.hide();
         this.refs.Sysconfview.hide();
+        this.refs.Sysdebugview.hide();
         this.refs.Calibrationview.show();
-        this.footButtonShow(false,true,false,false,false,false);
+        this.footButtonShow(false,true,false,false,false,false,false);
         this.tipsinfo("Balance Calibration");
     }
     update_status(status){
@@ -203,8 +234,8 @@ class App extends Component{
     update_light(light){
         this.refs.Workview.update_billboard_light(light);
     }
-    update_cali_status(balanceNo,status){
-        this.refs.Calibrationview.update_balance_status(balanceNo,status)
+    update_cali_status(balanceNo,status,weight){
+        this.refs.Calibrationview.update_balance_status(balanceNo,status,weight);
     }
     configureview(){
         alert("not support yet!");
@@ -249,6 +280,9 @@ class App extends Component{
     tipsinfo(tips){
         this.refs.foot.write_log(tips);
     }
+    debug_label_update(msg){
+        this.refs.Sysdebugview.update_msg(msg);
+    }
     render() {
         return(
         <div>
@@ -257,13 +291,14 @@ class App extends Component{
             </div>
             <div>
                 <Sysconfview ref="Sysconfview"/>
+                <Sysdebug ref="Sysdebugview"/>
                 <Calibrationview ref="Calibrationview"/>
                 <Loginview ref="Loginview"/>
                 <Brickview ref="Brickview"/>
                 <Workview ref="Workview" workstartcase={this._workstartcase} workstopcase={this._workstopcase} workcontrolfoot={this._workcontrolfoot} worksavenewcase={this._worksavenewcase} worksavemodcase={this._worksavemodcase}/>
             </div>
             <div>
-                <Foot ref="foot" footcallbackreturn={this._footcallbackreturn} footcallbackconfigure={this._footcallbackconfigure} footcallbackcalibration={this._footcallbackcalibration} />
+                <Foot ref="foot" footcallbackreturn={this._footcallbackreturn} footcallbackconfigure={this._footcallbackconfigure} footcallbackdebug={this._footcallbackdebug} footcallbackcalibration={this._footcallbackcalibration} />
             </div>
         </div>
         );
@@ -284,6 +319,7 @@ xhbalanceiconlist();
 var react_element = <App/>;
 var app_handle = ReactDOM.render(react_element,document.getElementById('app'));
 sysconffetch();
+sysdebugfetch();
 //var footcallback_return= function(){
 //    app_handle.loginview();
 //}
@@ -936,6 +972,42 @@ function xhbalancesavesysconfcallback(res){
     sysconffetch();
     tips("Save successfully!");
 }
+function xhbalancerunsysdebug(configure){
+
+    var map={
+        action:"XH_Balance_sys_debug_run",
+        type:"mod",
+        body:configure,
+        user:app_handle.getuser()
+    };
+    fetch(request_head,
+        {
+            method:'POST',
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify(map)
+        }).then(jsonParse)
+        .then(xhbalancerunsysdebugcallback)
+        //.then(fetchlist)
+        .catch( (error) => {
+        console.log('request error', error);
+    return { error };
+});
+}
+
+function xhbalancerunsysdebugcallback(res){
+    if(res.jsonResult.status == "false"){
+        alert("运行调试命令出错！");
+        return;
+    }
+    if(res.jsonResult.auth == "false"){
+        return;
+    }
+    app_handle.debug_label_update(res.jsonResult.msg);
+    tips("run successfully!");
+}
 function sysconffetch(){
     var map={
         action:"XH_Balance_sys_config",
@@ -970,7 +1042,40 @@ function sysconffetchcallback(res){
     app_handle.initializesysconf(xhbalancesavesysconf,configuration);
     //app_handle.workview();
 }
+function sysdebugfetch(){
+    var map={
+        action:"XH_Balance_sys_debug",
+        type:"query",
+        user:null
+    };
+    fetch(request_head,
+        {
+            method:'POST',
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify(map)
+        }).then(jsonParse)
+        .then(sysdebugfetchcallback)
+        .catch( (error) => {
+        console.log('request error', error);
+    return { error };
+});
+}
+function sysdebugfetchcallback(res){
+    if(res.jsonResult.status == "false"){
+        alert("系统错误，请联系管理员！");
+        return;
+    }
+    if(res.jsonResult.auth == "false"){
+        return;
+    }
+    let configuration = res.jsonResult.ret;
 
+    app_handle.initializesysdebug(xhbalancerunsysdebug,configuration);
+    //app_handle.workview();
+}
 function footcallback_save(){
     xhbalancesavesysconf(app_handle.getsysconfset());
 
@@ -1003,14 +1108,14 @@ function balance_to_zero(balanceno){
 function balance_to_zero_callback(res){
     let balanceNo= res.jsonResult.ret.balance;
     if(res.jsonResult.status == "false"){
-        app_handle.update_cali_status(balanceNo,3);
+        app_handle.update_cali_status(balanceNo,3,"");
         return;
     }
     if(res.jsonResult.auth == "false"){
-        app_handle.update_cali_status(balanceNo,3);
+        app_handle.update_cali_status(balanceNo,3,"");
         return;
     }
-    app_handle.update_cali_status(balanceNo,1);
+    app_handle.update_cali_status(balanceNo,1,"");
 }
 function balance_to_countweight(balanceno,callback){
     var body={
@@ -1040,14 +1145,14 @@ function balance_to_countweight(balanceno,callback){
 function balance_to_countweight_callback(res){
     let balanceNo= res.jsonResult.ret.balance;
     if(res.jsonResult.status == "false"){
-        app_handle.update_cali_status(balanceNo,3);
+        app_handle.update_cali_status(balanceNo,3,"");
         return;
     }
     if(res.jsonResult.auth == "false"){
-        app_handle.update_cali_status(balanceNo,3);
+        app_handle.update_cali_status(balanceNo,3,"");
         return;
     }
-    app_handle.update_cali_status(balanceNo,2);
+    app_handle.update_cali_status(balanceNo,2,res.jsonResult.msg);
 }
 
 function balance_get_alarm(){

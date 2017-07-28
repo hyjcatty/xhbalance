@@ -29,7 +29,7 @@ export default class Labelbig extends Component {
             <div className="tile-stats">
                 <h3 style={{paddingTop:10,color:"#3498db"}}>{this.state.title}</h3>
                 <div key="statuspanel" className="count" style={{fontSize:48,paddingTop:20,paddingBottom:20,textAlign:"center"}}>{this.state.status}</div>
-                <p className="pull-right" style={{paddingRight:10}}>{this.state.note}</p>
+                <p className="pull-right" style={{fontSize:14,paddingRight:10}}>{this.state.note}</p>
             </div>
         );
     }
