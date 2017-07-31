@@ -201,21 +201,21 @@ export default class unlockview extends Component {
                     <div className="leaderboard" style={{marginTop: this.state.margintop}}>
                         <div className="panel panel-default" id="kuang" >
                             <div className="panel-heading">
-                                <h3 className="panel-title">系统登陆</h3>
+                                <h3 className="panel-title">System Login</h3>
                             </div>
                             <div className="panel-body">
                                 <div className="input-group">
-                                    <span className="input-group-addon" id="Username" style={{minWidth: "100px"}}>用户名</span>
-                                    <input type="text" className="form-control" placeholder="用户名" aria-describedby="basic-addon1" id="Username_Input"/>
+                                    <span className="input-group-addon" id="Username" style={{minWidth: "100px",fontSize:"15px"}}>UserName</span>
+                                    <input type="text" className="form-control" placeholder="user name" aria-describedby="basic-addon1" id="Username_Input"/>
                                 </div>
                                 <p></p>
                                 <div className="input-group">
-                                    <span className="input-group-addon" id="Password" style={{minWidth: "100px"}}>密码</span>
-                                    <input type="password" className="form-control" placeholder="密码" aria-describedby="basic-addon1" id="Password_Input"/>
+                                    <span className="input-group-addon" id="Password" style={{minWidth: "100px",fontSize:"15px"}}>Password</span>
+                                    <input type="password" className="form-control" placeholder="password" aria-describedby="basic-addon1" id="Password_Input"/>
                                 </div>
                                 <p></p>
                                 <button type="button" id="Login_Comfirm" data-loading-text="Loading..." className="btn btn-primary" autoComplete="off" style={{minWidth: "150px"}} onClick={this.handle_login.bind(this)} >
-                                    登陆
+                                    Login
                                 </button>
                             </div>
                         </div>

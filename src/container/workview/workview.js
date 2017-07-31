@@ -79,7 +79,7 @@ export default class workview extends Component {
         this.show();
     }
     runview(configuration){
-        this.props.workcontrolfoot(false,true,true,false,false,true,false,true);
+        this.props.workcontrolfoot(false,true,false,false,false,true,false,false);
         if(configuration!==null){
             this.setState({configuration:configuration,status:"run"});
             this.refs.Billboardview.update_configuration(configuration);

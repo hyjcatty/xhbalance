@@ -1147,7 +1147,7 @@ function balance_to_zero_callback(res){
         app_handle.update_cali_status(balanceNo,3,"");
         return;
     }
-    app_handle.update_cali_status(balanceNo,1,"");
+    app_handle.update_cali_status(balanceNo,1,res.jsonResult.msg);
 }
 function balance_to_countweight(balanceno,callback){
     var body={
