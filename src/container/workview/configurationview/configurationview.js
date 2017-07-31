@@ -378,14 +378,14 @@ export default class configurationview extends Component {
                 if(this.state.configuration.parameter.groups[i].list[j].max!==""){
                     let contentline = "Max:["+this.state.configuration.parameter.groups[i].list[j].max+"];Min:["+this.state.configuration.parameter.groups[i].list[j].min+"];Note:"+this.state.configuration.parameter.groups[i].list[j].note;
                     content.push(<div className="count" style={{fontSize:20,marginTop:15,verticalAlign:'bottom'}} key={this.state.key2+i+"p"+j+"1"}>{this.state.configuration.parameter.groups[i].list[j].paraname}</div>);
-                    content.push(<h3 style={{fontSize:10,marginRight:5}}  key={this.state.key2+i+"p"+j+"2"}>{contentline}</h3>);
+                    content.push(<h3 style={{fontSize:14,marginRight:5}}  key={this.state.key2+i+"p"+j+"2"}>{contentline}</h3>);
                     content.push(<input type="text" className="form-control configure_input" placeholder="CONFIG Value" aria-describedby="basic-addon1" key={this.state.key2+"G"+i+"P"+j+"input"} id={"Para_G"+i+"P"+j+"_input"} data-group={i} data-parameter={j} value={this.state.configuration.parameter.groups[i].list[j].value} onChange={this.handleChange} onBlur={this.handleBlur} data-min={this.state.configuration.parameter.groups[i].list[j].min} data-max={this.state.configuration.parameter.groups[i].list[j].max}/>);
                 }else{
                     this.state.configuration.parameter.groups[i].list[j].defaultvalue = this.state.configuration.parameter.groups[i].list[j].items[parseInt(this.state.configuration.parameter.groups[i].list[j].value)];
 
                     let contentline = "Note:"+this.state.configuration.parameter.groups[i].list[j].note;
                     content.push(<div className="count" style={{fontSize:20,marginTop:15,verticalAlign:'bottom'}} key={this.state.key2+i+"p"+j+"1"}>{this.state.configuration.parameter.groups[i].list[j].paraname}</div>);
-                    content.push(<h3 style={{fontSize:10,marginRight:5}}  key={this.state.key2+i+"p"+j+"2"}>{contentline}</h3>);
+                    content.push(<h3 style={{fontSize:14,marginRight:5}}  key={this.state.key2+i+"p"+j+"2"}>{contentline}</h3>);
                     let choice_items = [];
                     for(let k=0;k<this.state.configuration.parameter.groups[i].list[j].items.length;k++){
                         /*

@@ -89,7 +89,7 @@ export default class Calibrationunit extends Component {
         if(this.state.location =="left"){
             light.push(
                 <div key="light" style={{width:this.state.width*0.42,float: "left",position:"relative",marginTop:this.state.width*0.00,borderBottom: "2px solid #ADB2B5"}}>
-                    <h3 style={{width:this.state.width*0.42,fontSize:5,marginLeft:5,marginBottom:"3px"}} className="pull-left">{this.state.title}</h3>
+                    <h3 style={{width:this.state.width*0.42,fontSize:15,marginTop:"6px",marginLeft:5,marginBottom:"3px",}} className="pull-left">{this.state.title}</h3>
                     <div key="light" style={{width:this.state.width*0.42,height:this.state.height,float: "left",position:"relative"}}>
                         <div style={{float: "left",position:"relative",marginRight:"5px",marginTop:"2px",height:(this.state.height-10),width:this.state.width*0.1,display:this.state.hideBack}}>
                             <button  type="button" className={lightcircle1} style={{height:(this.state.height-10),width:(this.state.height-10)*1.5,display:this.state.hideBack}} onClick={this.handle_click_back1.bind(this)}>
@@ -112,7 +112,7 @@ export default class Calibrationunit extends Component {
              //lightcircle1=lightcircle1 + "pull-right";
             light.push(
                 <div key="light" style={{width:this.state.width*0.42,float: "right",position:"relative",marginTop:this.state.width*0.00,borderBottom: "2px solid #ADB2B5"}}>
-                    <h3 style={{width:this.state.width*0.42,fontSize:5,marginRight:5,textAlign:"right",marginBottom:"3px"}}>{this.state.title}</h3>
+                    <h3 style={{width:this.state.width*0.42,fontSize:15,marginTop:"6px",marginRight:5,textAlign:"right",marginBottom:"3px"}}>{this.state.title}</h3>
                     <div key="light" style={{width:this.state.width*0.42,height:this.state.height,float: "left",position:"relative"}}>
                         <div style={{float: "right",position:"relative",marginLeft:"5px",marginTop:"2px",height:(this.state.height-10),width:this.state.width*0.1,display:this.state.hideBack}}>
                             <button  type="button" className={lightcircle1} style={{float: "right",position:"relative",height:(this.state.height-10),width:(this.state.height-10)*1.5,display:this.state.hideBack}} onClick={this.handle_click_back1.bind(this)}>

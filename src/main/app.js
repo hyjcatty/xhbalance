@@ -90,12 +90,13 @@ class App extends Component{
     initializehead(){
         this.refs.head.update_username(this.state.username);
     }
-    initializefoot(callback_back,callback_save,callback_tozero){
+    initializefoot(callback_back,callback_save,callback_tozero,callback_delete){
         this.refs.foot.hide_all();
         //this.refs.foot.update_callback_return(callback_return);
         this.refs.foot.update_callback_back(callback_back);
         this.refs.foot.update_callback_save(callback_save);
         this.refs.foot.update_callback_tozero(callback_tozero);
+        this.refs.foot.update_callback_delete(callback_delete);
         //this.refs.foot.update_callback_configure(callback_configure);
     }
     initializerunstop(runcallback,stopcallback){
@@ -113,7 +114,7 @@ class App extends Component{
     hidealarm(){
         this.refs.Workview.hidealarm();
     }
-    footButtonShow(breturn,bback,bconfigure,bsave,bcalibration,btozero,bdebug){
+    footButtonShow(breturn,bback,bconfigure,bsave,bcalibration,btozero,bdebug,bdelete){
         this.refs.foot.show_return_button(breturn);
         this.refs.foot.show_back_button(bback);
         this.refs.foot.show_configure_button(bconfigure);
@@ -121,6 +122,7 @@ class App extends Component{
         this.refs.foot.show_calibration_button(bcalibration);
         this.refs.foot.show_to_zero_button(btozero);
         this.refs.foot.show_debug_button(bdebug);
+        this.refs.foot.show_delete_button(bdelete);
     }
     initializeWork(work2brickcallback,work2alarmremovecallback){
         this.refs.Workview.update_callback(work2brickcallback,work2alarmremovecallback);
@@ -144,10 +146,10 @@ class App extends Component{
         this.refs.Sysconfview.hide();
         this.refs.Sysdebugview.hide();
         if(this.state.username === "admin")
-            this.footButtonShow(true,false,true,false,true,false,true);
+            this.footButtonShow(true,false,true,false,true,false,true,false);
 
         else
-        this.footButtonShow(true,false,true,false,true,false,false);
+        this.footButtonShow(true,false,true,false,true,false,false,false);
 
     }
     workview_run(configure){
@@ -157,7 +159,7 @@ class App extends Component{
         this.refs.Brickview.hide();
         this.refs.Sysconfview.hide();
         this.refs.Sysdebugview.hide();
-        this.footButtonShow(false,true,false,false,false,true,false);
+        this.footButtonShow(false,true,false,false,false,true,false,true);
         this.refs.Workview.runview(configure);
         if(configure!=null) this.tipsinfo(configure.name);
         this.state.forceflashback();
@@ -169,7 +171,7 @@ class App extends Component{
         this.refs.Brickview.hide();
         this.refs.Sysconfview.hide();
         this.refs.Sysdebugview.hide();
-        this.footButtonShow(false,false,false,false,false,false,false);
+        this.footButtonShow(false,false,false,false,false,false,false,false);
         this.refs.Workview.runningview(configure);
         if(configure!=null) this.tipsinfo(configure.name);
     }
@@ -180,7 +182,7 @@ class App extends Component{
         this.refs.Brickview.hide();
         this.refs.Sysconfview.hide();
         this.refs.Sysdebugview.hide();
-        this.footButtonShow(false,true,false,false,false,false,false);
+        this.footButtonShow(false,true,false,false,false,false,false,false);
         this.refs.Workview.modview(configure);
         if(configure!=null) this.tipsinfo(configure.name);
     }
@@ -192,7 +194,7 @@ class App extends Component{
         this.refs.Brickview.hide();
         this.refs.Sysconfview.show();
         this.refs.Sysdebugview.hide();
-        this.footButtonShow(false,true,false,true,false,false,false);
+        this.footButtonShow(false,true,false,true,false,false,false,false);
         this.tipsinfo("System Configuration");
     }
     sysdebugview(){
@@ -203,7 +205,7 @@ class App extends Component{
         this.refs.Brickview.hide();
         this.refs.Sysconfview.hide();
         this.refs.Sysdebugview.show();
-        this.footButtonShow(false,true,false,false,false,false,false);
+        this.footButtonShow(false,true,false,false,false,false,false,false);
         this.tipsinfo("System debug");
     }
     workview_new(configure){
@@ -213,7 +215,7 @@ class App extends Component{
         this.refs.Brickview.hide();
         this.refs.Sysconfview.hide();
         this.refs.Sysdebugview.hide();
-        this.footButtonShow(false,true,false,false,false,false,false);
+        this.footButtonShow(false,true,false,false,false,false,false,false);
         this.refs.Workview.newview(configure);
         this.tipsinfo("new Configuration");
     }
@@ -225,11 +227,14 @@ class App extends Component{
         this.refs.Sysconfview.hide();
         this.refs.Sysdebugview.hide();
         this.refs.Calibrationview.show();
-        this.footButtonShow(false,true,false,false,false,false,false);
+        this.footButtonShow(false,true,false,false,false,false,false,false);
         this.tipsinfo("Balance Calibration");
     }
     update_status(status){
         this.refs.Workview.update_billboard_status(status);
+    }
+    get_active_configuration(){
+        return this.refs.Workview.get_active_configuration();
     }
     update_light(light){
         this.refs.Workview.update_billboard_light(light);
@@ -300,6 +305,23 @@ class App extends Component{
             <div>
                 <Foot ref="foot" footcallbackreturn={this._footcallbackreturn} footcallbackconfigure={this._footcallbackconfigure} footcallbackdebug={this._footcallbackdebug} footcallbackcalibration={this._footcallbackcalibration} />
             </div>
+            <div className="modal fade" id="ExpiredAlarm" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel" >
+                <div className="modal-dialog" role="document">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 className="modal-title" id="ExpiredAlertModalLabel">Warning</h4>
+                        </div>
+                        <div className="modal-body" id="ExpiredAlertModalContent">
+                            Are u want do delete this configuration?
+                        </div>
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-default" data-dismiss="modal">Cancel</button>
+                            <button type="button" className="btn btn-default" data-dismiss="modal" id="ExpiredConfirm">Confirm</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         );
     }
@@ -311,9 +333,11 @@ var baselist=[];
 var IconList=[];
 var Running=false;
 var Alarming=false;
+var wait_time_short=300;
 var runcycle=setInterval(xhbalancegetstatus,250);
 var alarmcycle=setInterval(balance_get_alarm,3000);
 var lightcycle=setInterval(xhbalancegetlight,3000);
+var activeconf = null;
 get_size();
 xhbalanceiconlist();
 var react_element = <App/>;
@@ -338,7 +362,7 @@ app_handle.initializeSize(winWidth,winHeight);
 
 
 //app_handle.initializefoot(footcallback_return,footcallback_back,footcallback_configure);
-app_handle.initializefoot(footcallback_back,footcallback_save,xhbalancetozeroshortcut);
+app_handle.initializefoot(footcallback_back,footcallback_save,xhbalancetozeroshortcut,show_expiredModule);
 app_handle.initializehead();
 app_handle.initializeLogin(xhbalancelogin);
 app_handle.initializeWork(newviewabort,balance_clear_alarm);
@@ -347,6 +371,14 @@ app_handle.initializerunsave(xhbalancesavenewconf,xhbalancesavemodconf);
 app_handle.initializeforceflash(xhbalanceforceflashstatus);
 app_handle.initializeCalibration(balance_to_zero,balance_to_countweight);
 app_handle.loginview();
+
+
+
+$('#ExpiredConfirm').on('click',delete_configure);
+
+
+
+
 //fetchtest();
 function get_size(){
     if (window.innerWidth)
@@ -1225,6 +1257,69 @@ function balance_clear_alarm_callback(res){
         return;
     }
 }
+function modal_middle(modal){
+
+    setTimeout(function () {
+        var _modal = $(modal).find(".modal-dialog");
+        if(parseInt(($(window).height() - _modal.height())/2)>0){
+
+            _modal.animate({'margin-top': parseInt(($(window).height() - _modal.height())/2)}, 300 );
+        }
+    },wait_time_short);
+}
+
+function show_expiredModule(){
+    activeconf = app_handle.get_active_configuration();
+    if(activeconf === null) return;
+    let warning_content =  "Are you want to delete config ["+activeconf.name+"]?";
+    $('#ExpiredAlertModalContent').empty();
+    $('#ExpiredAlertModalContent').append(warning_content);
+    modal_middle($('#ExpiredAlarm'));
+    $('#ExpiredAlarm').modal('show') ;
+}
+
+function delete_configure(){
+    if(activeconf === null) return;
+    var body = {
+        file:activeconf.name
+    };
+    var map={
+        action:"XH_Balance_config_delete",
+        type:"mod",
+        body: body,
+        user:app_handle.getuser()
+    };
+    fetch(request_head,
+        {
+            method:'POST',
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify(map)
+        }).then(jsonParse)
+        .then(delete_configure_callback)
+        .catch( (error) => {
+            console.log('request error', error);
+            return { error };
+        });
+}
+function delete_configure_callback(res){
+    if(res.jsonResult.status == "true"){
+
+        xhbalanceconfiglist();
+        tips("Delete successfully");
+        return;
+    }
+    if(res.jsonResult.auth == "false"){
+        xhbalanceconfiglist();
+        tips("Warning:Delete Fail!!!");
+        return;
+    }
+}
+
+
+
 var hexcase = 0; /* hex output format. 0 - lowercase; 1 - uppercase     */
 var b64pad = ""; /* base-64 pad character. "=" for strict RFC compliance  */
 var chrsz = 8; /* bits per input character. 8 - ASCII; 16 - Unicode    */

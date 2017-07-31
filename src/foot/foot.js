@@ -22,7 +22,7 @@ export default class foot extends Component {
         super(props);
         this.state={
             height:50,
-            content:"©波峰智能",
+            content:"©BoFeng",
             hideReturn:"none",
             hideBack:"none",
             hideConfigure:"none",
@@ -30,9 +30,11 @@ export default class foot extends Component {
             hideCalibration:"none",
             hideTozero:"none",
             hideDebug:"none",
+            hideDelete:"none",
             callbackBack:null,
             callbackSave:null,
             callbackTozero:null,
+            callbackDelete:null,
             disabled:"",
             loginfo:"xxxxxxxxx"
         }
@@ -61,6 +63,9 @@ export default class foot extends Component {
     }
     update_callback_tozero(callback){
         this.setState({callbackTozero:callback})
+    }
+    update_callback_delete(callback){
+        this.setState({callbackDelete:callback})
     }
     show_return_button(input){
         if(input===true){
@@ -111,8 +116,15 @@ export default class foot extends Component {
             this.setState({hideTozero:"none"});
         }
     }
+    show_delete_button(input){
+        if(input===true){
+            this.setState({hideDelete:"block"});}
+        else{
+            this.setState({hideDelete:"none"});
+        }
+    }
     hide_all(){
-        this.setState({hideReturn:"none",hideConfigure:"none",hideBack:"none",hideSave:"none",hideCalibration:"none",hideTozero:"none",hideDebug:"none"});
+        this.setState({hideReturn:"none",hideConfigure:"none",hideBack:"none",hideSave:"none",hideCalibration:"none",hideTozero:"none",hideDebug:"none",hideDelete:"none"});
     }
     handle_click_return(){
         //console.log("click");
@@ -148,6 +160,10 @@ export default class foot extends Component {
     }
     handle_click_save(){
         this.state.callbackSave();
+
+    }
+    handle_click_delete(){
+        this.state.callbackDelete();
 
     }
     disable(b_input){
@@ -197,6 +213,9 @@ export default class foot extends Component {
                     </button>
                     <button  type="button" className="btn btn-warning btn-sm pull-left" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:(this.state.height-10)*1.6,display:this.state.hideDebug}} disabled={this.state.disabled} onClick={this.handle_click_debug.bind(this)}>
                         <i className="fa fa-bug" style={{fontSize:25}}> </i>
+                    </button>
+                    <button  type="button" className="btn btn-warning btn-sm pull-left" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:(this.state.height-10)*1.6,display:this.state.hideDelete}} disabled={this.state.disabled} onClick={this.handle_click_delete.bind(this)}>
+                        <i className="fa fa-trash-o" style={{fontSize:25}}> </i>
                     </button>
                     <a style={{position:"relative",height:this.state.height,display:'table-cell',verticalAlign:'middle'}}>
                         < span className="headlabel" style={{fontSize:this.state.height*0.3,marginRight:this.state.height*0.3}}>&nbsp;</span>

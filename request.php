@@ -94,6 +94,16 @@ function getfiledetail($path){
     $json_string = file_get_contents($afile);
     return $json_string;
 }
+function deletefile($path){
+    $ret = "";
+    if(!file_exists($path)) {
+        //echo $path." is not exist!";
+        return false;
+    }
+    $afile=$path;
+    $result = unlink ($path);
+    return $result;
+}
 function get_file_list($dir,$type){
     $ret = array();
     if(!file_exists($ff)) $ret;
@@ -190,6 +200,18 @@ switch ($key){
 
         $jsonencode = _encode($retval);
         echo $jsonencode; break;
+    case "XH_Balance_config_delete":
+            $body=$payload["body"];
+            $file_name=$body["file"];
+            $retbool = deletefile("./json/".$file_name.".json");
+            $retval=array(
+                'status'=>'true',
+                'auth'=>'true',
+                'msg'=>''
+            );
+
+            $jsonencode = _encode($retval);
+            echo $jsonencode; break;
     case "XH_Balance_get_svg_list":
         /*
              var map={

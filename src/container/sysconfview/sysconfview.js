@@ -347,13 +347,13 @@ export default class sysconfview extends Component {
                         param.push(
                             <div className="count" style={{fontSize:20,marginTop:15,verticalAlign:'bottom',width:"90%"}} key={this.state.key+i+"p"+j+"l"}>
                                 <div className="input-group">
-                                    <span className="input-group-addon"  style={{minWidth: "100px"}}>{this.state.configure.parameter.groups[i].list[j].paraname+":"}</span>
+                                    <span className="input-group-addon"  style={{minWidth: "100px",fontSize:"12px"}}>{this.state.configure.parameter.groups[i].list[j].paraname+":"}</span>
                                     <input type="text" className={className} placeholder="CONFIG Value" aria-describedby="basic-addon1"
                                            key={this.state.key2+"G"+i+"P"+j+this.state.configure.parameter.groups[i].list[j].type} id={this.state.key2+"G"+i+"P"+j+this.state.configure.parameter.groups[i].list[j].type} data-group={i} data-parameter={j}
                                            value={this.state.configure.parameter.groups[i].list[j].value} onChange={this.handleChange} onBlur={this.handleBlur}
                                            data-min={this.state.configure.parameter.groups[i].list[j].min} data-max={this.state.configure.parameter.groups[i].list[j].max}/>
                                 </div>
-                                <h3 style={{fontSize:10,marginRight:5}}  key={this.state.key2+i+"p"+j+"2"}>{contentline}</h3>
+                                <h3 style={{fontSize:15,marginRight:5,color:"#333"}}  key={this.state.key2+i+"p"+j+"2"}>{contentline}</h3>
                             </div>);
                     }
                     if(this.state.configure.parameter.groups[i].list[j].type === "float"){
@@ -362,13 +362,13 @@ export default class sysconfview extends Component {
                         param.push(
                             <div className="count" style={{fontSize:20,marginTop:15,verticalAlign:'bottom',width:"90%"}} key={this.state.key+i+"p"+j+"l"}>
                                 <div className="input-group">
-                                    <span className="input-group-addon" style={{minWidth: "100px"}}>{this.state.configure.parameter.groups[i].list[j].paraname+":"}</span>
+                                    <span className="input-group-addon" style={{minWidth: "100px",fontSize:"12px"}}>{this.state.configure.parameter.groups[i].list[j].paraname+":"}</span>
                                     <input type="text" className={className} placeholder="CONFIG Value" aria-describedby="basic-addon1"
                                            key={this.state.key2+"G"+i+"P"+j+this.state.configure.parameter.groups[i].list[j].type} id={this.state.key2+"G"+i+"P"+j+this.state.configure.parameter.groups[i].list[j].type} data-group={i} data-parameter={j}
                                            value={this.state.configure.parameter.groups[i].list[j].value} onChange={this.handleChange} onBlur={this.handleBlur}
                                            data-min={this.state.configure.parameter.groups[i].list[j].min} data-max={this.state.configure.parameter.groups[i].list[j].max}/>
                                 </div>
-                                <h3 style={{fontSize:10,marginRight:5}}  key={this.state.key2+i+"p"+j+"2"}>{contentline}</h3>
+                                <h3 style={{fontSize:15,marginRight:5,color:"#333"}}  key={this.state.key2+i+"p"+j+"2"}>{contentline}</h3>
                             </div>);
                     }
                     if(this.state.configure.parameter.groups[i].list[j].type === "string"){
@@ -377,13 +377,13 @@ export default class sysconfview extends Component {
                         param.push(
                             <div className="count" style={{fontSize:20,marginTop:15,verticalAlign:'bottom',width:"90%"}} key={this.state.key+i+"p"+j+"l"}>
                                 <div className="input-group">
-                                    <span className="input-group-addon"  style={{minWidth: "100px"}}>{this.state.configure.parameter.groups[i].list[j].paraname+":"}</span>
+                                    <span className="input-group-addon"  style={{minWidth: "100px",fontSize:"12px"}}>{this.state.configure.parameter.groups[i].list[j].paraname+":"}</span>
                                     <input type="text" className={className} placeholder="CONFIG Value" aria-describedby="basic-addon1"
                                            key={this.state.key2+"G"+i+"P"+j+this.state.configure.parameter.groups[i].list[j].type} id={this.state.key2+"G"+i+"P"+j+this.state.configure.parameter.groups[i].list[j].type} data-group={i} data-parameter={j}
                                            value={this.state.configure.parameter.groups[i].list[j].value} onChange={this.handleChange} onBlur={this.handleBlur}
                                            data-min={this.state.configure.parameter.groups[i].list[j].min} data-max={this.state.configure.parameter.groups[i].list[j].max}/>
                                 </div>
-                                <h3 style={{fontSize:10,marginRight:5}}  key={this.state.key2+i+"p"+j+"2"}>{contentline}</h3>
+                                <h3 style={{fontSize:15,marginRight:5,color:"#333"}}  key={this.state.key2+i+"p"+j+"2"}>{contentline}</h3>
                             </div>);
                     }
                     if(this.state.configure.parameter.groups[i].list[j].type === "choice"){
@@ -398,13 +398,13 @@ export default class sysconfview extends Component {
                         param.push(
                             <div className="count" style={{fontSize:20,marginTop:15,verticalAlign:'bottom',width:"90%"}} key={this.state.key+i+"p"+j+"l"}>
                                 <div className="input-group">
-                                    <span className="input-group-addon"  style={{minWidth: "100px"}}>{this.state.configure.parameter.groups[i].list[j].paraname+":"}</span>
+                                    <span className="input-group-addon"  style={{minWidth: "100px",fontSize:"12px"}}>{this.state.configure.parameter.groups[i].list[j].paraname+":"}</span>
                                     <select className={className} placeholder="CONFIG Value" aria-describedby="basic-addon1"
                                             key={this.state.key2+"G"+i+"P"+j+this.state.configure.parameter.groups[i].list[j].type} id={this.state.key2+"G"+i+"P"+j+this.state.configure.parameter.groups[i].list[j].type} data-group={i} data-parameter={j}
                                             onChange={this.handleChange} onBlur={this.handleBlur}
                                             defaultValue={this.state.configure.parameter.groups[i].list[j].defaultvalue} >{choice_items}</select>
                                 </div>
-                                <h3 style={{fontSize:10,marginRight:5}}  key={this.state.key2+i+"p"+j+"2"}>{contentline}</h3>
+                                <h3 style={{fontSize:15,marginRight:5,color:"#333"}}  key={this.state.key2+i+"p"+j+"2"}>{contentline}</h3>
                             </div>);
 
 

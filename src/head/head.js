@@ -22,7 +22,7 @@ export default class head extends Component {
         super(props);
         this.state={
             height:50,
-            username:"未登录用户"
+            username:"no login"
         }
     }
     update_size(height){
@@ -32,13 +32,13 @@ export default class head extends Component {
         this.setState({username:username})
     }
     render() {
-        let temp = "您好:"+this.state.username;
+        let temp = "Hello:"+this.state.username;
         return (
             <div style={{position:"relative",background:"#eeeeee",height:this.state.height,width:'100%',display:'table'}}>
                 <a style={{position:"relative",height:this.state.height,display:'table-cell',verticalAlign:'middle',width:this.state.height}}><i style={{marginLeft:this.state.height*0.3,fontSize:this.state.height*0.5,color:"#62b900"}}><img src="./svg/chili2.svg"  style={{height:this.state.height*0.8,width:this.state.height*0.8,zIndex: -1}}></img></i>
 
                 </a>
-                <a style={{position:"relative",height:this.state.height,display:'table-cell',verticalAlign:'middle'}}><span className="headlabel" style={{fontSize:this.state.height*0.3,marginLeft:20}}>组合秤</span></a>
+                <a style={{position:"relative",height:this.state.height,display:'table-cell',verticalAlign:'middle'}}><span className="headlabel" style={{fontSize:this.state.height*0.3,marginLeft:20}}>Combined Balance</span></a>
                 <a style={{position:"relative",height:this.state.height,display:'table-cell',verticalAlign:'middle'}}>< span className="headlabel pull-right" style={{fontSize:this.state.height*0.2,marginRight:this.state.height*0.3}}>{temp}</span></a>
             </div>
         );
