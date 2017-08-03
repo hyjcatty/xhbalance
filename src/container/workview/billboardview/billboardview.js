@@ -94,12 +94,12 @@ export default class billboardview extends Component {
     update_size(width,height){
         this.setState({height:height,width:width});
         //console.log("billboardview width:"+width+",height:"+height);
-        this.refs['Label1x1'].initialize("Target Weight","kg");
-        this.refs['Label1x2'].initialize("Upper Weight","kg");
-        this.refs['Label1x3'].initialize("Total Comb","pcs");
-        this.refs['Label1x4'].initialize("Total Weight","kg");
-        this.refs['Label1x5'].initialize("Speed Pcs","pcs/min");
-        this.refs['Label1x6'].initialize("Speed Kg","kg/min");
+        this.refs['Label1x1'].initialize("Target Weight","g");
+        this.refs['Label1x2'].initialize("Upper Weight","g");
+        this.refs['Label1x3'].initialize("Total Package","pcs");
+        this.refs['Label1x4'].initialize("Total Weight","g");
+        this.refs['Label1x5'].initialize("Speed Package","pcs/min");
+        this.refs['Label1x6'].initialize("Speed Weight","g/min");
         /*
         for(let i=1;i<4;i++){
             this.refs['Label2x'+(2*i-1)].initialize("Average Time","From last Count","left",width);
@@ -109,7 +109,7 @@ export default class billboardview extends Component {
         this.refs['Label3x2'].initialize("Warning info","fa fa-warning",width);
         this.refs['Label3x3'].initialize("Error info","fa fa-times",width);*/
 
-        this.refs.Labelbigboard.initialize("Current Weight","kg");
+        this.refs.Labelbigboard.initialize("Current Weight","g");
         for(let i=1;i<9;i++){
             this.refs['Light'+(2*i-1)].initialize("left",width,""+(2*i-1));
             this.refs['Light'+(2*i)].initialize("right",width,""+(2*i));

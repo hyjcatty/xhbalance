@@ -86,7 +86,7 @@ export default class buttonbar extends Component {
                 <div style={{marginTop:this.state.margintop,marginLeft:this.state.marginsize,width:this.state.bricksize,height:this.state.bricksize,float: "left",position:"relative"}}>
                     <button type="button" className="btn" style={{height:this.state.bricksize,width:this.state.bricksize,verticalAlign:"middle"}} onClick={this.handle_click1.bind(this)}><i>
                         <a style={{position:"relative",height:this.state.bricksize*0.3,display:'table-cell',verticalAlign:'middle'}}>
-                        <span className="framelabel"  style={{fontSize:this.state.bricksize*0.1,marginLeft:0}}>
+                        <span className="framelabel"  style={{fontSize:this.state.bricksize*0.2,marginLeft:0}}>
                             {this.state.button1}
                         </span>
                         </a>
@@ -97,7 +97,7 @@ export default class buttonbar extends Component {
                 <div style={{marginTop:this.state.margintop,marginLeft:this.state.marginsize,width:this.state.bricksize,height:this.state.bricksize,float: "left",position:"relative",display:this.state.button2hide}}>
                     <button type="button" className="btn" style={{height:this.state.bricksize,width:this.state.bricksize,verticalAlign:"middle"}} onClick={this.handle_click2.bind(this)}><i>
                         <a style={{position:"relative",height:this.state.bricksize*0.3,display:'table-cell',verticalAlign:'middle'}}>
-                        <span className="framelabel"  style={{fontSize:this.state.bricksize*0.1,marginLeft:0}}>
+                        <span className="framelabel"  style={{fontSize:this.state.bricksize*0.2,marginLeft:0}}>
                             {this.state.button2}
                         </span>
                         </a>

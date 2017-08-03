@@ -336,7 +336,7 @@ var Alarming=false;
 var wait_time_short=300;
 var runcycle=setInterval(xhbalancegetstatus,250);
 var alarmcycle=setInterval(balance_get_alarm,3000);
-var lightcycle=setInterval(xhbalancegetlight,3000);
+var lightcycle=setInterval(xhbalancegetlight,250);
 var activeconf = null;
 get_size();
 xhbalanceiconlist();

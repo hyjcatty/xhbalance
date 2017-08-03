@@ -62,7 +62,7 @@ export default class Calibrationunit extends Component {
     setstatus(status,weight){
         this.setState({status:status});
         if(status == 1){
-            this.setState({note:weight,disabled:"",colornote: "#f0ad4e",colornotename:"ORANGE",blingnote:true});
+            this.setState({note:weight,disabled:"",colornote: "#9B59B6",colornotename:"PURPLE",blingnote:true});
         }else if(status == 2){
             this.setState({note:weight,disabled:"disabled",colornote: "#26b99a",colornotename:"GREEN",blingnote:false});
         }else if(status == 3){
