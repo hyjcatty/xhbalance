@@ -196,7 +196,7 @@ export default class unlockview extends Component {
     }
     render() {
         return (
-            <div style={{position:"relative",background:"#FFFFFF",height:this.state.height,maxHeight:this.state.height,width:'100%',display:this.state.hide,overflow:'scroll',overflowX:'hidden'}}>
+            <div style={{position:"relative",background:"#FFFFFF",height:this.state.height,maxHeight:this.state.height,width:'100%',display:this.state.hide,overflow:'scroll',overflowX:'hidden',backgroundImage: "url(./resource/image/ctw.png)"}}>
                 <div className="container">
                     <div className="leaderboard" style={{marginTop: this.state.margintop}}>
                         <div className="panel panel-default" id="kuang" >

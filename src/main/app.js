@@ -36,7 +36,7 @@ class App extends Component{
             headfootminheight: 50,
             canvasheight: 700,
             userid: "user",
-            username:"未登录用户",
+            username:"Please login",
             buttonlist: [],
             iconlist:[],
             runcallback:null,
@@ -261,8 +261,8 @@ class App extends Component{
         this.refs.Workview.update_configuration(iconlist);
     }
     removeuser(){
-        this.setState({userid:"user",username:"未登录用户"});
-        this.refs.head.update_username("未登录用户");
+        this.setState({userid:"user",username:"Please login"});
+        this.refs.head.update_username("Please login");
     }
     getuser(){
         return this.state.userid;

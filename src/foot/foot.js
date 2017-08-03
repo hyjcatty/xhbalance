@@ -22,7 +22,7 @@ export default class foot extends Component {
         super(props);
         this.state={
             height:50,
-            content:"©BoFeng",
+            content:"Model:TWSC-10/12/16 ©BoFeng",
             hideReturn:"none",
             hideBack:"none",
             hideConfigure:"none",
