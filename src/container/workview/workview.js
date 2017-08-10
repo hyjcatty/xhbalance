@@ -29,12 +29,19 @@ export default class workview extends Component {
             iconlist:[],
             status:"run",
             brickviewcallback:null,
-            alarmremovecallback:null
+            alarmremovecallback:null,
+
         }
         this._button1click=this.button1click.bind(this);
         this._button2click=this.button2click.bind(this);
         this._buttonremoveclick=this.buttonremoveclick.bind(this);
 
+    }
+    update_language(language){
+        this.refs.Buttonbar.update_language(language.buttonbar);
+        this.refs.Alarmbar.update_language(language.alarmbar);
+        this.refs.Configurationview.update_language(language.configurationview);
+        this.refs.Billboardview.update_language(language.billboardview);
     }
     update_size(width,height){
         this.setState({height:height,width:width,leftwidth:width*0.25,rightwidth:(width-width*0.25)},this.update_subsize);

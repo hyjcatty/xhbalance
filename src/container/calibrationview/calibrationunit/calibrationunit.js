@@ -31,7 +31,12 @@ export default class Calibrationunit extends Component {
             disabled:"disabled",
             balanceNo:0,
             callbackzero:null,
-            callbackcountweight:null
+            callbackcountweight:null,
+            language:{
+                "title":"#Balance:",
+                "statusempty":"keep empty",
+                "statuserror":"error"
+            }
         };
         this.colorlist={
             RED:"#d95349",
@@ -46,11 +51,14 @@ export default class Calibrationunit extends Component {
             DBLUE:"#34495e"
         };
     }
+    updatelanguage(language){
+        this.setState({language:language});
+    }
     updateprop(note,colorbrick,colornote,colorcircle,blingbrick,blingnote,blingcircle,colorbrickname,colornotename,colorcirclename){
         this.setState({note:note,colorbrick:colorbrick,colornote:colornote,colorcircle:colorcircle,blingbrick:blingbrick,blingnote:blingnote,blingcircle:blingcircle,colorbrickname:colorbrickname,colornotename:colornotename,colorcirclename:colorcirclename});
     }
     updatebalance(balanceNo){
-        this.setState({balanceNo:balanceNo,title:("#Balance:_"+(balanceNo)+"_")});
+        this.setState({balanceNo:balanceNo,title:(this.state.language.title+"_"+(balanceNo)+"_")});
         this.setstatus(0);
     }
     updatecallback(callbackzero,callbackcountweight){
@@ -66,9 +74,9 @@ export default class Calibrationunit extends Component {
         }else if(status == 2){
             this.setState({note:weight,disabled:"disabled",colornote: "#26b99a",colornotename:"GREEN",blingnote:false});
         }else if(status == 3){
-            this.setState({note:"Error",disabled:"disabled",colornote: "#d95349",colornotename:"RED",blingnote:true});
+            this.setState({note:this.state.language.statuserror,disabled:"disabled",colornote: "#d95349",colornotename:"RED",blingnote:true});
         }else{
-            this.setState({note:"Keep Empty",disabled:"disabled",colornote: "#73879c",colornotename:"GRAY",blingnote:false});
+            this.setState({note:this.state.language.statusempty,disabled:"disabled",colornote: "#73879c",colornotename:"GRAY",blingnote:false});
         }
     }
     handle_click_back1(){

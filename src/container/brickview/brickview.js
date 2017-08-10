@@ -35,10 +35,20 @@ export default class brickview extends Component {
             callback:null,
             newchoicecallback:null,
             moduleshow:false,
-            moduleanimation:'door'
+            moduleanimation:'door',
+            language:{
+                "modaltitle":"Please select a configure as base",
+                "baseconftitle":"Base template",
+                "userconftitle":"User Configuration",
+                "modalconfirm":"confirm",
+                "modalcancel":"cancel"
+            }
         }
         this._newmoduleclick=this.module_show.bind(this);
         this._smalliconclick=this.handle_click.bind(this);
+    }
+    update_language(language){
+        this.setState({language:language});
     }
     update_size(width,height){
         this.setState({height:height,width:width});
@@ -125,11 +135,11 @@ export default class brickview extends Component {
                         <div className="modal-content">
                             <div className="modal-header">
                                 <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 className="modal-title" >Please select a configure as base</h4>
+                                <h4 className="modal-title" >{this.state.language.modaltitle}</h4>
                             </div>
                             <div className="modal-body" style={{height:this.state.height*0.75,maxHeight:this.state.height*0.75,overflow:"scroll",overflowX:"hidden"}}>
                                 <div className="col-md-12">
-                                    <h3 style={{fontSize:10,marginRight:5}} className="pull-left">Base template</h3>
+                                    <h3 style={{fontSize:10,marginRight:5}} className="pull-left">{this.state.language.baseconftitle}</h3>
                                 </div>
                                 <div className="col-md-12">
                                     <div style={{position:"relative",background:"#FFFFFF",width:'100%',display:this.state.hide}}>
@@ -137,7 +147,7 @@ export default class brickview extends Component {
                                     </div>
                                 </div>
                                 <div className="col-md-12">
-                                    <h3 style={{fontSize:10,marginRight:5}} className="pull-left">User Configuration</h3>
+                                    <h3 style={{fontSize:10,marginRight:5}} className="pull-left">{this.state.language.userconftitle}</h3>
                                 </div>
                                 <div className="col-md-12">
                                     <div style={{position:"relative",background:"#FFFFFF",width:'100%',display:this.state.hide}}>
@@ -146,8 +156,8 @@ export default class brickview extends Component {
                                 </div>
                             </div>
                             <div className="modal-footer">
-                                <button type="button" className="btn btn-default" data-dismiss="modal">cancel</button>
-                                <button type="button" className="btn btn-primary" id="NewConfigureModuleConfirm" >confirm</button>
+                                <button type="button" className="btn btn-default" data-dismiss="modal">{this.state.language.modalcancel}</button>
+                                <button type="button" className="btn btn-primary" id="NewConfigureModuleConfirm" >{this.state.language.modalconfirm}</button>
                             </div>
                         </div>
                     </div>

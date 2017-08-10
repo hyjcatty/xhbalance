@@ -21,9 +21,14 @@ export default class calibrationview extends Component {
             footheight:100,
             hide:"block",
             key:"calibrationbutton",
-            key2:"calibrationlight",
+            key2:"calibrationlight"
         }
         //this.keyboard_initialize();
+    }
+    update_language(language){
+        for(let i=0;i<16;i++){
+            this.refs['Light'+(i+1)].updatelanguage(language.calibrationunit);
+        }
     }
     update_size(width,height,footheight){
         this.setState({height:height,width:width,footheight:footheight});

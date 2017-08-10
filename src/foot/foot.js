@@ -36,8 +36,14 @@ export default class foot extends Component {
             callbackTozero:null,
             callbackDelete:null,
             disabled:"",
-            loginfo:"xxxxxxxxx"
+            loginfo:"xxxxxxxxx",
+            language:{
+                "content":"Model:TWSC-10/12/16 ?BoFeng"
+            }
         }
+    }
+    update_language(language){
+        this.setState({language:language});
     }
     write_log(log){
         if(log===undefined){
@@ -228,7 +234,7 @@ export default class foot extends Component {
                 </div>
                 <div style={{position:"relative",background:"#eeeeee",height:this.state.height,width:'33%',display:'table',float:"left"}}>
                     <a style={{position:"relative",height:this.state.height,display:'table-cell',verticalAlign:'middle'}}>
-                        < span className="headlabel pull-right" style={{fontSize:this.state.height*0.3,marginRight:this.state.height*0.3}}>{this.state.content}</span>
+                        < span className="headlabel pull-right" style={{fontSize:this.state.height*0.3,marginRight:this.state.height*0.3}}>{this.state.language.content}</span>
                     </a>
                 </div>
             </div>

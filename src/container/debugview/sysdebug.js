@@ -29,9 +29,17 @@ export default class sysdebug extends Component {
             configure:null,
             key:"sys_conf_key",
             key2:"sys_debug_input",
-            retmsg:"message return:"
+            retmsg:"message return:",
+            language:{
+                "consoletitle":"Output",
+                "sendbutton":"send",
+                "retmsg":"message return:"
+            },
         }
         //this.keyboard_initialize();
+    }
+    update_language(language){
+        this.setState({language:language,retmsg:language.retmsg});
     }
     update_size(width,height,footheight){
         this.setState({height:height,width:width,footheight:footheight});
@@ -456,10 +464,10 @@ export default class sysdebug extends Component {
             groups2.push(
             <div className="col-xs-12 col-md-12 col-sm-12 col-lg-12" key={this.state.key+"output"}>
                 <div className="tile-stats" key={"debug_group_right"} style={{marginTop:"15px"}}>
-                    <div key="statuspanel" className="count" style={{fontSize:24}}>output</div>
+                    <div key="statuspanel" className="count" style={{fontSize:24}}>{this.state.language.consoletitle}</div>
                     <label  style={{width:"90%",height:this.state.height*0.65,marginLeft:"15px"}}>{this.state.retmsg}</label>
                     <button  type="button" className="btn btn-warning btn-sm pull-right" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height*0.1),width:(this.state.height*0.1)}} onClick={this.handle_click_send.bind(this)}>
-                        <i style={{color:"#333",fontSize:"15px",fontWeight:"bold"}}> send</i>
+                        <i style={{color:"#333",fontSize:"15px",fontWeight:"bold"}}> {this.state.language.sendbutton}</i>
                     </button>
                 </div>
             </div>

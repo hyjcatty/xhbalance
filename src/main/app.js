@@ -43,7 +43,43 @@ class App extends Component{
             stopcallback:null,
             savenewback:null,
             savemodback:null,
-            forceflashback:null
+            forceflashback:null,
+            language:{
+                "app":{
+                    "modalhead":"Warning",
+                    "modaltips":"Are u want do delete this configuration?",
+                    "modalconfirm":"confirm",
+                    "modalcancel":"cancel"
+                },
+                "message":{
+                    "alert1":"System Error, please contract Admin!",
+                    "alert2":"Login Fail, please try again!",
+                    "alert3":"Can not get mandatory information, please contract Admin!",
+                    "alert4":"Fail while start case, please contract Admin!",
+                    "alert5":"Fail while stop case, please contract Admin!",
+                    "alert6":"Run error, system is shutting down!",
+                    "alert7":"Can not save new config!",
+                    "alert8":"Modify config save error!",
+                    "alert9":"System config save error!",
+                    "alert10":"Debug command error!",
+                    "message1":"Warning:Delete Fail!!!",
+                    "message2":"Delete successfully!",
+                    "message3":"run successfully!",
+                    "message4":"Save successfully!",
+                    "message5":"",
+                    "message6":"",
+                    "message7":"",
+                    "message8":"",
+                    "message9":"",
+                    "message10":"",
+                    "title1":"Balance Calibration",
+                    "title2":"new Configuration",
+                    "title3":"System debug",
+                    "title4":"System Configuration",
+                    "title5":"Please Login"
+
+                }
+            },
         };
         this._footcallbackreturn=this.loginview.bind(this);
         this._footcallbackconfigure=this.sysconfview.bind(this);
@@ -54,6 +90,16 @@ class App extends Component{
         this._workcontrolfoot=this.footButtonShow.bind(this);
         this._worksavenewcase=this.savenewcase.bind(this);
         this._worksavemodcase=this.savemodcase.bind(this);
+    }
+    initializelanguage(language){
+        this.setState({language:language});
+        this.refs.Loginview.update_language(language.loginview);
+        this.refs.head.update_language(language.head);
+        this.refs.foot.update_language(language.foot);
+        this.refs.Sysdebugview.update_language(language.sysdebugview);
+        this.refs.Brickview.update_language(language.brickview);
+        this.refs.Workview.update_language(language.workview);
+        this.refs.Calibrationview.update_language(language.calibrationview);
     }
     initializeSize(width,height){
         let winlength= (width>height)?width:height;
@@ -136,7 +182,8 @@ class App extends Component{
         this.refs.Brickview.hide();
         this.refs.Sysconfview.hide();
         this.refs.Sysdebugview.hide();
-        this.tipsinfo("Please login.");
+        //console.log(this.state.language);
+        this.tipsinfo(this.state.language.message.title5);
     }
     brickview(){
         this.refs.Calibrationview.hide();
@@ -195,7 +242,7 @@ class App extends Component{
         this.refs.Sysconfview.show();
         this.refs.Sysdebugview.hide();
         this.footButtonShow(false,true,false,true,false,false,false,false);
-        this.tipsinfo("System Configuration");
+        this.tipsinfo(this.state.language.message.title4);
     }
     sysdebugview(){
         this.refs.Calibrationview.hide();
@@ -206,7 +253,7 @@ class App extends Component{
         this.refs.Sysconfview.hide();
         this.refs.Sysdebugview.show();
         this.footButtonShow(false,true,false,false,false,false,false,false);
-        this.tipsinfo("System debug");
+        this.tipsinfo(this.state.language.message.title3);
     }
     workview_new(configure){
         //this.refs.Workview.billboardview();
@@ -217,7 +264,7 @@ class App extends Component{
         this.refs.Sysdebugview.hide();
         this.footButtonShow(false,true,false,false,false,false,false,false);
         this.refs.Workview.newview(configure);
-        this.tipsinfo("new Configuration");
+        this.tipsinfo(this.state.language.message.title2);
     }
     calibrationview(){
         this.refs.Workview.hide();
@@ -228,7 +275,7 @@ class App extends Component{
         this.refs.Sysdebugview.hide();
         this.refs.Calibrationview.show();
         this.footButtonShow(false,true,false,false,false,false,false,false);
-        this.tipsinfo("Balance Calibration");
+        this.tipsinfo(this.state.language.message.title1);
     }
     update_status(status){
         this.refs.Workview.update_billboard_status(status);
@@ -310,14 +357,14 @@ class App extends Component{
                     <div className="modal-content">
                         <div className="modal-header">
                             <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 className="modal-title" id="ExpiredAlertModalLabel">Warning</h4>
+                            <h4 className="modal-title" id="ExpiredAlertModalLabel">{this.state.language.app.modalhead}</h4>
                         </div>
                         <div className="modal-body" id="ExpiredAlertModalContent">
-                            Are u want do delete this configuration?
+                            {this.state.language.app.modaltips}
                         </div>
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-default" data-dismiss="modal">Cancel</button>
-                            <button type="button" className="btn btn-default" data-dismiss="modal" id="ExpiredConfirm">Confirm</button>
+                            <button type="button" className="btn btn-default" data-dismiss="modal">{this.state.language.app.modalcancel}</button>
+                            <button type="button" className="btn btn-default" data-dismiss="modal" id="ExpiredConfirm">{this.state.language.app.modalconfirm}</button>
                         </div>
                     </div>
                 </div>
@@ -338,12 +385,42 @@ var runcycle=setInterval(xhbalancegetstatus,250);
 var alarmcycle=setInterval(balance_get_alarm,3000);
 var lightcycle=setInterval(xhbalancegetlight,250);
 var activeconf = null;
-get_size();
-xhbalanceiconlist();
-var react_element = <App/>;
-var app_handle = ReactDOM.render(react_element,document.getElementById('app'));
-sysconffetch();
-sysdebugfetch();
+var language=null;
+var react_element;
+var app_handle;
+
+react_element = <App/>;
+app_handle = ReactDOM.render(react_element,document.getElementById('app'));
+
+syslanguagefetch();
+function systemstart(){
+    get_size();
+    xhbalanceiconlist();
+
+    sysconffetch();
+    sysdebugfetch();
+    //app_handle.initializeUrl(request_head);
+    app_handle.initializeSize(winWidth,winHeight);
+
+
+
+
+//app_handle.initializefoot(footcallback_return,footcallback_back,footcallback_configure);
+    app_handle.initializefoot(footcallback_back,footcallback_save,xhbalancetozeroshortcut,show_expiredModule);
+    app_handle.initializehead();
+    app_handle.initializeLogin(xhbalancelogin);
+    app_handle.initializeWork(newviewabort,balance_clear_alarm);
+    app_handle.initializerunstop(xhbalancestartcase,xhbalancestartcase);
+    app_handle.initializerunsave(xhbalancesavenewconf,xhbalancesavemodconf);
+    app_handle.initializeforceflash(xhbalanceforceflashstatus);
+    app_handle.initializeCalibration(balance_to_zero,balance_to_countweight);
+    app_handle.loginview();
+
+
+
+    $('#ExpiredConfirm').on('click',delete_configure);
+}
+
 //var footcallback_return= function(){
 //    app_handle.loginview();
 //}
@@ -355,26 +432,7 @@ var footcallback_back= function(){
 //    alert("Not support yet!");
 //}
 
-//app_handle.initializeUrl(request_head);
-app_handle.initializeSize(winWidth,winHeight);
 
-
-
-
-//app_handle.initializefoot(footcallback_return,footcallback_back,footcallback_configure);
-app_handle.initializefoot(footcallback_back,footcallback_save,xhbalancetozeroshortcut,show_expiredModule);
-app_handle.initializehead();
-app_handle.initializeLogin(xhbalancelogin);
-app_handle.initializeWork(newviewabort,balance_clear_alarm);
-app_handle.initializerunstop(xhbalancestartcase,xhbalancestartcase);
-app_handle.initializerunsave(xhbalancesavenewconf,xhbalancesavemodconf);
-app_handle.initializeforceflash(xhbalanceforceflashstatus);
-app_handle.initializeCalibration(balance_to_zero,balance_to_countweight);
-app_handle.loginview();
-
-
-
-$('#ExpiredConfirm').on('click',delete_configure);
 
 
 
@@ -508,7 +566,7 @@ function brickclickfetch(configuration,type){
 }
 function brickclickcallback(res){
     if(res.jsonResult.status == "false"){
-        alert("系统错误，请联系管理员！");
+        alert(language.message.alert1);
         return;
     }
     if(res.jsonResult.auth == "false"){
@@ -547,7 +605,7 @@ function bricknewclickfetch(configuration,type){
 }
 function bricknewclickcallback(res){
     if(res.jsonResult.status == "false"){
-        alert("系统错误，请联系管理员！");
+        alert(language.message.alert1);
         return;
     }
     if(res.jsonResult.auth == "false"){
@@ -560,7 +618,7 @@ function bricknewclickcallback(res){
 }
 function xhbalanceconfiglistcallback(res){
     if(res.jsonResult.status == "false"){
-        alert("系统错误，请联系管理员！");
+        alert(language.message.alert1);
         app_handle.initializeLogin(xhbalancelogin);
         app_handle.loginview();
         return;
@@ -605,7 +663,7 @@ function xhbalancelogin(username,password){
 
 function xhbalancelogincallback(res){
     if(res.jsonResult.status == "false"){
-        alert("登陆失败，请再次尝试登陆！");
+        alert(language.message.alert2);
         app_handle.initializeLogin(xhbalancelogin);
         app_handle.loginview();
         return;
@@ -643,7 +701,7 @@ function xhbalanceiconlist(){
 
 function xhbalanceiconlistcallback(res){
     if(res.jsonResult.status == "false"){
-        alert("无法获得系统关键信息！请和管理员联系");
+        alert(language.message.alert3);
         app_handle.initializeLogin(xhbalancelogin);
         app_handle.loginview();
         return;
@@ -726,7 +784,7 @@ function xhbalancetozeroshortcut(){
 }
 function xhbalancetozeroshortcutcallback(res){
     if(res.jsonResult.status == "false"){
-        alert("启动用例失败！请和管理员联系");
+        alert(language.message.alert4);
         app_handle.initializeLogin(xhbalancelogin);
         app_handle.loginview();
         return;
@@ -743,7 +801,7 @@ function xhbalanceforceflashstatus(){
 }
 function xhbalancestartcasecallback(res){
     if(res.jsonResult.status == "false"){
-        alert("启动用例失败！请和管理员联系");
+        alert(language.message.alert4);
         app_handle.initializeLogin(xhbalancelogin);
         app_handle.loginview();
         return;
@@ -756,7 +814,7 @@ function xhbalancestartcasecallback(res){
 }
 function xhbalancestopcasecallback(res){
     if(res.jsonResult.status == "false"){
-        alert("停止用例失败！请和管理员联系");
+        alert(language.message.alert5);
         app_handle.initializeLogin(xhbalancelogin);
         app_handle.loginview();
         Running=false;
@@ -817,7 +875,7 @@ function xhbalancegetstatus_force(){
 }
 function xhbalancestatuscallback(res){
     if(res.jsonResult.status == "false"){
-        alert("运行错误，设备已停止运行"+res.jsonResult.msg);
+        alert(language.message.alert6+res.jsonResult.msg);
         Running=false;
     }
     if(res.jsonResult.auth == "false"){
@@ -874,7 +932,7 @@ function xhbalancegetlight_force(){
 }
 function xhbalancelightcallback(res){
     if(res.jsonResult.status == "false"){
-        alert("运行错误，设备已停止运行"+res.jsonResult.msg);
+        alert(language.message.alert6+res.jsonResult.msg);
         Running=false;
     }
     if(res.jsonResult.auth == "false"){
@@ -892,7 +950,7 @@ function checkrename(name){
 function xhbalancesavenewconf(configure){
     if(configure =="") return;
     if(checkrename(configure.name)) {
-        alert("Rename alert, please check");
+        alert(language.message.alert7);
         return;
     }
     var map={
@@ -920,14 +978,14 @@ function xhbalancesavenewconf(configure){
 
 function xhbalancesavenewconfcallback(res){
     if(res.jsonResult.status == "false"){
-        alert("保存新配置出错！");
+        alert(language.message.alert7);
         return;
     }
     if(res.jsonResult.auth == "false"){
         return;
     }
     xhbalanceconfiglist();
-    tips("Save successfully!");
+    tips(language.message.message4);
 }
 
 function xhbalancesavemodconf(configure){
@@ -957,14 +1015,14 @@ function xhbalancesavemodconf(configure){
 
 function xhbalancesavemodconfcallback(res){
     if(res.jsonResult.status == "false"){
-        alert("修改配置保存出错！");
+        alert(language.message.alert8);
         return;
     }
     if(res.jsonResult.auth == "false"){
         return;
     }
     xhbalanceconfiglist();
-    tips("Save successfully!");
+    tips(language.message.message4);
 }
 
 function xhbalancesavesysconf(configure){
@@ -994,7 +1052,7 @@ function xhbalancesavesysconf(configure){
 
 function xhbalancesavesysconfcallback(res){
     if(res.jsonResult.status == "false"){
-        alert("修改系统配置保存出错！");
+        alert(language.message.alert9);
         return;
     }
     if(res.jsonResult.auth == "false"){
@@ -1002,7 +1060,7 @@ function xhbalancesavesysconfcallback(res){
     }
     xhbalanceconfiglist();
     sysconffetch();
-    tips("Save successfully!");
+    tips(language.message.message4);
 }
 function xhbalancerunsysdebug(configure){
 
@@ -1031,14 +1089,14 @@ function xhbalancerunsysdebug(configure){
 
 function xhbalancerunsysdebugcallback(res){
     if(res.jsonResult.status == "false"){
-        alert("运行调试命令出错！");
+        alert(language.message.alert10);
         return;
     }
     if(res.jsonResult.auth == "false"){
         return;
     }
     app_handle.debug_label_update(res.jsonResult.msg);
-    tips("run successfully!");
+    tips(language.message.message3);
 }
 function sysconffetch(){
     var map={
@@ -1063,7 +1121,7 @@ function sysconffetch(){
 }
 function sysconffetchcallback(res){
     if(res.jsonResult.status == "false"){
-        alert("系统错误，请联系管理员！");
+        alert(language.message.alert1);
         return;
     }
     if(res.jsonResult.auth == "false"){
@@ -1097,7 +1155,7 @@ function sysdebugfetch(){
 }
 function sysdebugfetchcallback(res){
     if(res.jsonResult.status == "false"){
-        alert("系统错误，请联系管理员！");
+        alert(language.message.alert1);
         return;
     }
     if(res.jsonResult.auth == "false"){
@@ -1271,7 +1329,7 @@ function modal_middle(modal){
 function show_expiredModule(){
     activeconf = app_handle.get_active_configuration();
     if(activeconf === null) return;
-    let warning_content =  "Are you want to delete config ["+activeconf.name+"]?";
+    let warning_content =  language.message5+" ["+activeconf.name+"]?";
     $('#ExpiredAlertModalContent').empty();
     $('#ExpiredAlertModalContent').append(warning_content);
     modal_middle($('#ExpiredAlarm'));
@@ -1308,15 +1366,65 @@ function delete_configure_callback(res){
     if(res.jsonResult.status == "true"){
 
         xhbalanceconfiglist();
-        tips("Delete successfully");
+        tips(language.message.message2);
         return;
     }
     if(res.jsonResult.auth == "false"){
         xhbalanceconfiglist();
-        tips("Warning:Delete Fail!!!");
+        tips(language.message.message1);
         return;
     }
 }
+function syslanguagefetch(){
+    var map={
+        action:"XH_Balance_sys_language",
+        type:"query",
+        user:null
+    };
+    fetch(request_head,
+        {
+            method:'POST',
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify(map)
+        }).then(jsonParse)
+        .then(syslanguagefetchcallback)
+        .catch( (error) => {
+            console.log('request error', error);
+            return { error };
+        });
+}
+function syslanguagefetchcallback(res){
+    if(res.jsonResult.status == "false"){
+        alert("Fetal Error, Can not get language file!");
+        windows.close();
+    }
+    if(res.jsonResult.auth == "false"){
+        alert("Fetal Error, Can not get language file!");
+        windows.close();
+    }
+    language = res.jsonResult.ret;
+    //console.log(language);
+    app_handle.initializelanguage(language);
+    systemstart();
+    //app_handle.workview();
+}
+
+function searchlanguage(key){
+    if(key === null || key === undefined|| key ==""){
+        return "";
+    }
+    if(language === null || language === undefined){
+        return key;
+    }
+    for(var i in language.message){
+        if(i==key) return language.message[key];
+    }
+    return key;
+}
+
 
 
 

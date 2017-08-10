@@ -30,7 +30,19 @@ export default class alarmbar extends Component {
             content1:"ERROR",
             content2:"ERROR",
             content3:"ERROR",
+            language:{
+                "button":"REMOVE",
+                "content":"ERROR",
+                "content1":"ERROR",
+                "content2":"ERROR",
+                "content3":"ERROR"
+            }
         }
+    }
+    update_language(language){
+        this.setState({language:language});
+        this.setState({button:language.button});
+        this.setState({content:language.content});
     }
     update_size(width,height){
         this.setState({height:height,width:width},this.calculatesize);

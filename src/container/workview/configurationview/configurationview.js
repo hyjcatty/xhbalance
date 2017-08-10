@@ -29,11 +29,20 @@ export default class configurationview extends Component {
             iconlist:[],
             defaulticon:"sugar1.svg",
             head:"none",
-            switchlist:[]
+            switchlist:[],
+            language:{
+                "configurename":"CONFIG NAME",
+                "icon":"icon:",
+                "preemption":"Preemption:",
+                "detailparameter":"Detail Parameter:"
+            }
         }
         this._iconcallback = this.handle_icon_selection.bind(this);
         //this.keyboard_initialize();
 
+    }
+    update_language(language){
+        this.setState({language:language});
     }
     update_size(width,height){
         this.setState({height:height,width:width});
@@ -486,12 +495,12 @@ export default class configurationview extends Component {
                         <h4>&nbsp;</h4>
                         <div className="col-xs-9 col-md-9 col-sm-9 col-lg-9" style={{display:this.state.head}}>
                             <div className="input-group">
-                                <span className="input-group-addon" id="Username" style={{minWidth: "150px"}}>CONFIG NAME</span>
-                                <input type="text" className="form-control" placeholder="CONFIG NAME" aria-describedby="basic-addon1" id="ConfigureName_Input" value="" />
+                                <span className="input-group-addon" id="CONFIG_NAME" style={{minWidth: "150px"}}>{this.state.language.configurename}</span>
+                                <input type="text" className="form-control" placeholder={this.state.language.configurename} aria-describedby="basic-addon1" id="ConfigureName_Input" value="" />
                             </div>
                         </div>
                         <div className="col-xs-9 col-md-9 col-sm-9 col-lg-9" style={{display:this.state.head,margonTop:50}}>
-                            <h4>Icon:</h4>
+                            <h4>{this.state.language.icon}</h4>
                             <div  style={{marginTop:this.state.bricksize/5,marginLeft:this.state.bricksize/5,marginRight:this.state.bricksize/5,marginBottom:this.state.bricksize/5,
                             width:this.state.bricksize,height:this.state.bricksize,float: "left",position:"relative"}}>
                                 <button type="button" className="btn" style={{height:this.state.bricksize,width:this.state.bricksize,verticalAlign:"middle"}} onClick={this.module_show.bind(this)}><i>
@@ -503,7 +512,7 @@ export default class configurationview extends Component {
                     <div className="clearfix"></div>
                     <div className="col-xs-12 col-md-12 col-sm-12 col-lg-12 " >
                         <div className="col-xs-12 col-md-12 col-sm-12 col-lg-12 " >
-                            <h4>Preemption:</h4>
+                            <h4>{this.state.language.preemption}</h4>
                         </div>
                         <div className="col-xs-12 col-md-12 col-sm-12 col-lg-12 "  id="preemption_tab">
                             {preemption}
@@ -512,7 +521,7 @@ export default class configurationview extends Component {
                     <div className="clearfix"></div>
                     <div className="col-xs-12 col-md-12 col-sm-12 col-lg-12 " >
                         <div className="col-xs-12 col-md-12 col-sm-12 col-lg-12 " >
-                            <h4>Detail Parameter:</h4>
+                            <h4>{this.state.language.detailparameter}</h4>
                         </div>
                         <div className="col-xs-3 col-md-3 col-sm-3 col-lg-3">
                             <ul className="nav nav-tabs tabs-left">

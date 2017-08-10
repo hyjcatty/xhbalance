@@ -633,6 +633,21 @@ switch ($key){
 
                 $jsonencode = _encode($retval);
                 echo $jsonencode; break;
+        case "XH_Balance_sys_language":
+            $retarray;
+            $retarray = getfiledetail("./sysconf/language.json");
+            //echo "file content".$retarray;
+            $obj=json_decode($retarray,true);
+            $retval=array(
+                'status'=>'true',
+                'auth'=>'true',
+                'ret'=>$obj,
+                'msg'=>''
+            );
+
+            $jsonencode = _encode($retval);
+
+            echo $jsonencode; break;
 	default:
 
 	break;

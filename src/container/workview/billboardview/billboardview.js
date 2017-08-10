@@ -86,20 +86,56 @@ export default class billboardview extends Component {
             defaultshow:showlist,
             defaultlight:lightlist,
             configuration:null,
-            hide:"block"
+            hide:"block",
+            language:{
+                "Label1x1":{
+                    "title":"Target Weight",
+                    "unit":"g"
+                },
+                "Label1x2":{
+                    "title":"Upper Weight",
+                    "unit":"g"
+                },
+                "Label1x3":{
+                    "title":"Total Package",
+                    "unit":"pcs"
+                },
+                "Label1x4":{
+                    "title":"Total Weight",
+                    "unit":"g"
+                },
+                "Label1x5":{
+                    "title":"Speed Package",
+                    "unit":"pcs/min"
+                },
+                "Label1x6":{
+                    "title":"Speed Weight",
+                    "unit":"g/min"
+                },
+                "Labelbigboard":{
+                    "title":"Current Weight",
+                    "unit":"g"
+                }
+            }
         };
 
 
     }
+    update_language(language){
+        //console.log(language);
+        this.setState({language:language});
+
+        this.refs['Label1x1'].initialize(language.Label1x1.title,language.Label1x1.unit);
+        this.refs['Label1x2'].initialize(language.Label1x2.title,language.Label1x2.unit);
+        this.refs['Label1x3'].initialize(language.Label1x3.title,language.Label1x3.unit);
+        this.refs['Label1x4'].initialize(language.Label1x4.title,language.Label1x4.unit);
+        this.refs['Label1x5'].initialize(language.Label1x5.title,language.Label1x5.unit);
+        this.refs['Label1x6'].initialize(language.Label1x6.title,language.Label1x6.unit);
+        this.refs.Labelbigboard.initialize(language.Labelbigboard.title,language.Labelbigboard.unit);
+    }
     update_size(width,height){
         this.setState({height:height,width:width});
         //console.log("billboardview width:"+width+",height:"+height);
-        this.refs['Label1x1'].initialize("Target Weight","g");
-        this.refs['Label1x2'].initialize("Upper Weight","g");
-        this.refs['Label1x3'].initialize("Total Package","pcs");
-        this.refs['Label1x4'].initialize("Total Weight","g");
-        this.refs['Label1x5'].initialize("Speed Package","pcs/min");
-        this.refs['Label1x6'].initialize("Speed Weight","g/min");
         /*
         for(let i=1;i<4;i++){
             this.refs['Label2x'+(2*i-1)].initialize("Average Time","From last Count","left",width);
@@ -109,7 +145,7 @@ export default class billboardview extends Component {
         this.refs['Label3x2'].initialize("Warning info","fa fa-warning",width);
         this.refs['Label3x3'].initialize("Error info","fa fa-times",width);*/
 
-        this.refs.Labelbigboard.initialize("Current Weight","g");
+        //this.refs.Labelbigboard.initialize("Current Weight","g");
         for(let i=1;i<9;i++){
             this.refs['Light'+(2*i-1)].initialize("left",width,""+(2*i-1));
             this.refs['Light'+(2*i)].initialize("right",width,""+(2*i));

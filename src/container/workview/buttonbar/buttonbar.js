@@ -27,8 +27,33 @@ export default class buttonbar extends Component {
             status:0,
             button1:"",
             button2:"",
-            button2hide:"block"
+            button2hide:"block",
+            language:{
+                "run_configure":{
+                    "button1":"START",
+                    "button2":"MODIFY"
+                },
+                "calibration_configure":{
+                    "button1":"TO_ZERO",
+                    "button2":"CALIBRATION"
+                },
+                "modify_configure":{
+                    "button1":"SAVE",
+                    "button2":"ABORT"
+                },
+                "new_configure":{
+                    "button1":"SAVE",
+                    "button2":"ABORT"
+                },
+                "running_configure":{
+                    "button1":"STOP",
+                    "button2":"STOP"
+                }
+            }
         }
+    }
+    update_language(language){
+        this.setState({language:language});
     }
     update_size(width,height){
         this.setState({height:height,width:width},this.calculatesize);
@@ -44,23 +69,23 @@ export default class buttonbar extends Component {
     }
     run_configure(){
         this.showbutton2();
-        this.setState({button1:"START",button2:"MODIFY",status:0});
+        this.setState({button1:this.state.language.run_configure.button1,button2:this.state.language.run_configure.button2,status:0});
     }
     calibration_configure(){
         this.showbutton2();
-        this.setState({button1:"TO_ZERO",button2:"CALIBRATION",status:0});
+        this.setState({button1:this.state.language.calibration_configure.button1,button2:this.state.language.calibration_configure.button2,status:0});
     }
     modify_configure(){
         this.showbutton2();
-        this.setState({button1:"SAVE",button2:"ABORT",status:1});
+        this.setState({button1:this.state.language.modify_configure.button1,button2:this.state.language.modify_configure.button2,status:1});
     }
     new_configure(){
         this.showbutton2();
-        this.setState({button1:"SAVE",button2:"ABORT",status:1});
+        this.setState({button1:this.state.language.new_configure.button1,button2:this.state.language.new_configure.button2,status:1});
     }
     running_configure(){
         this.hidebutton2();
-        this.setState({button1:"STOP",button2:"STOP",status:1});
+        this.setState({button1:this.state.language.running_configure.button1,button2:this.state.language.running_configure.button2,status:1});
     }
     hidebutton2(){
         this.setState({button2hide:"none"});
