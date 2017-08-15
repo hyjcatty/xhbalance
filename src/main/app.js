@@ -11,8 +11,10 @@ import classNames from 'classnames';
 import Foot from "../foot/foot"
 import Head from "../head/head"
 import Loginview from "../container/loginview/loginview"
+import Languageview from "../container/languageview/languageview"
 import Sysconfview from "../container/sysconfview/sysconfview"
 import Sysdebug from "../container/debugview/sysdebug"
+import Exportview from "../container/exportview/exportview"
 import Calibrationview from "../container/calibrationview/calibrationview"
 import Brickview from "../container/brickview/brickview"
 import Workview from "../container/workview/workview"
@@ -49,7 +51,8 @@ class App extends Component{
                     "modalhead":"Warning",
                     "modaltips":"Are u want do delete this configuration?",
                     "modalconfirm":"confirm",
-                    "modalcancel":"cancel"
+                    "modalcancel":"cancel",
+                    "userunknown":"Please login"
                 },
                 "message":{
                     "alert1":"System Error, please contract Admin!",
@@ -76,7 +79,8 @@ class App extends Component{
                     "title2":"new Configuration",
                     "title3":"System debug",
                     "title4":"System Configuration",
-                    "title5":"Please Login"
+                    "title5":"Please Login",
+                    "title6":"Log Export",
 
                 }
             },
@@ -84,19 +88,22 @@ class App extends Component{
         this._footcallbackreturn=this.loginview.bind(this);
         this._footcallbackconfigure=this.sysconfview.bind(this);
         this._footcallbackdebug=this.sysdebugview.bind(this);
+        this._footcallbackexport=this.exportview.bind(this);
         this._footcallbackcalibration=this.calibrationview.bind(this);
+        this._footcallbacklanguage=this.languageview.bind(this);
         this._workstartcase=this.startcase.bind(this);
         this._workstopcase=this.stopcase.bind(this);
         this._workcontrolfoot=this.footButtonShow.bind(this);
         this._worksavenewcase=this.savenewcase.bind(this);
         this._worksavemodcase=this.savemodcase.bind(this);
     }
-    initializelanguage(language){
+    updateLanguage(language){
         this.setState({language:language});
         this.refs.Loginview.update_language(language.loginview);
         this.refs.head.update_language(language.head);
         this.refs.foot.update_language(language.foot);
         this.refs.Sysdebugview.update_language(language.sysdebugview);
+        this.refs.Exportview.update_language(language.exportview);
         this.refs.Brickview.update_language(language.brickview);
         this.refs.Workview.update_language(language.workview);
         this.refs.Calibrationview.update_language(language.calibrationview);
@@ -111,9 +118,11 @@ class App extends Component{
         this.refs.foot.update_size(headfootheight);
         this.refs.Loginview.update_size(width,canvasheight);
         this.refs.Brickview.update_size(width,canvasheight);
+        this.refs.Languageview.update_size(width,canvasheight);
         this.refs.Workview.update_size(width,canvasheight);
         this.refs.Sysconfview.update_size(width,canvasheight,headfootheight);
         this.refs.Sysdebugview.update_size(width,canvasheight,headfootheight);
+        this.refs.Exportview.update_size(width,canvasheight,headfootheight);
         this.refs.Calibrationview.update_size(width,canvasheight,headfootheight);
     }
     initializesysconf(callback,configure){
@@ -124,6 +133,10 @@ class App extends Component{
         this.refs.Sysdebugview.update_callback(callback);
         this.refs.Sysdebugview.update_config(configure);
     }
+    initializeExport(callback,configure){
+        this.refs.Exportview.update_callback(callback);
+        this.refs.Exportview.update_config(configure);
+    }
     initializeLogin(callback){
         this.refs.Loginview.update_callback(callback);
     }
@@ -132,6 +145,9 @@ class App extends Component{
     }
     initializeBrick(Bricklist,Baselist,callback,newchoicecallback){
         this.refs.Brickview.update_buttonlist(Bricklist,Baselist,callback,newchoicecallback);
+    }
+    initializeLanguageview(Languagelist,callback){
+        this.refs.Languageview.update_buttonlist(Languagelist,callback);
     }
     initializehead(){
         this.refs.head.update_username(this.state.username);
@@ -160,7 +176,7 @@ class App extends Component{
     hidealarm(){
         this.refs.Workview.hidealarm();
     }
-    footButtonShow(breturn,bback,bconfigure,bsave,bcalibration,btozero,bdebug,bdelete){
+    footButtonShow(breturn,bback,bconfigure,bsave,bcalibration,btozero,bdebug,bdelete,bexport,blanguage){
         this.refs.foot.show_return_button(breturn);
         this.refs.foot.show_back_button(bback);
         this.refs.foot.show_configure_button(bconfigure);
@@ -169,6 +185,8 @@ class App extends Component{
         this.refs.foot.show_to_zero_button(btozero);
         this.refs.foot.show_debug_button(bdebug);
         this.refs.foot.show_delete_button(bdelete);
+        this.refs.foot.show_export_button(bexport);
+        this.refs.foot.show_language_button(blanguage);
     }
     initializeWork(work2brickcallback,work2alarmremovecallback){
         this.refs.Workview.update_callback(work2brickcallback,work2alarmremovecallback);
@@ -182,6 +200,9 @@ class App extends Component{
         this.refs.Brickview.hide();
         this.refs.Sysconfview.hide();
         this.refs.Sysdebugview.hide();
+        this.refs.Exportview.hide();
+        this.refs.Languageview.hide();
+        this.footButtonShow(false,false,false,false,false,false,false,false,false,true);
         //console.log(this.state.language);
         this.tipsinfo(this.state.language.message.title5);
     }
@@ -192,12 +213,26 @@ class App extends Component{
         this.refs.Brickview.show();
         this.refs.Sysconfview.hide();
         this.refs.Sysdebugview.hide();
+        this.refs.Exportview.hide();
+        this.refs.Languageview.hide();
         if(this.state.username === "admin")
-            this.footButtonShow(true,false,true,false,true,false,true,false);
+            this.footButtonShow(true,false,true,false,true,false,true,false,true,false);
 
         else
-        this.footButtonShow(true,false,true,false,true,false,false,false);
+        this.footButtonShow(true,false,true,false,true,false,false,false,true,false);
 
+    }
+    languageview(){
+        this.refs.Languageview.show();
+        this.refs.Calibrationview.hide();
+        this.refs.Workview.hide();
+        this.refs.Loginview.hide();
+        this.refs.Brickview.hide();
+        this.refs.Sysconfview.hide();
+        this.refs.Sysdebugview.hide();
+        this.refs.Exportview.hide();
+        this.footButtonShow(false,false,false,false,false,false,false,false,false,false);
+        this.tipsinfo("");
     }
     workview_run(configure){
         //this.refs.Workview.billboardview();
@@ -206,7 +241,9 @@ class App extends Component{
         this.refs.Brickview.hide();
         this.refs.Sysconfview.hide();
         this.refs.Sysdebugview.hide();
-        this.footButtonShow(false,true,false,false,false,true,false,true);
+        this.refs.Exportview.hide();
+        this.refs.Languageview.hide();
+        this.footButtonShow(false,true,false,false,false,true,false,true,false,false);
         this.refs.Workview.runview(configure);
         if(configure!=null) this.tipsinfo(configure.name);
         this.state.forceflashback();
@@ -218,7 +255,9 @@ class App extends Component{
         this.refs.Brickview.hide();
         this.refs.Sysconfview.hide();
         this.refs.Sysdebugview.hide();
-        this.footButtonShow(false,false,false,false,false,false,false,false);
+        this.refs.Exportview.hide();
+        this.refs.Languageview.hide();
+        this.footButtonShow(false,false,false,false,false,false,false,false,false,false);
         this.refs.Workview.runningview(configure);
         if(configure!=null) this.tipsinfo(configure.name);
     }
@@ -229,7 +268,9 @@ class App extends Component{
         this.refs.Brickview.hide();
         this.refs.Sysconfview.hide();
         this.refs.Sysdebugview.hide();
-        this.footButtonShow(false,true,false,false,false,false,false,false);
+        this.refs.Exportview.hide();
+        this.refs.Languageview.hide();
+        this.footButtonShow(false,true,false,false,false,false,false,false,false,false);
         this.refs.Workview.modview(configure);
         if(configure!=null) this.tipsinfo(configure.name);
     }
@@ -241,7 +282,9 @@ class App extends Component{
         this.refs.Brickview.hide();
         this.refs.Sysconfview.show();
         this.refs.Sysdebugview.hide();
-        this.footButtonShow(false,true,false,true,false,false,false,false);
+        this.refs.Exportview.hide();
+        this.refs.Languageview.hide();
+        this.footButtonShow(false,true,false,true,false,false,false,false,false,false);
         this.tipsinfo(this.state.language.message.title4);
     }
     sysdebugview(){
@@ -252,8 +295,23 @@ class App extends Component{
         this.refs.Brickview.hide();
         this.refs.Sysconfview.hide();
         this.refs.Sysdebugview.show();
-        this.footButtonShow(false,true,false,false,false,false,false,false);
+        this.refs.Exportview.hide();
+        this.refs.Languageview.hide();
+        this.footButtonShow(false,true,false,false,false,false,false,false,false,false);
         this.tipsinfo(this.state.language.message.title3);
+    }
+    exportview(){
+        this.refs.Calibrationview.hide();
+        this.refs.Workview.hide();
+        this.refs.Loginview.hide();
+        //this.refs.foot.hide_all();
+        this.refs.Brickview.hide();
+        this.refs.Sysconfview.hide();
+        this.refs.Sysdebugview.hide();
+        this.refs.Exportview.show();
+        this.refs.Languageview.hide();
+        this.footButtonShow(false,true,false,false,false,false,false,false,false,false);
+        this.tipsinfo(this.state.language.message.title6);
     }
     workview_new(configure){
         //this.refs.Workview.billboardview();
@@ -262,7 +320,9 @@ class App extends Component{
         this.refs.Brickview.hide();
         this.refs.Sysconfview.hide();
         this.refs.Sysdebugview.hide();
-        this.footButtonShow(false,true,false,false,false,false,false,false);
+        this.refs.Exportview.hide();
+        this.refs.Languageview.hide();
+        this.footButtonShow(false,true,false,false,false,false,false,false,false,false);
         this.refs.Workview.newview(configure);
         this.tipsinfo(this.state.language.message.title2);
     }
@@ -273,8 +333,10 @@ class App extends Component{
         this.refs.Brickview.hide();
         this.refs.Sysconfview.hide();
         this.refs.Sysdebugview.hide();
+        this.refs.Exportview.hide();
         this.refs.Calibrationview.show();
-        this.footButtonShow(false,true,false,false,false,false,false,false);
+        this.refs.Languageview.hide();
+        this.footButtonShow(false,true,false,false,false,false,false,false,false,false);
         this.tipsinfo(this.state.language.message.title1);
     }
     update_status(status){
@@ -308,8 +370,8 @@ class App extends Component{
         this.refs.Workview.update_configuration(iconlist);
     }
     removeuser(){
-        this.setState({userid:"user",username:"Please login"});
-        this.refs.head.update_username("Please login");
+        this.setState({userid:"user",username:this.state.language.app.userunknown});
+        this.refs.head.update_username(this.state.language.app.userunknown);
     }
     getuser(){
         return this.state.userid;
@@ -330,10 +392,13 @@ class App extends Component{
         return this.refs.Sysconfview.getUpdatedValue();
     }
     tipsinfo(tips){
-        this.refs.foot.write_log(tips);
+        this.refs.head.write_log(tips);
     }
     debug_label_update(msg){
         this.refs.Sysdebugview.update_msg(msg);
+    }
+    export_label_update(msg){
+        this.refs.Exportview.update_msg(msg);
     }
     render() {
         return(
@@ -344,13 +409,16 @@ class App extends Component{
             <div>
                 <Sysconfview ref="Sysconfview"/>
                 <Sysdebug ref="Sysdebugview"/>
+                <Exportview ref="Exportview"/>
                 <Calibrationview ref="Calibrationview"/>
+                <Languageview ref="Languageview"/>
                 <Loginview ref="Loginview"/>
                 <Brickview ref="Brickview"/>
                 <Workview ref="Workview" workstartcase={this._workstartcase} workstopcase={this._workstopcase} workcontrolfoot={this._workcontrolfoot} worksavenewcase={this._worksavenewcase} worksavemodcase={this._worksavemodcase}/>
             </div>
             <div>
-                <Foot ref="foot" footcallbackreturn={this._footcallbackreturn} footcallbackconfigure={this._footcallbackconfigure} footcallbackdebug={this._footcallbackdebug} footcallbackcalibration={this._footcallbackcalibration} />
+                <Foot ref="foot" footcallbackreturn={this._footcallbackreturn} footcallbackconfigure={this._footcallbackconfigure} footcallbackdebug={this._footcallbackdebug} footcallbackexport={this._footcallbackexport} footcallbackcalibration={this._footcallbackcalibration}
+                      footcallbacklanguage={this._footcallbacklanguage}/>
             </div>
             <div className="modal fade" id="ExpiredAlarm" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel" >
                 <div className="modal-dialog" role="document">
@@ -386,21 +454,28 @@ var alarmcycle=setInterval(balance_get_alarm,3000);
 var lightcycle=setInterval(xhbalancegetlight,250);
 var activeconf = null;
 var language=null;
+var language_list = null;
+var default_language="en";
 var react_element;
 var app_handle;
 
 react_element = <App/>;
-app_handle = ReactDOM.render(react_element,document.getElementById('app'));
 
-syslanguagefetch();
+get_size();
+app_handle = ReactDOM.render(react_element,document.getElementById('app'));
+app_handle.initializeSize(winWidth,winHeight);
+
+
+//syslanguagefetch();
+syslanguagelistfetch();
 function systemstart(){
-    get_size();
     xhbalanceiconlist();
 
     sysconffetch();
     sysdebugfetch();
+    exportfetch();
     //app_handle.initializeUrl(request_head);
-    app_handle.initializeSize(winWidth,winHeight);
+
 
 
 
@@ -546,6 +621,7 @@ function brickclickfetch(configuration,type){
     var map={
         action:"XH_Balance_config_detail",
         type:"query",
+        lang:default_language,
         body: body,
         user:app_handle.getuser()
     };
@@ -585,6 +661,7 @@ function bricknewclickfetch(configuration,type){
     var map={
         action:"XH_Balance_config_detail",
         type:"query",
+        lang:default_language,
         body: body,
         user:app_handle.getuser()
     };
@@ -640,6 +717,7 @@ function xhbalancelogin(username,password){
     var map={
         action:"XH_Balance_Login",
         type:"query",
+        lang:default_language,
         body: body,
         user:"null"
     };
@@ -680,6 +758,7 @@ function xhbalanceiconlist(){
     var map={
         action:"XH_Balance_get_svg_list",
         type:"query",
+        lang:default_language,
         user:"null"
     };
     fetch(request_head,
@@ -733,6 +812,7 @@ function xhbalancestartcase(boolinput,configure){
         action:"XH_Balance_Run",
         body:body,
         type:"query",
+        lang:default_language,
         user:"null"
     };
     fetch(request_head,
@@ -764,6 +844,7 @@ function xhbalancetozeroshortcut(){
         action:"XH_Balance_to_zero_shortcut",
         //body:body,
         type:"query",
+        lang:default_language,
         user:"null"
     };
     fetch(request_head,
@@ -832,6 +913,7 @@ function xhbalancegetstatus(){
     var map={
         action:"XH_Balance_status",
         type:"query",
+        lang:default_language,
         user:"null"
     };
     fetch(request_head,
@@ -855,6 +937,7 @@ function xhbalancegetstatus_force(){
     var map={
         action:"XH_Balance_status",
         type:"query",
+        lang:default_language,
         user:"null"
     };
     fetch(request_head,
@@ -890,6 +973,7 @@ function xhbalancegetlight(){
     var map={
         action:"XH_Balance_light",
         type:"query",
+        lang:default_language,
         user:"null"
     };
     fetch(request_head,
@@ -912,6 +996,7 @@ function xhbalancegetlight_force(){
     var map={
         action:"XH_Balance_light",
         type:"query",
+        lang:default_language,
         user:"null"
     };
     fetch(request_head,
@@ -956,6 +1041,7 @@ function xhbalancesavenewconf(configure){
     var map={
         action:"XH_Balance_save_new_conf",
         type:"mod",
+        lang:default_language,
         body:configure,
         user:app_handle.getuser()
     };
@@ -993,6 +1079,7 @@ function xhbalancesavemodconf(configure){
     var map={
         action:"XH_Balance_save_mod_conf",
         type:"mod",
+        lang:default_language,
         body:configure,
         user:app_handle.getuser()
     };
@@ -1030,6 +1117,7 @@ function xhbalancesavesysconf(configure){
     var map={
         action:"XH_Balance_sys_config_save",
         type:"mod",
+        lang:default_language,
         body:configure,
         user:app_handle.getuser()
     };
@@ -1067,6 +1155,7 @@ function xhbalancerunsysdebug(configure){
     var map={
         action:"XH_Balance_sys_debug_run",
         type:"mod",
+        lang:default_language,
         body:configure,
         user:app_handle.getuser()
     };
@@ -1098,10 +1187,51 @@ function xhbalancerunsysdebugcallback(res){
     app_handle.debug_label_update(res.jsonResult.msg);
     tips(language.message.message3);
 }
+
+
+function xhbalancerunexport(configure){
+
+    var map={
+        action:"XH_Balance_export_run",
+        type:"mod",
+        lang:default_language,
+        body:configure,
+        user:app_handle.getuser()
+    };
+    fetch(request_head,
+        {
+            method:'POST',
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify(map)
+        }).then(jsonParse)
+        .then(xhbalancerunexportcallback)
+        //.then(fetchlist)
+        .catch( (error) => {
+            console.log('request error', error);
+            return { error };
+        });
+}
+
+function xhbalancerunexportcallback(res){
+    if(res.jsonResult.status == "false"){
+        alert(language.message.alert10);
+        return;
+    }
+    if(res.jsonResult.auth == "false"){
+        return;
+    }
+    app_handle.export_label_update(res.jsonResult.msg);
+    tips(language.message.message3);
+}
+
 function sysconffetch(){
     var map={
         action:"XH_Balance_sys_config",
         type:"query",
+        lang:default_language,
         user:null
     };
     fetch(request_head,
@@ -1136,6 +1266,7 @@ function sysdebugfetch(){
     var map={
         action:"XH_Balance_sys_debug",
         type:"query",
+        lang:default_language,
         user:null
     };
     fetch(request_head,
@@ -1166,6 +1297,46 @@ function sysdebugfetchcallback(res){
     app_handle.initializesysdebug(xhbalancerunsysdebug,configuration);
     //app_handle.workview();
 }
+
+function exportfetch(){
+    var map={
+        action:"XH_Balance_export",
+        type:"query",
+        lang:default_language,
+        user:null
+    };
+    fetch(request_head,
+        {
+            method:'POST',
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify(map)
+        }).then(jsonParse)
+        .then(exportfetchcallback)
+        .catch( (error) => {
+            console.log('request error', error);
+            return { error };
+        });
+}
+function exportfetchcallback(res){
+    if(res.jsonResult.status == "false"){
+        alert(language.message.alert1);
+        return;
+    }
+    if(res.jsonResult.auth == "false"){
+        return;
+    }
+    let configuration = res.jsonResult.ret;
+
+    app_handle.initializeExport(xhbalancerunexport,configuration);
+    //app_handle.workview();
+}
+
+
+
+
 function footcallback_save(){
     xhbalancesavesysconf(app_handle.getsysconfset());
 
@@ -1178,6 +1349,7 @@ function balance_to_zero(balanceno){
         action:"XH_Balance_cali_to_zero",
         body:body,
         type:"query",
+        lang:default_language,
         user:app_handle.getuser()
     };
     fetch(request_head,
@@ -1215,6 +1387,7 @@ function balance_to_countweight(balanceno,callback){
         action:"XH_Balance_cali_to_countweight",
         body:body,
         type:"query",
+        lang:default_language,
         user:app_handle.getuser()
     };
     fetch(request_head,
@@ -1251,6 +1424,7 @@ function balance_get_alarm(){
     var map={
         action:"XH_Balance_get_alarm",
         type:"query",
+        lang:default_language,
         user:app_handle.getuser()
     };
     fetch(request_head,
@@ -1287,6 +1461,7 @@ function balance_clear_alarm(){
     var map={
         action:"XH_Balance_clear_alarm",
         type:"query",
+        lang:default_language,
         user:app_handle.getuser()
     };
     fetch(request_head,
@@ -1344,6 +1519,7 @@ function delete_configure(){
     var map={
         action:"XH_Balance_config_delete",
         type:"mod",
+        lang:default_language,
         body: body,
         user:app_handle.getuser()
     };
@@ -1375,11 +1551,13 @@ function delete_configure_callback(res){
         return;
     }
 }
-function syslanguagefetch(){
+function syslanguagefetch(language_list){
     var map={
         action:"XH_Balance_sys_language",
         type:"query",
-        user:null
+        lang:default_language,
+        user:null,
+        body:language_list
     };
     fetch(request_head,
         {
@@ -1407,10 +1585,54 @@ function syslanguagefetchcallback(res){
     }
     language = res.jsonResult.ret;
     //console.log(language);
-    app_handle.initializelanguage(language);
+    app_handle.updateLanguage(language);
     systemstart();
     //app_handle.workview();
 }
+
+function syslanguagelistfetch(){
+    var map={
+        action:"XH_Balance_sys_language_list",
+        type:"query",
+        lang:default_language,
+        user:null
+    };
+    fetch(request_head,
+        {
+            method:'POST',
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify(map)
+        }).then(jsonParse)
+        .then(syslanguagelistfetchcallback)
+        .catch( (error) => {
+            console.log('request error', error);
+            return { error };
+        });
+}
+function syslanguagelistfetchcallback(res){
+    if(res.jsonResult.status == "false"){
+        alert("Fetal Error, Can not get language file!");
+        windows.close();
+    }
+    if(res.jsonResult.auth == "false"){
+        alert("Fetal Error, Can not get language file!");
+        windows.close();
+    }
+    language_list=res.jsonResult.ret;
+    default_language = language_list.default;
+
+    app_handle.initializeLanguageview(language_list.national,language_brick_callback);
+    syslanguagefetch(language_list);
+
+}
+function language_brick_callback(language_conf){
+    language_list.default = language_conf.abbreviation;
+    syslanguagefetch(language_list);
+}
+
 
 function searchlanguage(key){
     if(key === null || key === undefined|| key ==""){

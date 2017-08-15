@@ -37,6 +37,11 @@ function confmod($content){
     fwrite($modfile,$content);
     fclose($modfile);
 }
+function languagemod($content){
+    $modfile=fopen("./sysconf/supportlanguage.json","w+") ;
+    fwrite($modfile,$content);
+    fclose($modfile);
+}
 function getfiles($path,$type){
     $ret = array();
     if(!file_exists($path)) return $ret;
@@ -539,6 +544,21 @@ switch ($key){
             $jsonencode = _encode($retval);
 
             echo $jsonencode; break;
+        case "XH_Balance_export":
+            $retarray;
+            $retarray = getfiledetail("./sysconf/export.json");
+            //echo "file content".$retarray;
+            $obj=json_decode($retarray,true);
+            $retval=array(
+                'status'=>'true',
+                'auth'=>'true',
+                'ret'=>$obj,
+                'msg'=>''
+            );
+
+            $jsonencode = _encode($retval);
+
+            echo $jsonencode; break;
         case "XH_Balance_sys_config_save":
             $body=$payload["body"];
             $sta='true';
@@ -552,6 +572,20 @@ switch ($key){
                 $jsonencode = _encode($retval);
                 echo $jsonencode; break;
         case "XH_Balance_sys_debug_run":
+            $body=$payload["body"];
+            $sta='true';
+            $retlen = rand(20,100);
+            $msg="return msg:";
+            for($i=0;$i<$retlen;$i++)$msg=$msg."x";
+            $retval=array(
+                'status'=>$sta,
+                'auth'=>'true',
+                'msg'=>$msg
+            );
+
+            $jsonencode = _encode($retval);
+            echo $jsonencode; break;
+        case "XH_Balance_export_run":
             $body=$payload["body"];
             $sta='true';
             $retlen = rand(20,100);
@@ -634,8 +668,25 @@ switch ($key){
                 $jsonencode = _encode($retval);
                 echo $jsonencode; break;
         case "XH_Balance_sys_language":
+            $body=$payload["body"];
+            $defaultlanguage = $body["default"];
+            languagemod(_encode($body));
+            $retarray = getfiledetail("./language/language_".$defaultlanguage.".json");
+            //echo "file content".$retarray;
+            $obj=json_decode($retarray,true);
+            $retval=array(
+                'status'=>'true',
+                'auth'=>'true',
+                'ret'=>$obj,
+                'msg'=>''
+            );
+
+            $jsonencode = _encode($retval);
+
+            echo $jsonencode; break;
+        case "XH_Balance_sys_language_list":
             $retarray;
-            $retarray = getfiledetail("./sysconf/language.json");
+            $retarray = getfiledetail("./sysconf/supportlanguage.json");
             //echo "file content".$retarray;
             $obj=json_decode($retarray,true);
             $retval=array(

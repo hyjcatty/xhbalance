@@ -31,6 +31,8 @@ export default class foot extends Component {
             hideTozero:"none",
             hideDebug:"none",
             hideDelete:"none",
+            hideExport:"none",
+            hideLanguage:"none",
             callbackBack:null,
             callbackSave:null,
             callbackTozero:null,
@@ -129,8 +131,22 @@ export default class foot extends Component {
             this.setState({hideDelete:"none"});
         }
     }
+    show_export_button(input){
+        if(input===true){
+            this.setState({hideExport:"block"});}
+        else{
+            this.setState({hideExport:"none"});
+        }
+    }
+    show_language_button(input){
+        if(input===true){
+            this.setState({hideLanguage:"block"});}
+        else{
+            this.setState({hideLanguage:"none"});
+        }
+    }
     hide_all(){
-        this.setState({hideReturn:"none",hideConfigure:"none",hideBack:"none",hideSave:"none",hideCalibration:"none",hideTozero:"none",hideDebug:"none",hideDelete:"none"});
+        this.setState({hideReturn:"none",hideConfigure:"none",hideBack:"none",hideSave:"none",hideCalibration:"none",hideTozero:"none",hideDebug:"none",hideDelete:"none",hideExport:"none",hideLanguage:"none"});
     }
     handle_click_return(){
         //console.log("click");
@@ -172,6 +188,17 @@ export default class foot extends Component {
         this.state.callbackDelete();
 
     }
+    handle_click_export(){
+        //console.log("click");
+        if(this.props.footcallbackexport){
+            this.props.footcallbackexport();
+        }
+    }
+    handle_click_language(){
+        if(this.props.footcallbacklanguage){
+            this.props.footcallbacklanguage();
+        }
+    }
     disable(b_input){
         if(b_input){
             this.setState({disabled:"disabled"});
@@ -198,7 +225,7 @@ export default class foot extends Component {
             </div>*/
 
             <div style={{position:"relative",background:"#eeeeee",height:this.state.height,width:'100%',display:'table'}}>
-                <div style={{position:"relative",background:"#eeeeee",height:this.state.height,width:'33%',display:'table',float:"left"}}>
+                <div style={{position:"relative",background:"#eeeeee",height:this.state.height,width:'67%',display:'table',float:"left"}}>
                     <button  type="button" className="btn btn-warning btn-sm pull-left" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:(this.state.height-10)*1.6,display:this.state.hideBack}} disabled={this.state.disabled} onClick={this.handle_click_back.bind(this)}>
                         <i className="fa fa-arrow-left" style={{fontSize:25}}></i>
                     </button>
@@ -217,21 +244,23 @@ export default class foot extends Component {
                     <button  type="button" className="btn btn-warning btn-sm pull-left" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:(this.state.height-10)*1.6,display:this.state.hideTozero}} disabled={this.state.disabled} onClick={this.handle_click_to_zero.bind(this)}>
                         <i className="fa fa-recycle" style={{fontSize:25}}> </i>
                     </button>
-                    <button  type="button" className="btn btn-warning btn-sm pull-left" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:(this.state.height-10)*1.6,display:this.state.hideDebug}} disabled={this.state.disabled} onClick={this.handle_click_debug.bind(this)}>
-                        <i className="fa fa-bug" style={{fontSize:25}}> </i>
-                    </button>
                     <button  type="button" className="btn btn-warning btn-sm pull-left" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:(this.state.height-10)*1.6,display:this.state.hideDelete}} disabled={this.state.disabled} onClick={this.handle_click_delete.bind(this)}>
                         <i className="fa fa-trash-o" style={{fontSize:25}}> </i>
+                    </button>
+                    <button  type="button" className="btn btn-warning btn-sm pull-left" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:(this.state.height-10)*1.6,display:this.state.hideExport}} disabled={this.state.disabled} onClick={this.handle_click_export.bind(this)}>
+                        <i className="fa fa-outdent" style={{fontSize:25}}> </i>
+                    </button>
+                    <button  type="button" className="btn btn-warning btn-sm pull-left" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:(this.state.height-10)*1.6,display:this.state.hideLanguage}} disabled={this.state.disabled} onClick={this.handle_click_language.bind(this)}>
+                        <i className="fa fa-language" style={{fontSize:25}}> </i>
+                    </button>
+                    <button  type="button" className="btn btn-warning btn-sm pull-left" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:(this.state.height-10)*1.6,display:this.state.hideDebug}} disabled={this.state.disabled} onClick={this.handle_click_debug.bind(this)}>
+                        <i className="fa fa-bug" style={{fontSize:25}}> </i>
                     </button>
                     <a style={{position:"relative",height:this.state.height,display:'table-cell',verticalAlign:'middle'}}>
                         < span className="headlabel" style={{fontSize:this.state.height*0.3,marginRight:this.state.height*0.3}}>&nbsp;</span>
                     </a>
                 </div>
-                <div style={{position:"relative",background:"#eeeeee",height:this.state.height,width:'33%',display:'table',float:"left"}}>
-                    <a style={{position:"relative",height:this.state.height,display:'table-cell',verticalAlign:'middle',textAlign:"center"}}>
-                        < span className="headlabel" style={{fontSize:this.state.height*0.3,marginRight:this.state.height*0.3}}>{this.state.loginfo}</span>
-                    </a>
-                </div>
+
                 <div style={{position:"relative",background:"#eeeeee",height:this.state.height,width:'33%',display:'table',float:"left"}}>
                     <a style={{position:"relative",height:this.state.height,display:'table-cell',verticalAlign:'middle'}}>
                         < span className="headlabel pull-right" style={{fontSize:this.state.height*0.3,marginRight:this.state.height*0.3}}>{this.state.language.content}</span>

@@ -15,7 +15,6 @@ var rename = require('gulp-rename');
 var clean = require('gulp-clean');
 var htmlmin = require('gulp-htmlmin');
 var mkdirp = require('mkdirp');
-var language = "ch";
 var option = {
 
     buildPath: "../www/balance"
@@ -92,9 +91,10 @@ gulp.task("resourcecopy",function(){
         .pipe(gulp.dest(option.buildPath+"/json/"));
     gulp.src("./sysconf/*")
         .pipe(gulp.dest(option.buildPath+"/sysconf/"));
-    gulp.src("./language/language_"+language+".json")
-        .pipe(rename("language.json"))
-        .pipe(gulp.dest(option.buildPath+"/sysconf/"));
+    gulp.src("./language/*")
+        .pipe(gulp.dest(option.buildPath+"/language/"));
+    gulp.src("./flag/*")
+        .pipe(gulp.dest(option.buildPath+"/flag/"));
     /*
      gulp.src("./*.html")
      .pipe(gulp.dest(option.buildPath+"/"));*/

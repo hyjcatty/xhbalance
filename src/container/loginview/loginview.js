@@ -42,6 +42,7 @@ export default class unlockview extends Component {
         var _modal = document.getElementById("kuang");
         var module_height = _modal.offsetHeight;
         if(((height - module_height)/2)>0){
+            //console.log("Login marginTop:"+parseInt((height - module_height)/2));
             this.setState({margintop:parseInt((height - module_height)/2)});
         }
     }
@@ -69,6 +70,11 @@ export default class unlockview extends Component {
     }
     componentDidMount(){
         this.keyboard_initialize();
+        //$("#Password").blur();
+    }
+    componentDidUpdate(){
+        //this.switchery_initialize();
+        //this.keyboard_initialize();
     }
     keyboard_initialize(){
         $.extend( $.keyboard.altKeys, {
@@ -94,8 +100,16 @@ export default class unlockview extends Component {
         });
 
         $(function(){
-            $('#Username_Input').keyboard({
+            $('.login_password').keyboard({
+                display: {
+                    'bksp': "\u2190",
+                    'accept': 'accept',
+                    'normal': 'ABC',
+                    'meta1': '.?123',
+                    'meta2': '#+='
+                },
                 layout: 'custom',
+                usePreview: false,
                 css: {
                     // input & preview
                     input: 'form-control input-sm',
@@ -137,18 +151,22 @@ export default class unlockview extends Component {
                         '{meta1} . , ? ! \' " {meta1}',
                         '{normal} {space} {normal} {accept}'
                     ]
+                },
+                visible: function(e, keyboard, el) {
+                    //console.log(keyboard.$preview);
+                    keyboard.$preview.val("");
                 }
-            }).addAltKeyPopup({
-                // time to hold down a button in ms to trigger a popup
-                holdTime : 500,
-                // event triggered when popup is visible
-                // access the overlay from keyboard.altKeyPopup_$overlay
-                // or the keys container from keyboard.altKeyPopup_$overlay.find('.ui-keyboard-popup')
-                // or the keys from keyboard.altKeyPopup_$overlay.find('.ui-keyboard-button')
-                popupVisible : 'popup-visible'
             });
-            $('#Password_Input').keyboard({
+            $('.login_user').keyboard({
+                display: {
+                    'bksp': "\u2190",
+                    'accept': 'accept',
+                    'normal': 'ABC',
+                    'meta1': '.?123',
+                    'meta2': '#+='
+                },
                 layout: 'custom',
+                usePreview: false,
                 css: {
                     // input & preview
                     input: 'form-control input-sm',
@@ -190,15 +208,10 @@ export default class unlockview extends Component {
                         '{meta1} . , ? ! \' " {meta1}',
                         '{normal} {space} {normal} {accept}'
                     ]
+                },
+                visible: function(e, keyboard, el) {
+                    keyboard.$preview[0].select();
                 }
-            }).addAltKeyPopup({
-                // time to hold down a button in ms to trigger a popup
-                holdTime : 500,
-                // event triggered when popup is visible
-                // access the overlay from keyboard.altKeyPopup_$overlay
-                // or the keys container from keyboard.altKeyPopup_$overlay.find('.ui-keyboard-popup')
-                // or the keys from keyboard.altKeyPopup_$overlay.find('.ui-keyboard-button')
-                popupVisible : 'popup-visible'
             });
         });
 
@@ -215,12 +228,12 @@ export default class unlockview extends Component {
                             <div className="panel-body">
                                 <div className="input-group">
                                     <span className="input-group-addon" id="Username" style={{minWidth: "100px",fontSize:"15px"}}>{this.state.language.username}</span>
-                                    <input type="text" className="form-control" placeholder={this.state.language.username} aria-describedby="basic-addon1" id="Username_Input"/>
+                                    <input type="text" className="form-control login_user" placeholder={this.state.language.username} aria-describedby="basic-addon1" id="Username_Input"/>
                                 </div>
                                 <p></p>
                                 <div className="input-group">
                                     <span className="input-group-addon" id="Password" style={{minWidth: "100px",fontSize:"15px"}}>{this.state.language.password}</span>
-                                    <input type="password" className="form-control" placeholder={this.state.language.password} aria-describedby="basic-addon1" id="Password_Input"/>
+                                    <input type="password" className="form-control login_password" placeholder={this.state.language.password} aria-describedby="basic-addon1" id="Password_Input"/>
                                 </div>
                                 <p></p>
                                 <button type="button" id="Login_Comfirm" data-loading-text="Loading..." className="btn btn-primary" autoComplete="off" style={{minWidth: "150px"}} onClick={this.handle_login.bind(this)} >
