@@ -910,8 +910,14 @@ function xhbalancestopcasecallback(res){
 
 function xhbalancegetstatus(){
     if(Running===false)return;
+    activeconf = app_handle.get_active_configuration();
+    let body;
+    body={
+        configurename:activeconf.name
+    };
     var map={
         action:"XH_Balance_status",
+        body:body,
         type:"query",
         lang:default_language,
         user:"null"
@@ -934,8 +940,14 @@ function xhbalancegetstatus(){
 }
 function xhbalancegetstatus_force(){
     //if(Running===false)return;
+    activeconf = app_handle.get_active_configuration();
+    let body;
+    body={
+        configurename:activeconf.name
+    };
     var map={
         action:"XH_Balance_status",
+        body:body,
         type:"query",
         lang:default_language,
         user:"null"
@@ -970,8 +982,14 @@ function xhbalancestatuscallback(res){
 
 function xhbalancegetlight(){
     if(Running===false)return;
+    activeconf = app_handle.get_active_configuration();
+    let body;
+    body={
+        configurename:activeconf.name
+    };
     var map={
         action:"XH_Balance_light",
+        body:body,
         type:"query",
         lang:default_language,
         user:"null"
@@ -993,8 +1011,14 @@ function xhbalancegetlight(){
         });
 }
 function xhbalancegetlight_force(){
+    activeconf = app_handle.get_active_configuration();
+    let body;
+    body={
+        configurename:activeconf.name
+    };
     var map={
         action:"XH_Balance_light",
+        body:body,
         type:"query",
         lang:default_language,
         user:"null"
@@ -1630,6 +1654,7 @@ function syslanguagelistfetchcallback(res){
 }
 function language_brick_callback(language_conf){
     language_list.default = language_conf.abbreviation;
+    default_language = language_list.default;
     syslanguagefetch(language_list);
 }
 
