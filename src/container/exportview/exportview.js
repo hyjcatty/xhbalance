@@ -357,7 +357,7 @@ export default class exportview extends Component {
                 let param = [];
                 for(let j=0;j<this.state.configure.parameter.groups[i].list.length;j++){
                     if(this.state.configure.parameter.groups[i].list[j].type === "int"){
-                        let contentline = "Max:["+this.state.configure.parameter.groups[i].list[j].max+"];Min:["+this.state.configure.parameter.groups[i].list[j].min+"];Note:"+this.state.configure.parameter.groups[i].list[j].note;
+                        let contentline = "["+this.state.configure.parameter.groups[i].list[j].min+"->"+this.state.configure.parameter.groups[i].list[j].max+"]:"+this.state.configure.parameter.groups[i].list[j].note;
                         let className="form-control "+"sys_debug_input_"+this.state.configure.parameter.groups[i].list[j].type;
                         param.push(
                             <div className="count" style={{fontSize:20,marginTop:15,verticalAlign:'bottom',width:"90%"}} key={this.state.key+i+"p"+j+"l"}>
@@ -372,7 +372,7 @@ export default class exportview extends Component {
                             </div>);
                     }
                     if(this.state.configure.parameter.groups[i].list[j].type === "float"){
-                        let contentline = "Max:["+this.state.configure.parameter.groups[i].list[j].max+"];Min:["+this.state.configure.parameter.groups[i].list[j].min+"];Note:"+this.state.configure.parameter.groups[i].list[j].note;
+                        let contentline = "["+this.state.configure.parameter.groups[i].list[j].min+"->"+this.state.configure.parameter.groups[i].list[j].max+"]:"+this.state.configure.parameter.groups[i].list[j].note;
                         let className="form-control "+"sys_debug_input_"+this.state.configure.parameter.groups[i].list[j].type;
                         param.push(
                             <div className="count" style={{fontSize:20,marginTop:15,verticalAlign:'bottom',width:"90%"}} key={this.state.key+i+"p"+j+"l"}>
@@ -387,7 +387,7 @@ export default class exportview extends Component {
                             </div>);
                     }
                     if(this.state.configure.parameter.groups[i].list[j].type === "string"){
-                        let contentline = "Max length:["+this.state.configure.parameter.groups[i].list[j].max+"];Note:"+this.state.configure.parameter.groups[i].list[j].note;
+                        let contentline = this.state.configure.parameter.groups[i].list[j].note;
                         let className="form-control "+"sys_debug_input_"+this.state.configure.parameter.groups[i].list[j].type;
                         param.push(
                             <div className="count" style={{fontSize:20,marginTop:15,verticalAlign:'bottom',width:"90%"}} key={this.state.key+i+"p"+j+"l"}>
@@ -402,7 +402,7 @@ export default class exportview extends Component {
                             </div>);
                     }
                     if(this.state.configure.parameter.groups[i].list[j].type === "choice"){
-                        let contentline = "Note:"+this.state.configure.parameter.groups[i].list[j].note;
+                        let contentline = this.state.configure.parameter.groups[i].list[j].note;
                         let className="form-control "+"sys_conf_choice";
                         let choice_items = [];
                         this.state.configure.parameter.groups[i].list[j].defaultvalue = this.state.configure.parameter.groups[i].list[j].items[parseInt(this.state.configure.parameter.groups[i].list[j].value)];
