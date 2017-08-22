@@ -219,7 +219,7 @@ class App extends Component{
             this.footButtonShow(true,false,true,false,true,false,true,false,true,false);
 
         else
-        this.footButtonShow(true,false,true,false,true,false,false,false,true,false);
+        this.footButtonShow(true,false,true,false,true,false,false,false,false,false);
 
     }
     languageview(){
