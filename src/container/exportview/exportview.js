@@ -27,8 +27,8 @@ export default class exportview extends Component {
             callback:null,
             margintop:20,
             configure:null,
-            key:"sys_conf_key",
-            key2:"sys_debug_input",
+            key:"sys_export_key",
+            key2:"sys_export_input",
             retmsg:"message return:",
             language:{
                 "consoletitle":"Export result",

@@ -27,7 +27,7 @@ export default class sysdebug extends Component {
             callback:null,
             margintop:20,
             configure:null,
-            key:"sys_conf_key",
+            key:"sys_debug_key",
             key2:"sys_debug_input",
             retmsg:"message return:",
             language:{
