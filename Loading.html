@@ -20,18 +20,44 @@
     <link href="./resource/css/custom.min.css" rel="stylesheet">
 
     <script src="./resource/keyboardmaster/docs/js/jquery-latest.min.js"></script>
+      <style type="text/css">
+          body{
+              width:100%;
+              height:100%;
+              background-size:100% 100%;
+              background: url('./resource/image/ctw.png');
+              background-position: center;
+              background-repeat: no-repeat;
+              color:white;
+          }
+          h1{
+              color:white;
+          }
+          h1:before{
+              background:white;
+          }
+          h1:after{
+              background:white;
+          }
+          .login_content h1:before{
+              background:white;
+          }
+          .login_content h1:after{
+              background:white;
+          }
+      </style>
   </head>
 
-  <body class="login">
+  <body>
     <div>
 
-      <div class="login_wrapper">
+      <div class="login_wrapper" style="margin-Top:0">
         <div class="animate form login_form">
-          <section class="login_content">
+          <section class="login_content" style="margin-Top:55%">
             <form>
               <h1>System is Booting</h1>
               <div>
-                <h1 id="contentline">Please wait a moment....</h1>
+                <h1 id="contentline">[  System is booting  ]....</h1>
               </div>
 
               <div class="clearfix"></div>
@@ -42,7 +68,7 @@
                 <br />
 
                 <div>
-                  <h1><i class="fa fa-paw"></i> Xiao Hui tech</h1>
+                  <h1><i class="fa fa-paw"></i> BoFeng tech</h1>
                   <p>©2017 All Rights Reserved.</p>
                 </div>
               </div>
@@ -60,6 +86,7 @@
       $(document).ready(function() {
 
         var runcycle=setInterval(check_if_ready,2500);
+          $("body").height(window.innerHeight);
       });
       function check_if_ready(){
         var map={
@@ -69,10 +96,12 @@
           if(result.status=="true"){
             jump_to_index();
           }else{
+            var message =result.msg;
             var content = $("#contentline").text();
-            content = content + "."
-            if(content.length>25) content = "Please wait a moment";
-            $("#contentline").text(content);
+            var tail = content.split("]")[1];
+            tail = tail + ".";
+            if(tail.length>5) tail = ".";
+            $("#contentline").text("[  "+message+"  ]"+tail);
           }
         };
         JQ_get(request_head,map,callback);
@@ -88,7 +117,7 @@
       }
       function getRelativeURL(){
         var url = document.location.toString();
-        var arrUrl= url.split("//");
+        var arrUrl= url.split("://");
         var start = arrUrl[1].indexOf("/");
         var reUrl=arrUrl[1].substring(start);
         if(reUrl.indexOf("?")!=-1) {

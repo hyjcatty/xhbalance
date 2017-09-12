@@ -130,6 +130,7 @@ gulp.task('scripts', function() {
         .pipe(htmlmin(option_html))
         .pipe(gulp.dest(option.buildPath+'/'));
     gulp.src('./Loading.html')
+        .pipe(rename('login.html'))
         .pipe(htmlmin(option_html))
         .pipe(gulp.dest(option.buildPath+'/'));
 });
