@@ -40,7 +40,29 @@ export default class foot extends Component {
             disabled:"",
             loginfo:"xxxxxxxxx",
             language:{
-                "content":"Model:TWSC-10/12/16 ?BoFeng"
+                "content":"Model:TWSC-10/12/16 ©BoFeng",
+                "getting":"Getting......",
+                "upgrade":"System upgrade, new version:",
+                "pnotifytitle":"System version:"
+            },
+            version:{
+                'HCU':"Getting",
+                'IHU':"Getting"
+            },
+            PNotify:null,
+            PNotifyTitle:"Version Info"
+        }
+    }
+    updateversion(version){
+        if(this.state.version.HCU == version.HCU &&this.state.version.IHU == version.IHU){
+            return;
+        }else{
+            if(this.state.version.HCU == "Getting" || this.state.version.IHU == "Getting"){
+                this.setState({version:version});
+                this.closePnotify();
+            }else{
+                this.closePnotify();
+                this.setState({version:version},this.openPnotifyupgrade);
             }
         }
     }
@@ -199,6 +221,93 @@ export default class foot extends Component {
             this.props.footcallbacklanguage();
         }
     }
+    closePnotify(){
+        //this.state.PNotify.closePnotify();
+        PNotify.removeAll();
+        this.setState({PNotify:null});
+    }
+    getversiontext(){
+        let ret = "";
+        ret = ret+ "HCU:";
+        if(this.state.version.HCU == "Getting"){
+            ret = ret+this.state.language.getting;
+        }else{
+            ret = ret+this.state.version.HCU;
+        }
+        ret = ret+ "<br/>";
+        ret = ret+ "IHU:";
+        if(this.state.version.IHU == "Getting"){
+            ret = ret+this.state.language.getting;
+        }else{
+            ret = ret+this.state.version.IHU;
+        }
+        return ret;
+    }
+
+    openPnotify(){
+        var stack_bottomright = {"dir1": "up", "dir2": "left", "firstpos1": 50, "firstpos2": 25};
+        let notifyhandle = new PNotify({
+            title: this.state.language.pnotifytitle,
+            type: "info",
+            text: this.getversiontext(),
+            opacity: 0.4,
+            addclass: "stack-bottomright dark",
+            stack: stack_bottomright,
+            nonblock: {
+                nonblock: true
+            },
+            //addclass: 'dark',
+            styling: 'bootstrap3',
+            hide: false,
+            before_close: function(PNotify) {
+                PNotify.update({
+                    title: PNotify.options.title + " - Enjoy your Stay",
+                    before_close: null
+                });
+
+                PNotify.queueRemove();
+
+                return false;
+            }
+        });
+        this.setState({PNotify:notifyhandle});
+    }
+    openPnotifyupgrade(){
+        var stack_bottomright = {"dir1": "up", "dir2": "left", "firstpos1": 50, "firstpos2": 25};
+        let notifyhandle = new PNotify({
+            title: this.state.language.upgrade,
+            type: "info",
+            text: this.getversiontext(),
+            opacity: 0.4,
+            addclass: "stack-bottomright dark",
+            stack: stack_bottomright,
+            nonblock: {
+                nonblock: true
+            },
+            //addclass: 'dark',
+            styling: 'bootstrap3',
+            hide: false,
+            before_close: function(PNotify) {
+                PNotify.update({
+                    title: PNotify.options.title + " - Enjoy your Stay",
+                    before_close: null
+                });
+
+                PNotify.queueRemove();
+
+                return false;
+            }
+        });
+        this.setState({PNotify:notifyhandle});
+    }
+    handle_click_version(){
+        if(this.state.PNotify == null){
+            this.openPnotify();
+        }else{
+            this.closePnotify();
+        }
+        //console.log("version");
+    }
     disable(b_input){
         if(b_input){
             this.setState({disabled:"disabled"});
@@ -265,6 +374,9 @@ export default class foot extends Component {
                     <a style={{position:"relative",height:this.state.height,display:'table-cell',verticalAlign:'middle'}}>
                         < span className="headlabel pull-right" style={{fontSize:this.state.height*0.3,marginRight:this.state.height*0.3}}>{this.state.language.content}</span>
                     </a>
+                    <button  type="button" className="btn btn-warning btn-sm pull-right" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:(this.state.height-10)*1.6}} disabled={this.state.disabled} onClick={this.handle_click_version.bind(this)}>
+                        <i className="fa fa-newspaper-o" style={{fontSize:25}}> </i>
+                    </button>
                 </div>
             </div>
         );

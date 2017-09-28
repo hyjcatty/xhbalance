@@ -108,6 +108,9 @@ class App extends Component{
         this.refs.Workview.update_language(language.workview);
         this.refs.Calibrationview.update_language(language.calibrationview);
     }
+    updateVersion(version){
+        this.refs.foot.updateversion(version);
+    }
     initializeSize(width,height){
         let winlength= (width>height)?width:height;
         let headfootheight = (parseInt(winlength/20)>this.state.headfootminheight)?parseInt(winlength/20):this.state.headfootminheight;
@@ -449,9 +452,7 @@ var IconList=[];
 var Running=false;
 var Alarming=false;
 var wait_time_short=300;
-var runcycle=setInterval(xhbalancegetstatus,250);
-var alarmcycle=setInterval(balance_get_alarm,3000);
-var lightcycle=setInterval(xhbalancegetlight,250);
+
 var activeconf = null;
 var language=null;
 var language_list = null;
@@ -464,7 +465,10 @@ react_element = <App/>;
 get_size();
 app_handle = ReactDOM.render(react_element,document.getElementById('app'));
 app_handle.initializeSize(winWidth,winHeight);
-
+var runcycle=setInterval(xhbalancegetstatus,250);
+var alarmcycle=setInterval(balance_get_alarm,3000);
+var lightcycle=setInterval(xhbalancegetlight,250);
+var versioncycle=setInterval(sysversionfetch,30000);
 
 //syslanguagefetch();
 syslanguagelistfetch();
@@ -1661,6 +1665,43 @@ function language_brick_callback(language_conf){
     default_language = language_list.default;
     syslanguagefetch(language_list);
 }
+
+function sysversionfetch(){
+    var map={
+        action:"XH_Balance_sys_version",
+        type:"query",
+        lang:default_language,
+        user:null
+    };
+    fetch(request_head,
+        {
+            method:'POST',
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify(map)
+        }).then(jsonParse)
+        .then(sysversionfetchcallback)
+        .catch( (error) => {
+            console.log('request error', error);
+            return { error };
+        });
+}
+function sysversionfetchcallback(res){
+    if(res.jsonResult.status == "false"){
+        alert("Fetal Error, Can not get language file!");
+        windows.close();
+    }
+    if(res.jsonResult.auth == "false"){
+        alert("Fetal Error, Can not get language file!");
+        windows.close();
+    }
+    let version=res.jsonResult.ret;
+    app_handle.updateVersion(version);
+
+}
+
 
 
 function searchlanguage(key){

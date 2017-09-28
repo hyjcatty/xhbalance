@@ -15,7 +15,10 @@
     "greet":"您好:"
   },
   "foot":{
-    "content":"型号:TWSC-10/12/16 ©波峰"
+    "content":"型号:TWSC-10/12/16 ©波峰",
+    "getting":"正在获取中......",
+    "upgrade":"系统完成升级，新版本号:",
+    "pnotifytitle":"当前系统版本:"
   },
   "calibrationview":{
     "calibrationunit":{

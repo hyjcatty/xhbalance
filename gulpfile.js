@@ -84,6 +84,8 @@ gulp.task("resourcecopy",function(){
         .pipe(gulp.dest(option.buildPath+"/resource/select2/"));
     gulp.src("./resource/switchery/*")
         .pipe(gulp.dest(option.buildPath+"/resource/switchery/"));
+    gulp.src("./resource/pnotify/*")
+        .pipe(gulp.dest(option.buildPath+"/resource/pnotify/"));
     mkdirp.sync(option.buildPath+"/upload/");
     gulp.src("./svg/*")
         .pipe(gulp.dest(option.buildPath+"/svg/"));
