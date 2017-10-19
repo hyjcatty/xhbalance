@@ -43,7 +43,7 @@ switch ($key){
             $retval=array(
                     'status'=>'false',
                     'auth'=>'true',
-                    'msg'=>'software updating software updatingsoftware updatingsoftware updatingsoftware updating............. ...................... ......'
+                    'msg'=>'software updating software updatingsoftware updatingsoftware updatingsoftware updatingssuu susudusuuids'
             );
         }
 

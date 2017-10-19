@@ -57,7 +57,7 @@
             <form>
               <h1>System is Booting</h1>
               <div>
-                <h1 id="contentline" style="line-height:40px">[  System is booting  ]....</h1>
+                <h1 id="contentline" style="line-height:40px">System is booting ....</h1>
               </div>
 
               <div class="clearfix"></div>
@@ -98,10 +98,11 @@
           }else{
             var message =result.msg;
             var content = $("#contentline").text();
-            var tail = content.split("]")[1];
+            var tail = content.split(" ..")[1];
+              //console.log("tail="+tail+tail.length);
             tail = tail + ".";
             if(tail.length>5) tail = ".";
-            $("#contentline").text(message+"  "+tail);
+            $("#contentline").text(message+"  .."+tail);
           }
         };
         JQ_get(request_head,map,callback);
