@@ -31,7 +31,7 @@ $key=$_GET["action"];
 switch ($key){
     case "XH_Balance_if_ready": //Query How many lock is autherized to user,response is a list of StatCode and Name and Location and so on
 
-        $number = rand(0,10);
+        $number = rand(0,100);
         $retval;
         if($number == 1){
             $retval=array(
@@ -43,7 +43,7 @@ switch ($key){
             $retval=array(
                     'status'=>'false',
                     'auth'=>'true',
-                    'msg'=>'software updating ............. ...................... ......'
+                    'msg'=>'software updating software updatingsoftware updatingsoftware updatingsoftware updating............. ...................... ......'
             );
         }
 
