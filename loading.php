@@ -37,13 +37,13 @@ switch ($key){
             $retval=array(
                     'status'=>'true',
                     'auth'=>'true',
-                    'msg'=>'system is loading'
+                    'msg'=>'system is loading.........'
             );
         }else{
             $retval=array(
                     'status'=>'false',
                     'auth'=>'true',
-                    'msg'=>'software update'
+                    'msg'=>'software updating ............. ...................... ......'
             );
         }
 

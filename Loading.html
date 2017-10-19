@@ -101,7 +101,7 @@
             var tail = content.split("]")[1];
             tail = tail + ".";
             if(tail.length>5) tail = ".";
-            $("#contentline").text("[  "+message+"  ]"+tail);
+            $("#contentline").text(message+"  "+tail);
           }
         };
         JQ_get(request_head,map,callback);

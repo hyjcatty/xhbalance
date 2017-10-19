@@ -43,9 +43,11 @@ export default class foot extends Component {
                 "content":"Model:TWSC-10/12/16 ©BoFeng",
                 "getting":"Getting......",
                 "upgrade":"System upgrade, new version:",
-                "pnotifytitle":"System version:"
+                "pnotifytitle":"System message:"
             },
             version:{
+                'Alarm':false,
+                'Title':"Getting",
                 'HCU':"Getting",
                 'IHU':"Getting"
             },
@@ -54,6 +56,9 @@ export default class foot extends Component {
         }
     }
     updateversion(version){
+
+        this.setState({version:version});
+        /*
         if(this.state.version.HCU == version.HCU &&this.state.version.IHU == version.IHU){
             return;
         }else{
@@ -64,7 +69,7 @@ export default class foot extends Component {
                 this.closePnotify();
                 this.setState({version:version},this.openPnotifyupgrade);
             }
-        }
+        }*/
     }
     update_language(language){
         this.setState({language:language});
@@ -228,14 +233,14 @@ export default class foot extends Component {
     }
     getversiontext(){
         let ret = "";
-        ret = ret+ "HCU:";
+        ret = ret;
         if(this.state.version.HCU == "Getting"){
             ret = ret+this.state.language.getting;
         }else{
             ret = ret+this.state.version.HCU;
         }
         ret = ret+ "<br/>";
-        ret = ret+ "IHU:";
+        ret = ret;
         if(this.state.version.IHU == "Getting"){
             ret = ret+this.state.language.getting;
         }else{
@@ -245,9 +250,13 @@ export default class foot extends Component {
     }
 
     openPnotify(){
+        let localtitle = this.state.version.Title;
+        if (localtitle == "Getting"){
+            localtitle= this.state.language.pnotifytitle;
+        }
         var stack_bottomright = {"dir1": "up", "dir2": "left", "firstpos1": 50, "firstpos2": 25};
         let notifyhandle = new PNotify({
-            title: this.state.language.pnotifytitle,
+            title: this.state.version.Title,
             type: "info",
             text: this.getversiontext(),
             opacity: 0.4,
@@ -275,7 +284,7 @@ export default class foot extends Component {
     openPnotifyupgrade(){
         var stack_bottomright = {"dir1": "up", "dir2": "left", "firstpos1": 50, "firstpos2": 25};
         let notifyhandle = new PNotify({
-            title: this.state.language.upgrade,
+            title: this.state.version.Title,
             type: "info",
             text: this.getversiontext(),
             opacity: 0.4,
@@ -316,6 +325,16 @@ export default class foot extends Component {
         }
     }
     render() {
+        let buttonstyle='';
+        if(this.state.version.Alarm){
+            buttonstyle = <button  type="button" className="btn btn-warning btn-sm pull-right" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:(this.state.height-10)*1.6,backgroundColor:"#FF0000"}} disabled={this.state.disabled} onClick={this.handle_click_version.bind(this)}>
+                <i className="fa fa-newspaper-o" style={{fontSize:25}}> </i>
+            </button>
+        }else{
+            buttonstyle =<button  type="button" className="btn btn-warning btn-sm pull-right" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:(this.state.height-10)*1.6}} disabled={this.state.disabled} onClick={this.handle_click_version.bind(this)}>
+                <i className="fa fa-newspaper-o" style={{fontSize:25}}> </i>
+            </button>
+        }
         return (
             /*
             <div style={{position:"relative",background:"#eeeeee",height:this.state.height,width:'100%',display:'table'}}>
@@ -374,9 +393,7 @@ export default class foot extends Component {
                     <a style={{position:"relative",height:this.state.height,display:'table-cell',verticalAlign:'middle'}}>
                         < span className="headlabel pull-right" style={{fontSize:this.state.height*0.3,marginRight:this.state.height*0.3}}>{this.state.language.content}</span>
                     </a>
-                    <button  type="button" className="btn btn-warning btn-sm pull-right" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:(this.state.height-10)*1.6}} disabled={this.state.disabled} onClick={this.handle_click_version.bind(this)}>
-                        <i className="fa fa-newspaper-o" style={{fontSize:25}}> </i>
-                    </button>
+                    {buttonstyle}
                 </div>
             </div>
         );

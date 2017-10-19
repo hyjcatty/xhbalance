@@ -702,13 +702,17 @@ switch ($key){
         case "XH_Balance_sys_version":
             $temp = rand(0,10);
             $ret;
-            if($temp>5){
+            if($temp>7){
                 $ret=array(
-                    'HCU'=>"HCU-SW-R3.V243.DB11.PATCH",
+                    'Alarm'=>true,
+                    'Title'=>'New version',
+                    'HCU'=>"yyHCU-SW-R3.V243.DB11.PATCH xxHCU-SW-R3.V243.DB11.PATCH",
                     'IHU'=>"IHU-SW-R3.V243.DB11.PATCH"
                 );
             }else{
                 $ret=array(
+                    'Alarm'=>false,
+                    'Title'=>'New version',
                     'HCU'=>"HCU-SW-R4.V244.DB12.PATCH",
                     'IHU'=>"IHU-SW-R4.V244.DB12.PATCH"
                 );
