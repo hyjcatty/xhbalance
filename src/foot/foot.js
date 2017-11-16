@@ -358,7 +358,7 @@ export default class foot extends Component {
                         <i className="fa fa-arrow-left" style={{fontSize:25}}></i>
                     </button>
                     <button  type="button" className="btn btn-warning btn-sm pull-left" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:(this.state.height-10)*1.6,display:this.state.hideReturn}} disabled={this.state.disabled} onClick={this.handle_click_return.bind(this)}>
-                        <i className="fa fa-sign-out" style={{fontSize:25}}> </i>
+                        <i className="fa fa-arrow-left" style={{fontSize:25}}> </i>
                     </button>
                     <button  type="button" className="btn btn-warning btn-sm pull-left" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:(this.state.height-10)*1.6,display:this.state.hideConfigure}} disabled={this.state.disabled} onClick={this.handle_click_configure.bind(this)}>
                         <i className="fa fa-gear" style={{fontSize:25}}> </i>

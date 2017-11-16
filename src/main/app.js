@@ -466,9 +466,9 @@ get_size();
 app_handle = ReactDOM.render(react_element,document.getElementById('app'));
 app_handle.initializeSize(winWidth,winHeight);
 var runcycle=setInterval(xhbalancegetstatus,250);
-var alarmcycle=setInterval(balance_get_alarm,3000);
+var alarmcycle=setInterval(balance_get_alarm,1000);
 var lightcycle=setInterval(xhbalancegetlight,250);
-var versioncycle=setInterval(sysversionfetch,30000);
+var versioncycle=setInterval(sysversionfetch,3000);
 
 //syslanguagefetch();
 syslanguagelistfetch();

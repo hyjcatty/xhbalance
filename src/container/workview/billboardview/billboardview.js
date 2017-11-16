@@ -23,16 +23,16 @@ export default class billboardview extends Component {
         super(props);
 
         this.colorlist={
-            RED:"#d95349",
-            ORANGE:"#f0ad4e",
-            BLUE:"#3498db",
-            GREEN:"#26b99a",
-            GRAY:"#73879c",
-            PURPLE:"#9B59B6",
-            LBLUE:"#5bc0de",
-            LGREEN:"#5cb85c",
-            LGRAY:"#2a3f54",
-            DBLUE:"#34495e"
+            RED:"#880000",
+            ORANGE:"#bb5500",
+            BLUE:"#000088",
+            GREEN:"#227700",
+            GRAY:"#878787",
+            PURPLE:"#4b0082",
+            LBLUE:"#003377",
+            LGREEN:"#008800",
+            LGRAY:"#696969",
+            DBLUE:"#191970"
         };
         let showlist= {
             statusdetail: {

@@ -29,9 +29,9 @@ export default class Label1 extends Component {
         return (
             <div className="animated flipInY" style={{paddingTop:15}}>
                 <div className="tile-stats">
-                    <h3 style={{fontSize:16,paddingTop:10,marginRight:5,color:"#3498db",width:"100%",fontWeight:"bold"}} className="pull-left">{this.state.title}</h3>
+                    <h3 style={{fontSize:16,paddingTop:10,marginRight:5,color:"#000000",width:"100%",fontWeight:"bold"}} className="pull-left">{this.state.title}</h3>
                     <div className="count" style={{fontSize:32,color:this.state.color,textAlign:"center",width:"100%",marginLeft:"0px"}}>{this.state.value}</div>
-                    <p style={{fontSize:16,paddingTop:0,fontWeight:"bold",color:"#333",marginRight:"10px",marginTop:"-5px"}} className="pull-right">{this.state.note}</p>
+                    <p style={{fontSize:16,paddingTop:0,fontWeight:"bold",color:"#000000",marginRight:"10px",marginTop:"-5px"}} className="pull-right">{this.state.note}</p>
                 </div>
             </div>
         );

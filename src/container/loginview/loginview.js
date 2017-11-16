@@ -218,25 +218,25 @@ export default class unlockview extends Component {
     }
     render() {
         return (
-            <div style={{position:"relative",background:"#FFFFFF",height:this.state.height,maxHeight:this.state.height,width:'100%',display:this.state.hide,overflow:'scroll',overflowX:'hidden',backgroundImage: "url(./resource/image/ctw.png)"}}>
+            <div style={{position:"relative",background:"#FFFFFF",height:this.state.height,maxHeight:this.state.height,width:'100%',display:this.state.hide,overflow:'scroll',overflowX:'hidden',backgroundImage: "url(./resource/image/ctw_black.png)"}}>
                 <div className="container">
                     <div className="leaderboard" style={{marginTop: this.state.margintop}}>
                         <div className="panel panel-default" id="kuang" >
                             <div className="panel-heading">
-                                <h3 className="panel-title">{this.state.language.title}</h3>
+                                <h3 className="panel-title" style={{color:"#000000",fontWeight:700}}>{this.state.language.title}</h3>
                             </div>
                             <div className="panel-body">
                                 <div className="input-group">
-                                    <span className="input-group-addon" id="Username" style={{minWidth: "100px",fontSize:"15px"}}>{this.state.language.username}</span>
+                                    <span className="input-group-addon" id="Username" style={{minWidth: "100px",fontSize:"15px",color:"#000000",fontWeight:700}}>{this.state.language.username}</span>
                                     <input type="text" className="form-control login_user" placeholder={this.state.language.username} aria-describedby="basic-addon1" id="Username_Input"/>
                                 </div>
                                 <p></p>
                                 <div className="input-group">
-                                    <span className="input-group-addon" id="Password" style={{minWidth: "100px",fontSize:"15px"}}>{this.state.language.password}</span>
+                                    <span className="input-group-addon" id="Password" style={{minWidth: "100px",fontSize:"15px",color:"#000000",fontWeight:700}}>{this.state.language.password}</span>
                                     <input type="password" className="form-control login_password" placeholder={this.state.language.password} aria-describedby="basic-addon1" id="Password_Input"/>
                                 </div>
                                 <p></p>
-                                <button type="button" id="Login_Comfirm" data-loading-text="Loading..." className="btn btn-primary" autoComplete="off" style={{minWidth: "150px"}} onClick={this.handle_login.bind(this)} >
+                                <button type="button" id="Login_Comfirm" data-loading-text="Loading..." className="btn btn-primary" autoComplete="off" style={{minWidth: "150px",color:"#ffffff",fontWeight:700,background:"#000000"}} onClick={this.handle_login.bind(this)} >
                                     {this.state.language.confirm}
                                 </button>
                             </div>

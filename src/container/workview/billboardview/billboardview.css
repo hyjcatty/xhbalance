@@ -5451,3 +5451,10 @@ font-weight:bold}
         box-shadow: 0 0 5px rgba(0,0,255,.2), inset 0 0 5px rgba(0,0,255,.1), 0 2px 0 #fff;
     }
 }
+p{
+    color:#000000;
+}
+h3 {
+    margin-top: 0px;
+    margin-bottom: 10px;
+}

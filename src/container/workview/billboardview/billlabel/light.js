@@ -50,11 +50,11 @@ export default class Light extends Component {
 
 
             <div key="light" style={{width:this.state.width*0.22,float: "right",position:"relative"}}>
-                <h3 style={{fontSize:14,color:"#3498db",width:this.state.width*0.22,float: "left",paddingBottom:10,textAlign:"right"}} >{this.state.id}</h3>
+                <h3 style={{fontSize:14,color:"#3498db",width:this.state.width*0.22,float: "left",paddingBottom:10,textAlign:"right",color:"#000000",fontWeight:700}} >{this.state.id}</h3>
     <span key = "brick-light" className={lightbrick1} style={{float: "right",position:"relative",top: "50%",backgroundColor:this.state.colorbrick,transform: "translateY(-50%)",marginLeft:5}}>&nbsp;</span>
 
-                <div className={lightnote1} role="alert" style={{float: "right",position:"relative",backgroundColor:this.state.colornote,borderColor:this.state.colornote,padding:5,marginBottom:0,top: "50%",transform: "translateY(-50%)",width:this.state.width*0.15}}>
-                    <strong>{this.state.note}</strong>
+                <div className={lightnote1} role="alert" style={{float: "right",position:"relative",backgroundColor:this.state.colornote,borderColor:this.state.colornote,padding:5,marginBottom:0,top: "50%",transform: "translateY(-50%)",width:this.state.width*0.15,height:45,display: "table-cell",verticalAlign: "middle"}}>
+                    <p style={{color:"#FFFFFF",fontSize:20,fontWeight:700}}>{this.state.note}</p>
                 </div>
 <span key = "circle-light"  className={lightcircle1} style={{float: "right",position:"relative",top: "50%",backgroundColor:this.state.colorcircle,transform: "translateY(-50%)",marginRight:5}}>&nbsp;</span>
 
@@ -64,11 +64,11 @@ export default class Light extends Component {
             light.push(
 
                 <div key="light" style={{width:this.state.width*0.22,float: "left",position:"relative"}}>
-                    <h3 style={{fontSize:14,color:"#3498db",width:this.state.width*0.22,float: "left",paddingBottom:10}}>{this.state.id}</h3>
+                    <h3 style={{fontSize:14,color:"#3498db",width:this.state.width*0.22,float: "left",paddingBottom:10,color:"#000000",fontWeight:700}}>{this.state.id}</h3>
                     <span key = "brick-light"   className={lightbrick1} style={{float: "left",position:"relative",top: "50%",backgroundColor:this.state.colorbrick,transform: "translateY(-50%)",marginRight:5}}>&nbsp;</span>
 
-                    <div className={lightnote1} role="alert" style={{float: "left",position:"relative",backgroundColor:this.state.colornote,borderColor:this.state.colornote,padding:5,marginBottom:0,top: "50%",transform: "translateY(-50%)",width:this.state.width*0.15}}>
-                        <strong>{this.state.note}</strong>
+                    <div className={lightnote1} role="alert" style={{float: "left",position:"relative",backgroundColor:this.state.colornote,borderColor:this.state.colornote,padding:5,marginBottom:0,top: "50%",transform: "translateY(-50%)",width:this.state.width*0.15,height:45,display: "table-cell",verticalAlign: "middle"}}>
+                        <p style={{color:"#FFFFFF",fontSize:20,fontWeight:700}}>{this.state.note}</p>
                     </div>
                     <span key = "circle-light"   className={lightcircle1} style={{float: "left",position:"relative",top: "50%",backgroundColor:this.state.colorcircle,transform: "translateY(-50%)",marginLeft:5}}>&nbsp;</span>
 
