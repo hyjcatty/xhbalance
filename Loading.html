@@ -89,6 +89,9 @@
         var runcycle=setInterval(check_if_ready,2500);
           $("body").height(window.innerHeight);
       });*/
+      window.onresize= function(){
+          location.reload(true);
+      }
       window.onload=function() {
 
           var runcycle=setInterval(check_if_ready,2500);
