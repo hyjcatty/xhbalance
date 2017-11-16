@@ -83,11 +83,17 @@
       var basic_address = getRelativeURL()+"/";
       var request_head= basic_address+"loading.php";
       var indexurl = basic_address+"index.html";
+      /*
       $(document).ready(function() {
 
         var runcycle=setInterval(check_if_ready,2500);
           $("body").height(window.innerHeight);
-      });
+      });*/
+      window.onload=function() {
+
+          var runcycle=setInterval(check_if_ready,2500);
+          $("body").height(window.innerHeight);
+      }
       function check_if_ready(){
         var map={
           action:"XH_Balance_if_ready"
