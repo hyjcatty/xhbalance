@@ -52,9 +52,10 @@ export default class workview extends Component {
         this.refs.Billboardview.update_size(this.state.rightwidth,this.state.height);
         this.refs.Configurationview.update_size(this.state.rightwidth,this.state.height);
     }
-    update_configuration(iconlist){
+    update_configuration(iconlist,drag){
         this.setState({iconlist:iconlist});
         this.refs.Configurationview.update_iconlist(iconlist);
+        this.refs.Configurationview.update_drag(drag);
         //this.refs.Buttonbar.update_callbacklist([null,this.billboardview()],[null,this.configurationview()]);
     }
     update_callback(back2brickviewcallback,back2alarmremovecallback){

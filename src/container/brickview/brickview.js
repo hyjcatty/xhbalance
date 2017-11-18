@@ -127,9 +127,12 @@ export default class brickview extends Component {
             );
         }
         return (
-            <div style={{position:"relative",background:"#FFFFFF",height:this.state.height,maxHeight:this.state.height,width:'100%',display:this.state.hide,overflow:'scroll',overflowX:'hidden'}}>
-                {items}
-                <div key={this.state.key+"plus"} style={{marginTop:this.state.marginsize,marginLeft:this.state.marginsize,marginRight:this.state.marginsize,marginBottom:this.state.marginsize,width:this.state.bricksize,height:this.state.bricksize,float: "left",position:"relative"}}><Plusbutton ref="Plusbutton" setclick={this._newmoduleclick}/></div>
+            <div style={{position:"relative",background:"#FFFFFF",height:this.state.height,maxHeight:this.state.height,width:'100%',display:this.state.hide,overflow:'hidden',overflowX:'hidden'}}>
+                <div id= 'brickview' style={{position:"relative",background:"#FFFFFF",height:this.state.height,maxHeight:this.state.height,width:'100%',display:this.state.hide,overflow:'scroll',overflowX:'hidden'}}>
+                    {items}
+                    <div key={this.state.key+"plus"} style={{marginTop:this.state.marginsize,marginLeft:this.state.marginsize,marginRight:this.state.marginsize,marginBottom:this.state.marginsize,width:this.state.bricksize,height:this.state.bricksize,float: "left",position:"relative"}}><Plusbutton ref="Plusbutton" setclick={this._newmoduleclick}/></div>
+
+                </div>
                 <div className="modal fade" id="NewConfigureModel" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel" style={{width:'100%'}}>
                     <div className="modal-dialog" role="document">
                         <div className="modal-content">
@@ -137,7 +140,7 @@ export default class brickview extends Component {
                                 <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                 <h4 className="modal-title" >{this.state.language.modaltitle}</h4>
                             </div>
-                            <div className="modal-body" style={{height:this.state.height*0.75,maxHeight:this.state.height*0.75,overflow:"scroll",overflowX:"hidden"}}>
+                            <div id="NewConfigureModelContentBody" className="modal-body" style={{height:this.state.height*0.75,maxHeight:this.state.height*0.75,overflow:"scroll",overflowX:"hidden"}}>
                                 <div className="col-md-12">
                                     <h3 style={{fontSize:10,marginRight:5}} className="pull-left">{this.state.language.baseconftitle}</h3>
                                 </div>
@@ -183,8 +186,8 @@ export default class brickview extends Component {
          </div>
          </div>
          <div className="modal-footer">
-         <button type="button" className="btn btn-default" data-dismiss="modal">·ÅÆú</button>
-         <button type="button" className="btn btn-primary" id="NewConfigureModuleConfirm" StatCode="">ÐÞ¸Ä</button>
+         <button type="button" className="btn btn-default" data-dismiss="modal">ï¿½ï¿½ï¿½ï¿½</button>
+         <button type="button" className="btn btn-primary" id="NewConfigureModuleConfirm" StatCode="">ï¿½Þ¸ï¿½</button>
          </div>
          </div>
          </div>

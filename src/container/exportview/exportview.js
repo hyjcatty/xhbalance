@@ -467,7 +467,7 @@ export default class exportview extends Component {
                     <div key="statuspanel" className="count" style={{fontSize:24}}>{this.state.language.consoletitle}</div>
                     <label  style={{width:"90%",height:this.state.height*0.65,marginLeft:"15px"}}>{this.state.retmsg}</label>
                     <button  type="button" className="btn btn-warning btn-sm pull-right" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height*0.1),width:(this.state.height*0.1)}} onClick={this.handle_click_send.bind(this)}>
-                        <i style={{color:"#333",fontSize:"15px",fontWeight:"bold"}}> {this.state.language.sendbutton}</i>
+                        <i style={{color:"#ffffff",fontSize:"15px",fontWeight:"bold"}}> {this.state.language.sendbutton}</i>
                     </button>
                 </div>
             </div>

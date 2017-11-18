@@ -35,7 +35,8 @@ export default class configurationview extends Component {
                 "icon":"icon:",
                 "preemption":"Preemption:",
                 "detailparameter":"Detail Parameter:"
-            }
+            },
+            drag:null
         }
         this._iconcallback = this.handle_icon_selection.bind(this);
         //this.keyboard_initialize();
@@ -59,15 +60,21 @@ export default class configurationview extends Component {
             this.refs[this.state.key3+i].updateprop(this.state.iconlist[i],this.state.bricksize);
         }
     }
+    update_drag(drag){
+        this.setState({drag:drag});
+    }
     hide(){
         this.setState({hide:"none"});
         //this.switchery_distory();
     }
     show(){
-        //console.log(this.state.configuration);
+        this.setState({hide:"block"},this.handdrag);
 
-        //
-        this.setState({hide:"block"});
+    }
+    handdrag(){
+
+        this.state.drag("configurationview");
+        this.state.drag("iconselectview");
     }
     module_show(){
         this.update_sub_props();
@@ -489,8 +496,8 @@ export default class configurationview extends Component {
 
         }*/
         return (
-            <div style={{position:"relative",background:"#FFFFFF",height:this.state.height,maxHeight:this.state.height,width:'100%',display:this.state.hide,overflowY:'scroll',overflowX:'hidden'}}>
-                <div className="x_content" >
+            <div style={{position:"relative",background:"#FFFFFF",height:this.state.height,maxHeight:this.state.height,width:'100%',display:this.state.hide,overflowY:'hidden',overflowX:'hidden'}}>
+                <div className="x_content" id = 'configurationview'  style={{position:"relative",background:"#FFFFFF",height:this.state.height,maxHeight:this.state.height,width:'100%',display:this.state.hide,overflowY:'scroll',overflowX:'hidden'}}>
                     <div className="col-xs-12 col-md-12 col-sm-12 col-lg-12" style={{display:this.state.head}}>
                         <h4>&nbsp;</h4>
                         <div className="col-xs-9 col-md-9 col-sm-9 col-lg-9" style={{display:this.state.head}}>
@@ -547,7 +554,7 @@ export default class configurationview extends Component {
                                 <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                 <h4 className="modal-title" >Please select a icon</h4>
                             </div>
-                            <div className="modal-body" style={{height:this.state.height*0.75,maxHeight:this.state.height*0.75,overflow:"scroll",overflowX:"hidden"}}>
+                            <div id='iconselectview' className="modal-body" style={{height:this.state.height*0.75,maxHeight:this.state.height*0.75,overflow:"scroll",overflowX:"hidden"}}>
 
                                 <div className="col-md-12">
                                     <div style={{position:"relative",background:"#FFFFFF",width:'100%'}}>

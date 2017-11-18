@@ -462,7 +462,7 @@ export default class sysconfview extends Component {
         }
 
         return (
-            <div style={{position:"relative",background:"#FFFFFF",height:this.state.height,maxHeight:this.state.height,width:'100%',display:this.state.hide,overflow:'scroll',overflowX:'hidden'}}>
+            <div id='sysconfview'  style={{position:"relative",background:"#FFFFFF",height:this.state.height,maxHeight:this.state.height,width:'100%',display:this.state.hide,overflow:'scroll',overflowX:'hidden'}}>
                 <div className="container">
                     <div className="col-xs-6 col-md-6 col-sm-6 col-lg-6">
                         {groups1}

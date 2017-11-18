@@ -6,7 +6,7 @@
       {
         "groupname": "group1",
         "list": [
-          {"paraname":"choice11","type":"choice","max":"","min":"","value":"0","items":["123","456","789","0"],"note":"choice info"},
+          {"paraname":"choice11","type":"choice","max":"","min":"","value":"0","items":["123","456","789","0","sss","aaa","dddd","eeeee","fsdf","erere","ghghg","4545","98989","uiui","klkl"],"note":"choice info"},
           {"paraname":"para11","type":"float","max":"100","min":"0","value":"50","note":"Note info"},
           {"paraname":"para12","type":"int","max":"100","min":"0","value":"50","note":"Note info"},
           {"paraname":"para13","type":"string","max":"5","min":"","value":"ssd","note":"Note info"},

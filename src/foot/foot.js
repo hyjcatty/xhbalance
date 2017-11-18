@@ -367,7 +367,7 @@ export default class foot extends Component {
                         <i className="fa fa-save" style={{fontSize:25}}> </i>
                     </button>
                     <button  type="button" className="btn btn-warning btn-sm pull-left" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:(this.state.height-10)*1.6,display:this.state.hideCalibration}} disabled={this.state.disabled} onClick={this.handle_click_calibration.bind(this)}>
-                        <i className="fa fa-wrench" style={{fontSize:25}}> </i>
+                        <i className="fa fa-balance-scale" style={{fontSize:25}}> </i>
                     </button>
                     <button  type="button" className="btn btn-warning btn-sm pull-left" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:(this.state.height-10)*1.6,display:this.state.hideTozero}} disabled={this.state.disabled} onClick={this.handle_click_to_zero.bind(this)}>
                         <i className="fa fa-recycle" style={{fontSize:25}}> </i>
@@ -376,7 +376,7 @@ export default class foot extends Component {
                         <i className="fa fa-trash-o" style={{fontSize:25}}> </i>
                     </button>
                     <button  type="button" className="btn btn-warning btn-sm pull-left" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:(this.state.height-10)*1.6,display:this.state.hideExport}} disabled={this.state.disabled} onClick={this.handle_click_export.bind(this)}>
-                        <i className="fa fa-outdent" style={{fontSize:25}}> </i>
+                        <i className="fa fa-external-link" style={{fontSize:25}}> </i>
                     </button>
                     <button  type="button" className="btn btn-warning btn-sm pull-left" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:(this.state.height-10)*1.6,display:this.state.hideLanguage}} disabled={this.state.disabled} onClick={this.handle_click_language.bind(this)}>
                         <i className="fa fa-language" style={{fontSize:25}}> </i>
