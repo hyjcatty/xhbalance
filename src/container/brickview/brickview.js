@@ -57,7 +57,7 @@ export default class brickview extends Component {
 
     }
     calculatesize(width){
-        let size = (width-30)/4;
+        let size = (width-50)/4;
         let marginsize = size*0.05;
         let bricksize = size-marginsize*2;
         //console.log("bricksize:"+bricksize+",marginsize:"+marginsize);
