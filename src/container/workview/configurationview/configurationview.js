@@ -34,7 +34,8 @@ export default class configurationview extends Component {
                 "configurename":"CONFIG NAME",
                 "icon":"icon:",
                 "preemption":"Preemption:",
-                "detailparameter":"Detail Parameter:"
+                "detailparameter":"Detail Parameter:",
+                "balance":"Balance."
             },
             drag:null
         }
@@ -441,14 +442,14 @@ export default class configurationview extends Component {
             if(this.state.configuration.parameter.preemption[i]){
                 let temp =<div className = "col-xs-3 col-md-3 col-sm-3 col-lg-3" key={"preemption_"+i} >
                     <label>
-                        <input type="checkbox" id={"Configure_Balance_"+i} className="js-switch configure-js-switch" defaultChecked="checked" onChange={this.handleChangecheck} data-switchery="true" value="on"/> {"balance_"+i}
+                        <input type="checkbox" id={"Configure_Balance_"+i} className="js-switch configure-js-switch" defaultChecked="checked" onChange={this.handleChangecheck} data-switchery="true" value="on"/> {this.state.language.balance+(i+1)}
                     </label>
                 </div>;
                 preemption.push(temp);
             }else{
                 let temp = <div className = "col-xs-3 col-md-3 col-sm-3 col-lg-3" key={"preemption_"+i} >
                     <label>
-                        <input type="checkbox" id={"Configure_Balance_"+i} className="js-switch configure-js-switch"  data-switchery="false" value="off" onChange={this.handleChangecheck}/> {"balance_"+i}
+                        <input type="checkbox" id={"Configure_Balance_"+i} className="js-switch configure-js-switch"  data-switchery="false" value="off" onChange={this.handleChangecheck}/> {this.state.language.balance+(i+1)}
                     </label>
                 </div>;
                 preemption.push(temp);

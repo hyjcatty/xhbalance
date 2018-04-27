@@ -84,7 +84,8 @@
       "configurename":"配置名称",
       "icon":"图标:",
       "preemption":"优先权:",
-      "detailparameter":"具体参数:"
+      "detailparameter":"具体参数:",
+      "balance":"秤台."
     },
     "billboardview":{
       "Label1x1":{

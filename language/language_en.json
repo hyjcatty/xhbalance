@@ -83,8 +83,9 @@
     "configurationview":{
       "configurename":"CONFIG NAME",
       "icon":"icon:",
-      "preemption":"Preemption:",
-      "detailparameter":"Detail Parameter:"
+      "preemption":"Activation:",
+      "detailparameter":"Detail Parameter:",
+      "balance":"Balance."
     },
     "billboardview":{
       "Label1x1":{
