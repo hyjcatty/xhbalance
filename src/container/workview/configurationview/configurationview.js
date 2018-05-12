@@ -281,7 +281,7 @@ export default class configurationview extends Component {
 
         if ($(".configure-js-switch")[0]) {
             var elems = Array.prototype.slice.call(document.querySelectorAll('.configure-js-switch'));
-            console.log("switchery list lenght:"+elems.length);
+            //console.log("switchery list lenght:"+elems.length);
             elems.forEach(function (html) {
                 var switchery = new Switchery(html, {
                     color: '#26B99A'

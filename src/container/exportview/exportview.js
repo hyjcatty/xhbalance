@@ -102,7 +102,7 @@ export default class exportview extends Component {
 
         if ($(".sys_conf_checkbox")[0]) {
             var elems = Array.prototype.slice.call(document.querySelectorAll('.sys_conf_checkbox'));
-            console.log("switchery list lenght:"+elems.length);
+            //console.log("switchery list lenght:"+elems.length);
             elems.forEach(function (html) {
                 var switchery = new Switchery(html, {
                     color: '#26B99A'
