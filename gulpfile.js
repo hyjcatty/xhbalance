@@ -93,10 +93,24 @@ gulp.task("resourcecopy",function(){
         .pipe(gulp.dest(option.buildPath+"/json/"));
     gulp.src("./sysconf/*")
         .pipe(gulp.dest(option.buildPath+"/sysconf/"));
-    gulp.src("./language/*")
-        .pipe(gulp.dest(option.buildPath+"/language/"));
     gulp.src("./flag/*")
         .pipe(gulp.dest(option.buildPath+"/flag/"));
+
+
+    gulp.src("./language/language_en.json")
+        .pipe(gulp.dest(option.buildPath+"/language/"))
+        .pipe(rename('language_de.json'))
+        .pipe(gulp.dest(option.buildPath+"/language/"))
+        .pipe(rename('language_ar.json'))
+        .pipe(gulp.dest(option.buildPath+"/language/"));
+    gulp.src("./language/language_ch.json")
+        .pipe(gulp.dest(option.buildPath+"/language/"))
+        .pipe(rename('language_th.json'))
+        .pipe(gulp.dest(option.buildPath+"/language/"))
+        .pipe(rename('language_jp.json'))
+        .pipe(gulp.dest(option.buildPath+"/language/"))
+        .pipe(rename('language_fr.json'))
+        .pipe(gulp.dest(option.buildPath+"/language/"));
     /*
      gulp.src("./*.html")
      .pipe(gulp.dest(option.buildPath+"/"));*/
