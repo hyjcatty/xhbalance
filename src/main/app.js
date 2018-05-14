@@ -52,7 +52,10 @@ class App extends Component{
                     "modaltips":"Are u want do delete this configuration?",
                     "modalconfirm":"confirm",
                     "modalcancel":"cancel",
-                    "userunknown":"Please login"
+                    "userunknown":"Please login",
+                    "notehead":"Notice",
+                    "notetips":"System zero reset done!"
+
                 },
                 "message":{
                     "alert1":"System Error, please contract Admin!",
@@ -436,6 +439,22 @@ class App extends Component{
                         <div className="modal-footer">
                             <button type="button" className="btn btn-default" data-dismiss="modal">{this.state.language.app.modalcancel}</button>
                             <button type="button" className="btn btn-default" data-dismiss="modal" id="ExpiredConfirm">{this.state.language.app.modalconfirm}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="modal fade" id="ToZeroAlarm" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel" >
+                <div className="modal-dialog" role="document">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 className="modal-title" id="ToZeroAlertModalLabel">{this.state.language.app.notehead}</h4>
+                        </div>
+                        <div className="modal-body" id="ToZeroAlertModalContent">
+                            {this.state.language.app.notetips}
+                        </div>
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-default" data-dismiss="modal" >{this.state.language.app.modalconfirm}</button>
                         </div>
                     </div>
                 </div>
@@ -884,6 +903,9 @@ function xhbalancetozeroshortcutcallback(res){
         return;
     }
     xhbalanceforceflashstatus();
+
+    modal_middle($('#ToZeroAlarm'));
+    $('#ToZeroAlarm').modal('show') ;
 }
 function xhbalanceforceflashstatus(){
     xhbalancegetstatus_force();

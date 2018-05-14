@@ -6,7 +6,9 @@
     "modaltips":"确认删除配置",
     "modalconfirm":"确认",
     "modalcancel":"取消",
-    "userunknown":"未登陆用户"
+    "userunknown":"未登陆用户",
+    "notehead":"系统提示",
+    "notetips":"系统一键清零完成!"
   },
   "head":{
     "icon":"",

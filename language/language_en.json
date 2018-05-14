@@ -6,7 +6,9 @@
     "modaltips":"Are u want do delete this configuration?",
     "modalconfirm":"confirm",
     "modalcancel":"cancel",
-    "userunknown":"Please login"
+    "userunknown":"Please login",
+    "notehead":"Notice",
+    "notetips":"System zero reset done!"
   },
   "head":{
     "icon":"",
