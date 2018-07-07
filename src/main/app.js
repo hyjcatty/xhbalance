@@ -852,6 +852,10 @@ function xhbalancestartcase(boolinput,configure){
         lang:default_language,
         user:"null"
     };
+    temp_lock();
+    setTimeout(function(){
+        temp_unlock();
+    },3000);
     fetch(request_head,
         {
             method:'POST',
