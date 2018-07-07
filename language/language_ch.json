@@ -54,7 +54,7 @@
   },
   "workview":{
     "alarmbar":{
-      "button":"忽略",
+      "button":"移除",
       "content":"错误信息",
       "content1":"错误",
       "content2":"错误",
@@ -85,7 +85,7 @@
     "configurationview":{
       "configurename":"配置名称",
       "icon":"图标:",
-      "preemption":"秤台激活:",
+      "preemption":"秤台隔离:",
       "detailparameter":"具体参数:",
       "balance":"秤台."
     },

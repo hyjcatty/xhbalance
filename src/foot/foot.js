@@ -354,34 +354,34 @@ export default class foot extends Component {
 
             <div style={{position:"relative",background:"#eeeeee",height:this.state.height,width:'100%',display:'table'}}>
                 <div style={{position:"relative",background:"#eeeeee",height:this.state.height,width:'67%',display:'table',float:"left"}}>
-                    <button  type="button" className="btn btn-warning btn-sm pull-left" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:(this.state.height-10)*1.6,display:this.state.hideBack}} disabled={this.state.disabled} onClick={this.handle_click_back.bind(this)}>
+                    <button  type="button"  className="btn btn-warning btn-sm pull-left" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:(this.state.height-10)*1.6,display:this.state.hideBack}} disabled={this.state.disabled} onClick={this.handle_click_back.bind(this)}>
                         <i className="fa fa-arrow-left" style={{fontSize:25}}></i>
                     </button>
-                    <button  type="button" className="btn btn-warning btn-sm pull-left" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:(this.state.height-10)*1.6,display:this.state.hideReturn}} disabled={this.state.disabled} onClick={this.handle_click_return.bind(this)}>
+                    <button  type="button"  className="btn btn-warning btn-sm pull-left" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:(this.state.height-10)*1.6,display:this.state.hideReturn}} disabled={this.state.disabled} onClick={this.handle_click_return.bind(this)}>
                         <i className="fa fa-arrow-left" style={{fontSize:25}}> </i>
                     </button>
-                    <button  type="button" className="btn btn-warning btn-sm pull-left" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:(this.state.height-10)*1.6,display:this.state.hideConfigure}} disabled={this.state.disabled} onClick={this.handle_click_configure.bind(this)}>
+                    <button  type="button"   className="btn btn-warning btn-sm pull-left" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:(this.state.height-10)*1.6,display:this.state.hideConfigure}} disabled={this.state.disabled} onClick={this.handle_click_configure.bind(this)}>
                         <i className="fa fa-gear" style={{fontSize:25}}> </i>
                     </button>
-                    <button  type="button" className="btn btn-warning btn-sm pull-left" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:(this.state.height-10)*1.6,display:this.state.hideSave}} disabled={this.state.disabled} onClick={this.handle_click_save.bind(this)}>
+                    <button  type="button"  className="btn btn-warning btn-sm pull-left" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:(this.state.height-10)*1.6,display:this.state.hideSave}} disabled={this.state.disabled} onClick={this.handle_click_save.bind(this)}>
                         <i className="fa fa-save" style={{fontSize:25}}> </i>
                     </button>
-                    <button  type="button" className="btn btn-warning btn-sm pull-left" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:(this.state.height-10)*1.6,display:this.state.hideCalibration}} disabled={this.state.disabled} onClick={this.handle_click_calibration.bind(this)}>
+                    <button  type="button"   className="btn btn-warning btn-sm pull-left" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:(this.state.height-10)*1.6,display:this.state.hideCalibration}} disabled={this.state.disabled} onClick={this.handle_click_calibration.bind(this)}>
                         <i className="fa fa-balance-scale" style={{fontSize:25}}> </i>
                     </button>
-                    <button  type="button" className="btn btn-warning btn-sm pull-left" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:(this.state.height-10)*1.6,display:this.state.hideTozero}} disabled={this.state.disabled} onClick={this.handle_click_to_zero.bind(this)}>
+                    <button  type="button"   className="btn btn-warning btn-sm pull-left" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:(this.state.height-10)*1.6,display:this.state.hideTozero}} disabled={this.state.disabled} onClick={this.handle_click_to_zero.bind(this)}>
                         <i className="fa fa-recycle" style={{fontSize:25}}> </i>
                     </button>
-                    <button  type="button" className="btn btn-warning btn-sm pull-left" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:(this.state.height-10)*1.6,display:this.state.hideDelete}} disabled={this.state.disabled} onClick={this.handle_click_delete.bind(this)}>
+                    <button  type="button"   className="btn btn-warning btn-sm pull-left" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:(this.state.height-10)*1.6,display:this.state.hideDelete}} disabled={this.state.disabled} onClick={this.handle_click_delete.bind(this)}>
                         <i className="fa fa-trash-o" style={{fontSize:25}}> </i>
                     </button>
-                    <button  type="button" className="btn btn-warning btn-sm pull-left" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:(this.state.height-10)*1.6,display:this.state.hideExport}} disabled={this.state.disabled} onClick={this.handle_click_export.bind(this)}>
+                    <button  type="button"   className="btn btn-warning btn-sm pull-left" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:(this.state.height-10)*1.6,display:this.state.hideExport}} disabled={this.state.disabled} onClick={this.handle_click_export.bind(this)}>
                         <i className="fa fa-external-link" style={{fontSize:25}}> </i>
                     </button>
-                    <button  type="button" className="btn btn-warning btn-sm pull-left" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:(this.state.height-10)*1.6,display:this.state.hideLanguage}} disabled={this.state.disabled} onClick={this.handle_click_language.bind(this)}>
+                    <button  type="button"   className="btn btn-warning btn-sm pull-left" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:(this.state.height-10)*1.6,display:this.state.hideLanguage}} disabled={this.state.disabled} onClick={this.handle_click_language.bind(this)}>
                         <i className="fa fa-language" style={{fontSize:25}}> </i>
                     </button>
-                    <button  type="button" className="btn btn-warning btn-sm pull-left" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:(this.state.height-10)*1.6,display:this.state.hideDebug}} disabled={this.state.disabled} onClick={this.handle_click_debug.bind(this)}>
+                    <button  type="button"  className="btn btn-warning btn-sm pull-left" style={{marginLeft:"5px",marginTop:"5px",height:(this.state.height-10),width:(this.state.height-10)*1.6,display:this.state.hideDebug}} disabled={this.state.disabled} onClick={this.handle_click_debug.bind(this)}>
                         <i className="fa fa-bug" style={{fontSize:25}}> </i>
                     </button>
                     <a style={{position:"relative",height:this.state.height,display:'table-cell',verticalAlign:'middle'}}>

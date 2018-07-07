@@ -85,7 +85,7 @@
     "configurationview":{
       "configurename":"CONFIG NAME",
       "icon":"icon:",
-      "preemption":"Activation:",
+      "preemption":"Isolation:",
       "detailparameter":"Detail Parameter:",
       "balance":"Balance."
     },

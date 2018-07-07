@@ -28,6 +28,7 @@ export default class buttonbar extends Component {
             button1:"",
             button2:"",
             button2hide:"block",
+            disabled:"",
             language:{
                 "run_configure":{
                     "button1":"START",
@@ -105,11 +106,18 @@ export default class buttonbar extends Component {
     handle_click2(){
         this.props.button2click();
     }
+    disable(b_input){
+        if(b_input){
+            this.setState({disabled:"disabled"});
+        }else{
+            this.setState({disabled:""});
+        }
+    }
     render() {
         return (
             <div style={{position:"relative",background:"#73839c",height:this.state.height,maxHeight:this.state.height,width:'100%',display:this.state.hide,overflowY:'hidden',overflowX:'hidden'}}>
                 <div style={{marginTop:this.state.margintop,marginLeft:this.state.marginsize,width:this.state.bricksize,height:this.state.bricksize,float: "left",position:"relative"}}>
-                    <button type="button" className="btn" style={{height:this.state.bricksize,width:this.state.bricksize,verticalAlign:"middle"}} onClick={this.handle_click1.bind(this)}><i>
+                    <button type="button" disabled={this.state.disabled} className="btn" style={{height:this.state.bricksize,width:this.state.bricksize,verticalAlign:"middle"}} onClick={this.handle_click1.bind(this)}><i>
                         <a style={{position:"relative",height:this.state.bricksize*0.3,display:'table-cell',verticalAlign:'middle'}}>
                         <span className="framelabel"  style={{fontSize:this.state.bricksize*0.2,marginLeft:0}}>
                             {this.state.button1}
@@ -120,7 +128,7 @@ export default class buttonbar extends Component {
                 </div>
 
                 <div style={{marginTop:this.state.margintop,marginLeft:this.state.marginsize,width:this.state.bricksize,height:this.state.bricksize,float: "left",position:"relative",display:this.state.button2hide}}>
-                    <button type="button" className="btn" style={{height:this.state.bricksize,width:this.state.bricksize,verticalAlign:"middle"}} onClick={this.handle_click2.bind(this)}><i>
+                    <button type="button" disabled={this.state.disabled} className="btn" style={{height:this.state.bricksize,width:this.state.bricksize,verticalAlign:"middle"}} onClick={this.handle_click2.bind(this)}><i>
                         <a style={{position:"relative",height:this.state.bricksize*0.3,display:'table-cell',verticalAlign:'middle'}}>
                         <span className="framelabel"  style={{fontSize:this.state.bricksize*0.2,marginLeft:0}}>
                             {this.state.button2}

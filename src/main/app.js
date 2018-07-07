@@ -406,6 +406,14 @@ class App extends Component{
     export_label_update(msg){
         this.refs.Exportview.update_msg(msg);
     }
+    lock_button(){
+        this.refs.Workview.disable(true);
+        this.refs.foot.disable(true);
+    }
+    unlock_button(){
+        this.refs.Workview.disable(false);
+        this.refs.foot.disable(false);
+    }
     render() {
         return(
         <div>
@@ -487,7 +495,7 @@ app_handle.initializeSize(winWidth,winHeight);
 var runcycle=setInterval(xhbalancegetstatus,250);
 var alarmcycle=setInterval(balance_get_alarm,1000);
 var lightcycle=setInterval(xhbalancegetlight,250);
-var versioncycle=setInterval(sysversionfetch,3000);
+var versioncycle=setInterval(sysversionfetch,10000);
 
 //syslanguagefetch();
 syslanguagelistfetch();
@@ -892,6 +900,12 @@ function xhbalancetozeroshortcut(){
             return { error };
         });
 }
+function temp_lock(){
+    app_handle.lock_button();
+}
+function temp_unlock(){
+    app_handle.unlock_button();
+}
 function xhbalancetozeroshortcutcallback(res){
     if(res.jsonResult.status == "false"){
         alert(language.message.alert4);
@@ -902,6 +916,11 @@ function xhbalancetozeroshortcutcallback(res){
     if(res.jsonResult.auth == "false"){
         return;
     }
+
+    temp_lock();
+    setTimeout(function(){
+        temp_unlock();
+    },3000);
     xhbalanceforceflashstatus();
 
     modal_middle($('#ToZeroAlarm'));

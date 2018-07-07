@@ -114,6 +114,10 @@ export default class workview extends Component {
         this.refs.Alarmbar.hide();
         this.show();
     }
+
+    disable(b_input){
+        this.refs.Buttonbar.disable(b_input);
+    }
     runningview(configuration){
         this.props.workcontrolfoot(false,false,false,false,false,false,false,false,false);
         if(configuration!==null){
