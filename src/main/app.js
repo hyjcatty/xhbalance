@@ -496,7 +496,7 @@ var runcycle=setInterval(xhbalancegetstatus,250);
 var alarmcycle=setInterval(balance_get_alarm,1000);
 var lightcycle=setInterval(xhbalancegetlight,250);
 var versioncycle=setInterval(sysversionfetch,10000);
-
+var timeout_handle =0;
 //syslanguagefetch();
 syslanguagelistfetch();
 function systemstart(){
@@ -945,6 +945,8 @@ function xhbalancestartcasecallback(res){
     if(res.jsonResult.auth == "false"){
         return;
     }
+
+    clearTimeout(timeout_handle);
     Running=true;
     app_handle.workview_running(null);
 }
@@ -959,7 +961,10 @@ function xhbalancestopcasecallback(res){
     if(res.jsonResult.auth == "false"){
         return;
     }
-    Running=false;
+    clearTimeout(timeout_handle);
+    timeout_handle = setTimeout(function(){
+        Running=false;
+    },10000);
     app_handle.workview_run(null);
 }
 
